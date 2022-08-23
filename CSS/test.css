@@ -1,0 +1,119 @@
+body {
+    margin: 200;
+    padding: 100;
+    background: #fff;
+    color: #4a4a4a;
+}
+
+header {
+    font-size: large;
+    text-align: center;
+    padding: 1em 0;
+    background-color: #4a4a4a;
+    color: #f9f9f9;
+}
+
+footer {
+    font-size: small;
+    text-align: center;
+    padding: 0.1em 0;
+    background-color: #4a4a4a;
+    color: #f9f9f9;
+}
+
+nav {
+    background: #eee;
+    
+}
+
+main {
+    background: #f9f9f9;
+  }
+
+aside {
+    background: #eee;
+  }
+
+h1 {
+    color : red;
+    font-style: oblique;
+    /* 종류 & 효과 & 색깔 */
+    text-decoration: underline solid violet;
+    /* 가로 & 세로 & 퍼짐 & 색깔 */
+    text-shadow: 2px 1px 3px black;
+}
+
+#main_h1 {
+    color: black ;
+    font-size: 12pt;
+    font-style: normal;
+}
+
+#main_h3 {
+    color: green;
+}
+
+.menu_item {
+    text-decoration: underline;
+    letter-spacing: 0.1rem 0rem;
+    line-height: 1rem 0rem;
+}
+
+.selected {
+    font-weight: bold;
+    color: #009999;
+}
+
+.red {
+    color: #ff0000;
+  }
+
+.box {
+    color: #155724; /* 글자 색상 */
+    background-color: #d4edda; /* 배경 색상 */
+    border-color: #c3e6cb; /* 테두리 색상 */
+  }
+
+  .emphasize {
+    font-family: "SF Pro KR", "MalgunGothic", "Verdana";
+  }
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: darkblue;
+    background-color: antiquewhite;
+  }
+
+p {
+    /* border-width & border-style & border-color */
+    border: 1px solid red;
+    /* top & right & bottom & left (시계방향) */
+    margin: 10px 20px 30px 40px;
+    padding: 10px 20px 30px 20px;
+    background-color: lightyellow;
+    /* 콘텐츠가 박스 크기를 벗어나면 자동 스크롤바 생성, hidden을 사용하면 넘어간 콘텐츠 숨김 */
+    overflow: auto; 
+  }
+
+
+#box_outter {
+    width: 300px;
+    padding: 10px;
+    background-color: yellow;
+    border: 2px solid red;
+  }
+  
+#box_inner {
+    width: 100%;
+    height: 200px;
+    border: 2px solid green;
+    background-color: lightgreen;
+    padding: 30px;
+  }
+
+/* 모든 박스에서 여백과 테두리를 포함한 크기로 계산하여 ineer box가 container를 넘지 않도록 함 */
+/* 박스 크기 측정 기본값 : content-box */
+*  {
+    box-sizing: border-box;
+}

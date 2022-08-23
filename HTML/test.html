@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset = "UTF-8" />
+        <title> Test Page </title>
+        <link rel="stylesheet" href="../CSS/test.css" />
+        <link rel="stylesheet" href="../CSS/test_layout.css" />
+    </head>
+
+    <body>
+        <header class = "title">제목을 입력하세요.</header>
+        
+        <div class="container">
+            <nav class = "emphasize">
+              <h4>This is the navigation section.</h4>
+              <ul>
+                <li class = "menu_item selected">Home</li>  <!-- 띄어쓰기로 class 이름 구분 -->
+                <li class = "menu_item">Mac</li>
+                <li class = "menu_item">iPhone</li>
+                <li class = "menu_item">iPad</li>
+              </ul>
+            </nav>
+
+
+            <main class="box">
+                <h1 class = "red"> h1 Hello world </h1>
+                <div> div 태그는 한 줄을 차지합니다
+                    <span style="color: blue"> div가 닫히기 전에 span을 사용하면 같은줄에 적힘</span>
+                </div>
+                    <span style="color: blueviolet"> span 태그는 컨텐츠 크기만큼 공간을 차지합니다 </span>
+                <div>division2</div>
+                    <span style="background-color: rgba(242,179,188,0.5)">span2</span>
+                    <span>span3</span>
+                <div>division3</div>
+        
+                <h2> h2 귀여운 고양이. </h2>
+                <img src ="https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?cs=srgb&dl=pexels-pixabay-45201.jpg&fm=jpg" \
+                style="width: 10vw; min-width: 100px;"/>
+                <!-- src : img 태그의 속성, source, image파일이 어디있는지 경로를 적으면 거기에 가서 이미지를 가져옴 -->
+                <!-- style width, min-width : 사진을 가져왔는데 너무 커서 width로 10% 배율 설정, 최소 width = 100px -->
+                <br/>
+                <a href="https://www.google.com/search?q=cat+free+image&sxsrf=ALiCzsYVGxA76wm90M69mqIm9bSqQHLVzg:1661217634210&source=lnms&tbm=isch&sa=X&ved=2ahUKEwit7Oz35dv5AhUNdd4KHWe4AdMQ_AUoAXoECAEQAw&biw=1920&bih=969&dpr=1" \
+                 target="_blank"> 고양이 더보기 </a>
+                 <!-- href : a 태그의 속성, hypertext reference, a 태그로 감싸진 링크로 연결 -->
+                 <!-- target = "_blank" : 새창으로 열기 -->
+        
+                <h3> h3. ul, li : 리스트 </h3>
+                <ul>
+                    <li>ul : unordered list (넘버링이 없는) </li>
+                    <li>li : list item</li>
+                    <li>Item 3 has nested list
+                        <ol>
+                            <li>ol : ordered list (넘버링이 있는) </li>
+                            <li>Item 3-2</li>
+                        </ol>
+                    </li>
+                </ul>
+        
+                <h3 id = "main_h3"> input, textarea : 다양한 입력폼 </h3>
+                 <input type="text" placeholder="ID"> &emsp;
+                 <input type="password" placeholder="PW">
+                 <div>
+                     <input type="checkbox"> 로그인 상태 유지
+                     <br/>
+                     <input type="checkbox" checked> 광고성 수신 동의
+                    </div>
+                    <button>로그인</button>
+                    <br/><br/>
+                 <div>
+                    <input type="radio" name="choice" value="a"> a
+                    <input type="radio" name="choice" value="b"> b
+                    <!-- name이라는 그룹으로 묶여있어야 둘 중 하나 선택이 가능함 -->
+                 </div>
+                 <div> 
+                    자기 소개 <br/>
+                    <textarea></textarea>
+                 </div>
+        
+                 <h3> 안배웠지만 p태그</h3>
+                 <p>first paragraph 어쩌고저쩌고</p>
+                 <p>second paragraph</p>
+                 <p>
+                    new line<br>
+                    third paragraph. &lt;br&gt;로 구분하면 문단 만들기
+                 </p>
+
+                 <h3> Box Model </h3>
+                 <div id="box_outter">
+                    <div id="box_inner">
+                    안쪽 box
+                  </div>
+                </div>
+            </main>
+
+
+            <aside>
+              <h4>This is an aside section.</h4>
+              <p>...</p>
+            </aside>
+          </div>
+
+
+
+         <footer class = "emphasize">
+            <ul>
+              <li>개인정보 처리방침</li>
+              <li>이용 약관</li>
+              <li>법적 고지</li>
+            </ul>
+          </footer>
+
+    </body>
+
+</html>
