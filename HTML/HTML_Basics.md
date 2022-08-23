@@ -133,7 +133,7 @@ HTML은 트리구조로 형성되어 있다.
 
 <br>
 
-### 📋 **더욱 자세한 태그는 [_MDN_]("https://developer.mozilla.org/ko/docs/Web/HTML/Element") 참조**
+### 📋 **더욱 자세한 태그는 [MDN]("https://developer.mozilla.org/ko/docs/Web/HTML/Element") 참조**
 
 <br>
 

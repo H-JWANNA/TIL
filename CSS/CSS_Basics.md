@@ -81,7 +81,7 @@ CSS에서 Style을 적용하고자하는 HTML 요소를 정확히 특정하기 �
 
 <br>
 
-### 📋 **[_더 많은 셀렉터 관련 참조 문서_]("https://poiemaweb.com/css3-selector")**
+### 📋 **[더 많은 셀렉터 관련 참조 문서]("https://poiemaweb.com/css3-selector")**
 
 <br>
 
@@ -152,7 +152,7 @@ CSS에서 Style을 적용하고자하는 HTML 요소를 정확히 특정하기 �
 
 <br>
 
-### 📋 **더욱 자세한 속성은 [_MDN_]("https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Values_and_Units"), [_W3L_]("https://www.w3schools.com/cssref/css_units.asp") 참조**
+### 📋 **더욱 자세한 속성은 [MDN]("https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Values_and_Units"), [W3L]("https://www.w3schools.com/cssref/css_units.asp") 참조**
 
 <br>
 
