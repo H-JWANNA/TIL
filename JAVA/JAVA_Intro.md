@@ -41,11 +41,11 @@ Public void main(int A) {
 
 <br>
 
-## [변수 & 타입](/JAVA_Variable_Type.md)
+## [변수 & 타입](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Variable_Type.md)
 
-## [문자열](/JAVA_String.md)
+## [문자열](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_String.md)
 
-## [연산자 & I/O](/JAVA_Operator_IO.md)
+## [연산자 & I/O](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Operator_IO.md)
 
 
 
