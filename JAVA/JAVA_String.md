@@ -76,9 +76,6 @@ System.out.println("compareTo() 메서드 호출 후 문자열 : " + str);
 
 <br>
 
-추가로 공부할 내용
-
-> StringTokenizer, StringBuilder, StringBuffer
 
 ### 추가 심화 내용
 
