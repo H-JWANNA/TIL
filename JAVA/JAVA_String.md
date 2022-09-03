@@ -120,4 +120,6 @@ System.out.println(str);            // 문자열 연결 (String 타입)
 
 ***
 
-<span style="color: gray ; display: inline-block; width: 95%; text-align: right;">_2022.08.30._</span>
+_Modified 2022.09.03._
+
+_Update 2022.08.30._
