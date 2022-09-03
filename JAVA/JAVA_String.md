@@ -80,6 +80,42 @@ System.out.println("compareTo() 메서드 호출 후 문자열 : " + str);
 
 > StringTokenizer, StringBuilder, StringBuffer
 
+### 추가 심화 내용
+
+```StringTokenizer``` : 문자열을 지정한 구분자로 쪼개주는 클래스
+> ```import java.util.StringTokenizer```를 통해 호출한다.
+- ```.countTokens()``` : (int) 현재 남아있는 token의 개수를 반환
+- ```.hasMoreElements(), .hasMoreTokens()``` : (boolean) 현재 위치 뒤에 있는 문자열에서 하나 이상의 토큰을 사용할 수 있는 경우 ```true```를 반환
+- ```.nextElement(), .nextToken()``` : (Object, String) 다음 토큰을 반환
+
+<br>
+
+```StringBuilder``` : 문자열을 연결할 때 사용하는 클래스   
+> ```StringBuilder name = new StringBuilder();```를 통해 인스턴스를 생성
+- ```.append("text")``` : 문자열을 연결하는 메서드
+- ```.toString()``` : 변수에 문자열을 할당할 때 사용하는 메서드
+
+```java
+StringBuilder stringBuilder = new StringBuilder();
+stringBuilder.append("문자열 ").append("연결");
+
+String str = stringBuilder.toString();
+
+// 아래 두 코드는 같은 값을 출력한다.
+System.out.println(stringBuilder);  // 문자열 연결 (StringBuilder 타입)
+System.out.println(str);            // 문자열 연결 (String 타입)
+```
+
+<br>
+
+```StringBuffer``` : ```StringBuilder```와 비슷하게 문자열 연결에 사용하는 클래스
+> ```StringBuffer name = new StringBuffer();```를 통해 인스턴스를 생성
+- ```.append()``` : 문자열을 연결하는 메서드 (```concat()``` 메서드와 같을 결과지만 훨씬 빠름)
+- ```.capacity()``` : 인스턴스의 현재 버퍼 크기를 반환 (문자열 크기 + 여유 버퍼 크기 16)
+- ```.delete(num1, num2)``` : (num1) ~ (num2-1) 인덱스에 해당하는 문자열을 제거
+- ```.deleteCharAt(num)``` : num 인덱스에 해당하는 문자 제거
+- ```.insert(num, "text")``` : num 인덱스 위치에 "text" 문자열을 삽입
+
 <br>
 
 ***
