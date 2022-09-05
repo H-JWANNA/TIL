@@ -61,3 +61,7 @@
 - [Java Class & Object (Java 클래스 & 객체)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Class_Object.md)
 
 - [Java Field & Method (Java 필드 & 메서드)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Field_Method.md)
+
+- [Java Constructor (Java 생성자)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Constructor.md)
+
+- [Java Inner Class (Java 내부 클래스)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_InnerClass.md)
