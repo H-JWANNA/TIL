@@ -49,6 +49,15 @@ final double PI = 3.141592;
 
 <br>
 
+_2022.09.06. 추가_
+
+> Java에서 ```final``` 제어자는 변경할 수 없다는 의미로 사용된다.  
+> 즉, 필드나 지역 변수에 사용하면 값을 변경할 수 없는 상수가 된다.
+>
+> 클래스에 사용하게 되면 해당 클래스는 다른 클래스가 상속받을 수 없게 되고,  
+> 메소드에 사용하게 되면 해당 메소드는 오버라이딩을 통한 재정의를 할 수 없게 된다.
+
+
 ***
 
 <br>
@@ -230,4 +239,6 @@ String myFirstName = "Hong"; // 문자열 변수 myFirstName, 문자열 리터�
 
 ***
 
-<span style="color: gray ; display: inline-block; width: 95%; text-align: right;">_2022.08.30._</span>
+_Modified 2022.09.06._
+
+_Update 2022.08.30._
