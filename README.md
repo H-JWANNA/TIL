@@ -2,11 +2,7 @@
 
 파일은 MarkDown(.md)형식으로 기록한다.
  
-<br>
-
-***
-
-<br>
+<br><br>
 
 ### [📋 Web Development General](https://github.com/H-JWANNA/TIL/tree/main/Development%20basics)
 
@@ -65,3 +61,13 @@
 - [Java Constructor (Java 생성자)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Constructor.md)
 
 - [Java Inner Class (Java 내부 클래스)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_InnerClass.md)
+
+<br>
+
+- [Java Inheritance (Java 상속))](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Inheritance.md)
+
+- [Java Encapsulation (Java 캡슐화)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Encapsulation.md)
+
+- [Java Polymorphism (Java 다형성)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Polymorphism.md)
+
+- [Java Abstraction (Java 추상화)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Abstraction.md)
