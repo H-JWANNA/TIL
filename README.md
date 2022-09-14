@@ -71,3 +71,15 @@
 - [Java Polymorphism (Java 다형성)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Polymorphism.md)
 
 - [Java Abstraction (Java 추상화)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Abstraction.md)
+
+<br>
+
+*▼ Java Collection*
+
+- [Java Enum (Java 열거형)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Enum.md)
+
+- [Java Generic (Java 제네릭)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Generic.md)
+
+- [Java Exception Handling (Java 예외 처리)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Exception.md)
+
+- [Java Collection Framework (Java 컬렉션 프레임워크)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_CollectionFramework.md)
