@@ -22,11 +22,15 @@
 
 <br>
 
+***
+
+<br>
+
 ## 콘솔 입출력(I/O)
 
 <br>
 
-### 출력
+### 🔸 출력
 
 <br>
 
@@ -49,7 +53,7 @@
 
 <br>
 
-### 입력
+### 🔸 입력
 
 <br>
 
@@ -125,9 +129,249 @@ int num2 = Integer.parseInt(str.nextToken());
 String arr[] = str.split(" ");
 ```
 
+<br>
+
 ***
 
-_Modified 2022.09.03._
+<br>
 
+## 파일 입출력(I/O)
+
+<br>
+
+### 🔸 입력
+
+<br>
+
+**FileInputStream**
+
+```
+// 터미널에서 실행 > test.txt 파일 생성
+echo code >> test.txt
+```
+
+```java
+import java.io.FileInputStream;
+
+try {
+    FileInputStream fileInput = new FileInputStream("test.txt");    // 같은 디렉토리
+    int i = 0;
+
+    //fileInput.read()의 리턴값을 i에 저장한 후, 값이 -1인지 확인
+    while ((i = fileInput.read()) != -1) { 
+        System.out.println((char)i);
+    }
+    fileInput.close();
+}
+catch (Exception e) {
+    System.out.println(e);
+}
+
+// 출력 : code
+```
+
+<br>
+
+**BufferedInputStream**
+
+```BufferedInputStream```이라는 보조 스트림을 사용하면 성능이 향상되므로 대부분 이것을 사용한다.
+
+```java
+import java.io.FileInputStream;
+import java.io.BufferedInputStream;
+
+try {
+    FileInputStream fileInput = new FileInputStream("test.txt");
+    BufferedInputStream bufferedInput = new BufferedInputStream(fileInput);
+    int i = 0;
+    while ((i = bufferedInput.read()) != -1) {
+        System.out.print((char)i);
+    }
+    fileInput.close();
+}
+
+catch (Exception e) {
+    System.out.println(e);
+}
+
+출력 : code
+```
+
+### 📋 [_**InputStream 공식 문서**_](https://docs.oracle.com/javase/7/docs/api/java/io/InputStream.html)
+
+<br><br>
+
+**FileReader**
+
+```FileInputStream```은 ```byte``` 기반 스트림이라서 입출력 단위가 1byte다.
+
+Java의 ```char```타입은 2byte이기 때문에 이를 위해 문자 기반 스트림 ```FileReader```가 있다.
+
+```java
+import java.io.*;
+
+public static void main(String[] args) throws IOException {
+    try {
+        // testfile.txt 내용 > 안녕하세요
+        String fileName = "testfile.txt";
+        FileReader file = new FileReader(fileName);
+
+        int data = 0;
+
+        while((data=file.read()) != -1) {
+            System.out.print((char)data);
+        }
+        file.close();
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    }
+}
+
+// 출력 : 안녕하세요
+
+// FileInputStream으로 출력하면 "ìëíì¸ì"와 같이 출력됨
+```
+
+<br>
+
+**BufferedReader**
+
+위의 콘솔 입력에서 작성한 ```BuffredReader```와 같다.
+
+원래는 파일 입력시 Reader의 성능을 개선하는 용도이지만  
+매개변수를 ```InputStreamReader```로 받아서 콘솔 입력 시에 성능 개선 용도로 사용했다.
+
+```java
+try {
+    String fileName = "testfile.txt";
+    FileReader file = new FileReader(fileName);
+    BufferedReader buffered = new BufferedReader(file);
+
+    int data = 0;
+
+    while((data=buffered.read()) != -1) {
+        System.out.print((char)data);
+    }
+    file.close();
+}
+catch (IOException e) {
+    e.printStackTrace();
+}
+```
+
+### 📋 [_**FileReader 공식 문서**_](https://docs.oracle.com/javase/7/docs/api/java/io/Reader.html)
+
+<br><br>
+
+### 🔸 출력
+
+<br>
+
+**FileOutputStream**
+
+```java
+import java.io.FileOutputStream;
+
+try {
+    FileOutputStream fileOutput = new FileOutputStream("testfile.txt");
+    String word = "code";
+
+    byte b[] = word.getBytes();
+    fileOutput.write(b);
+    fileOutput.close();
+}
+catch (Exception e) {
+    System.out.println(e);
+}
+
+// 프로젝트 하위에 code라는 문자열이 입력된 testfile.txt 파일이 생성
+```
+
+### 📋 [_**OutputStream 공식 문서**_](https://docs.oracle.com/javase/7/docs/api/java/io/OutputStream.html)
+
+<br><br>
+
+**FileWriter**
+
+```java
+try {
+    String fileName = "testfile2.txt";
+    FileWriter writer = new FileWriter(fileName);
+
+    String str = "파일 쓰기";
+    writer.write(str);
+    writer.close();
+}
+catch (IOException e) {
+    e.printStackTrace();
+}
+```
+
+### 📋 [_**FileWriter 공식 문서**_](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/Writer.html)
+
+<br>
+
+### File
+
+```File``` 클래스를 통해 파일과 디렉토리에 접근할 수 있다.
+
+```java
+import java.io.*;
+
+File file = new File("../testfile.txt");
+
+System.out.println(file.getPath());
+System.out.println(file.getParent());
+System.out.println(file.getCanonicalPath());
+System.out.println(file.canWrite());
+
+// 출력
+..\testfile.txt
+..
+C:\Users\JWANNA\~\testfile.txt
+false
+```
+
+<br>
+
+파일 생성을 위해서는 파일 인스턴스 생성시에 아래와 같이 하면 된다.
+1. 첫번째 인자에 경로
+2. 두번째 인자에 파일명
+3. ```createNewFile()``` 메서드 작성
+
+```java
+File file = new File("./", "newTestFile.txt");
+file.createNewFile();
+```
+
+<br>
+
+```java
+File parentDir = new File("./");    // 현재 디렉토리
+File[] list = parentDir.listFiles();
+
+String prefix = "code"; // 해당 문자열 붙임
+
+for(int i =0; i <list.length; i++) {
+   String fileName = list[i].getName();
+
+if(fileName.endsWith("txt") && !fileName.startsWith("code")) {
+       list[i].renameTo(new File(parentDir, prefix + fileName));
+   }
+}
+```
+▲ _현재 디렉토리(.)에서 확장자가 .txt인 파일명 앞에 "code"라는 문자열을 붙이는 예제_
+
+<br>
+
+### 📋 [_**File 공식 문서**_](https://docs.oracle.com/javase/7/docs/api/java/io/File.html)
+
+<br>
+
+***
+
+_Modified 2022.09.16._
+
+_Modified 2022.09.03._
 
 _Update 2022.08.30._
