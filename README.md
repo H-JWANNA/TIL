@@ -38,6 +38,10 @@
 
 ### [📋 JAVA](https://github.com/H-JWANNA/TIL/tree/main/JAVA)
 
+<br>
+
+&emsp; *▼ Java Basic*
+
 - [Java Intro (Java 개요)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Intro.md)
   
 - [Java Variable & Type (Java 변수 & 타입)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Variable_Type.md)
@@ -52,7 +56,7 @@
 
 <br>
 
-*▼ Object Oriented Programming, OOP (객체 지향 프로그래밍)*
+&emsp; *▼ Object Oriented Programming*
 
 - [Java Class & Object (Java 클래스 & 객체)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Class_Object.md)
 
@@ -74,7 +78,7 @@
 
 <br>
 
-*▼ Java Collection*
+&emsp; *▼ Java Collection*
 
 - [Java Enum (Java 열거형)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Enum.md)
 
@@ -83,3 +87,13 @@
 - [Java Exception Handling (Java 예외 처리)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Exception.md)
 
 - [Java Collection Framework (Java 컬렉션 프레임워크)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_CollectionFramework.md)
+
+<br>
+
+&emsp; *▼ Java Effective*
+
+- [Java Annotation (Java 어노테이션)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Annotation.md)
+
+- [Java Lambda (Java 람다식)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Lambda.md)
+
+- [Java Stream (Java 스트림)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Stream.md)
