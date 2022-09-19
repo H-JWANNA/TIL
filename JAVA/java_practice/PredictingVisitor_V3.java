@@ -1,5 +1,3 @@
-package com.codestates.section1.java_basic;
-
 public class PredictingVisitor_V3 {
     public static void main(String[] args) {
         // 데이터
