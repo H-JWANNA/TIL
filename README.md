@@ -97,3 +97,7 @@
 - [Java Lambda (Java 람다식)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Lambda.md)
 
 - [Java Stream (Java 스트림)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Stream.md)
+
+- [Java Thread (Java 스레드)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Thread.md)
+
+- [Java Virtual Machine (Java 가상 머신)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_VirtualMachine.md)
