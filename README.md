@@ -1,103 +1,52 @@
 # Today I Learned
 
-파일은 MarkDown(.md)형식으로 기록한다.
+> 파일은 MarkDown(.md)형식으로 기록한다.
  
-<br><br>
+<br>
 
-### [📋 Web Development General](https://github.com/H-JWANNA/TIL/tree/main/Development%20basics)
+# 📌 FrontEnd
 
-- [Web Development Basics (웹 개발 기초)](https://github.com/H-JWANNA/TIL/blob/main/Development%20basics/%EC%9B%B9%20%EA%B0%9C%EB%B0%9C%20%EA%B8%B0%EC%B4%88.md)
+| **HTML**   | **CSS**  |
+|:----------:|:--------:|
+|[HTML Basics](https://github.com/H-JWANNA/TIL/blob/main/HTML/HTML_Basics.md "HTML 기초")|[CSS Basics](https://github.com/H-JWANNA/TIL/blob/main/CSS/CSS_Basics.md "CSS 기초")|
+| - |[CSS Layout](https://github.com/H-JWANNA/TIL/blob/main/CSS/Layout.md "CSS 레이아웃 - Flexbox")|
 
 <br>
 
-### [📋 HTML](https://github.com/H-JWANNA/TIL/tree/main/HTML)
+# 📌 BackEnd
 
-- [HTML Basics (HTML 기초)](https://github.com/H-JWANNA/TIL/blob/main/HTML/HTML_Basics.md)
+## &ensp; 📋 JAVA
+
+|**Java Basic**|**Java OOP**|**Java Collection**|**Java Effective**|
+|:------------:|:----------:|:-----------------:|:----------------:|
+|[Java Intro](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Intro.md "개요")|[Class & Object](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Class_Object.md "클래스 & 객체")|[Enum](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Enum.md "열거형")|[Annotation](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Annotation.md "어노테이션")|
+|[Variable & Type](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Variable_Type.md "변수 & 타입")|[Field & Method](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Field_Method.md "필드 & 메소드")|[Generic](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Generic.md "제네릭")|[Lambda](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Lambda.md "람다식")|
+|[String](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_String.md "문자열")|[Constructor](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Constructor.md "생성자")|[Exception Handling](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Exception.md "예외 처리")|[Stream](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Stream.md "스트림")|
+|[Operator](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Operator.md "연산자")|[Inner Class](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_InnerClass.md "내부 클래스")|[Collection Framework](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_CollectionFramework.md "컬렉션 프레임워크")|[Thread](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Thread.md "스레드")|
+|[I/O](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_IO.md "입출력")|[Inheritance](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Inheritance.md "상속")| - |[Java Virtual Machine](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_VirtualMachine.md "자바 가상 머신")|
+|[Control Flow Statement](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Control_Flow_Statement.md "제어문 - 조건문 반복문")|[Encapsulation](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Encapsulation.md "캡슐화")| - | - |
+|[Array](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Array.md "배열")|[Polymorphism](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Polymorphism.md "다형성")| - | - |
+| - |[Abstraction](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Abstraction.md "추상화")| - | - |
 
 <br>
 
-### [📋 CSS](https://github.com/H-JWANNA/TIL/tree/main/CSS)
+# 📌 CS
 
-- [CSS Basics (CSS 기초)](https://github.com/H-JWANNA/TIL/blob/main/CSS/CSS_Basics.md)
-  
-- [CSS Layout (CSS 레이아웃 - Flexbox)](https://github.com/H-JWANNA/TIL/blob/main/CSS/Layout.md)
+| **Web Development** | **Algorithm** |
+|:-------------------:|:-------------:|
+|[Web Development Basics](https://github.com/H-JWANNA/TIL/blob/main/Development%20basics/%EC%9B%B9%20%EA%B0%9C%EB%B0%9C%20%EA%B8%B0%EC%B4%88.md "웹 개발 기초")|[Recursion](https://github.com/H-JWANNA/TIL/blob/main/Algorithm/Recursion.md "재귀")|
 
 <br>
+
+# 📌 Others
 
 ### [📋 Linux](https://github.com/H-JWANNA/TIL/tree/main/Linux)
 
-- [Linux Basics (Linux 기초)](https://github.com/H-JWANNA/TIL/blob/main/Linux/Linux_basics.md)
+- [Linux Basics](https://github.com/H-JWANNA/TIL/blob/main/Linux/Linux_basics.md "Linux 기초")
 
 <br>
 
 ### [📋 Git](https://github.com/H-JWANNA/TIL/tree/main/Git)
 
-- [Git Basics (Git 기초)](https://github.com/H-JWANNA/TIL/blob/main/Git/Git_basic.md)
-
+- [Git Basics](https://github.com/H-JWANNA/TIL/blob/main/Git/Git_basic.md "Git 기초")
 <br>
-
-### [📋 JAVA](https://github.com/H-JWANNA/TIL/tree/main/JAVA)
-
-<br>
-
-&emsp; *▼ Java Basic*
-
-- [Java Intro (Java 개요)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Intro.md)
-  
-- [Java Variable & Type (Java 변수 & 타입)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Variable_Type.md)
-
-- [Java String (Java 문자열)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_String.md)
-
-- [Java Operator & I/O (Java 연산자 & 입출력)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Operator_IO.md)
-
-- [Java Control Flow Statement (Java 제어문 - 조건문/반복문)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Control_Flow_Statement.md)
-
-- [Java Array (Java 배열)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Array.md)
-
-<br>
-
-&emsp; *▼ Object Oriented Programming*
-
-- [Java Class & Object (Java 클래스 & 객체)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Class_Object.md)
-
-- [Java Field & Method (Java 필드 & 메서드)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Field_Method.md)
-
-- [Java Constructor (Java 생성자)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Constructor.md)
-
-- [Java Inner Class (Java 내부 클래스)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_InnerClass.md)
-
-<br>
-
-- [Java Inheritance (Java 상속))](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Inheritance.md)
-
-- [Java Encapsulation (Java 캡슐화)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Encapsulation.md)
-
-- [Java Polymorphism (Java 다형성)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Polymorphism.md)
-
-- [Java Abstraction (Java 추상화)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Abstraction.md)
-
-<br>
-
-&emsp; *▼ Java Collection*
-
-- [Java Enum (Java 열거형)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Enum.md)
-
-- [Java Generic (Java 제네릭)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Generic.md)
-
-- [Java Exception Handling (Java 예외 처리)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Exception.md)
-
-- [Java Collection Framework (Java 컬렉션 프레임워크)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_CollectionFramework.md)
-
-<br>
-
-&emsp; *▼ Java Effective*
-
-- [Java Annotation (Java 어노테이션)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Annotation.md)
-
-- [Java Lambda (Java 람다식)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Lambda.md)
-
-- [Java Stream (Java 스트림)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Stream.md)
-
-- [Java Thread (Java 스레드)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_Thread.md)
-
-- [Java Virtual Machine (Java 가상 머신)](https://github.com/H-JWANNA/TIL/blob/main/JAVA/JAVA_VirtualMachine.md)
