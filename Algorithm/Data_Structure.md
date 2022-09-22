@@ -95,13 +95,14 @@ Queue<T> queue = new LinkedList<>();
 
 |기능	|리턴<br>타입	|메서드	|설명|
 |:-:|:-:|:-----|:------------------|
-|객체<br>추가| boolean | ```add(e)``` | Queue에 데이터 추가 <br> 큐가 꽉 찬 경우에는 ```IllegalStateException``` 발생 |
+|객체<br>추가| boolean | ```add(e)``` | Queue에 데이터 추가 <br> 큐가 꽉 찬 경우 ```IllegalStateException``` 발생 |
 || boolean | ```offer(e)``` | Queue에 데이터 추가 / 실패 시 ```false``` 리턴 |
 |객체<br>삭제| Element | ```poll()``` | Queue 가장 앞쪽의 데이터 제거<br>큐가 비어있으면 ```null``` 리턴 |
-|| Element /<br> boolean | ```remove()``` /<br> ```remove(o)``` | 인자가 없는 경우 Queue 가장 앞쪽의 데이터 제거 <br> 인자가 있는 경우 해당 데이터를 제거 / 실패 시 ```false``` 리턴 |
+|| Element | ```remove()``` | 인자가 없는 경우 Queue 가장 앞쪽의 데이터 제거 <br> 큐가 비어있는 경우 ```NoSuchElementException``` 발생  |
+||boolean| ```remove(o)``` | 인자가 있는 경우 해당 데이터를 제거 / 실패 시 ```false``` 리턴 |
 || void | ```clear()``` | Queue의 데이터 모두 제거 |
 |객체<br>검색| Element | ```peek()```  | Queue 가장 앞쪽의 데이터 출력 <br> 인자가 없는 경우 ```null``` 리턴|
-|| Element | ```element()```  | Queue 가장 앞쪽의 데이터 출력 <br> 인자가 없는 경우 ```NoSuchElementException``` 발생 |
+|| Element | ```element()```  | Queue 가장 앞쪽의 데이터 출력 <br> 큐가 비어있는 경우 ```NoSuchElementException``` 발생 |
 
 <br>
 
