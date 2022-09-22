@@ -30,6 +30,32 @@ Stack은 data를 순서대로 쌓는 자료 구조이다.
 
 <br>
 
+### Stack 메서드
+
+```java
+import java.util.Stack;
+
+Stack<T> stack = new Stack<>();
+```
+▲ _Stack 선언_
+
+<br>
+
+**Stack 메서드**
+
+|기능	|리턴<br>타입	|메서드	|설명|
+|:-:|:-:|:-----|:-|
+|객체<br>추가|Element|```push(e)``` | Stack에 데이터 추가|
+|객체<br>삭제|Element|```pop()``` | 가장 위쪽의 데이터 제거|
+||void|```clear()``` | Stack의 데이터 모두 제거|
+|객체<br>검색|Element|```peek()``` | Stack 가장 상단의 데이터 출력|
+||int|```size()``` | Stack의 크기 출력|
+||int|```search(Object o)``` | Object의 index 반환 <br> index는 스택의 최상단이 1부터 시작 <br> Object를 찾을 수 없는 경우 ```-1``` 반환|
+||boolean|```empty()``` | Stack이 비어있는지 확인|
+||boolean|```contains(e)``` | Stack에 Object가 있는지 확인|
+
+<br>
+
 ## Queue (큐)
 
 Queue는 data가 입력된 순서대로 처리하는 자료 구조이다.
@@ -49,6 +75,32 @@ Queue는 data가 입력된 순서대로 처리하는 자료 구조이다.
 3. 두 개의 입출력 방향을 가지고 있다.  
    입력이 이루어지는 쪽을 ```rear```, 출력이 이루어지는 쪽을 ```front```라고 한다.  
    값을 입력할수록 rear 값이 증가하고, 값을 출력할수록 front 값이 증가한다.
+
+<br>
+
+### Queue 메서드
+
+```java
+import java.util.Queue;
+import java.util.LinkedList;
+
+Queue<T> queue = new LinkedList<>();
+```
+▲ _Queue 선언_
+
+<br>
+
+**Queue 메서드**
+
+|기능	|리턴<br>타입	|메서드	|설명|
+|:-:|:-:|:-----|:------------------|
+|객체<br>추가| boolean | ```add(e)``` | Queue에 데이터 추가 <br> 큐가 꽉 찬 경우에는 ```IllegalStateException``` 발생 |
+|| boolean | ```offer(e)``` | Queue에 데이터 추가 / 실패한 경우 false 반환 |
+|객체<br>삭제| Element /<br> boolean | ```remove()``` /<br> ```remove(o)``` | 인자가 없는 경우 Queue 가장 앞쪽의 데이터 제거 <br> 인자가 있는 경우 해당 데이터를 제거 / 실패시 false 반환 |
+|| Element | ```poll()``` | Queue 가장 앞쪽의 데이터 제거<br>큐가 비어있으면 ```null``` 반환 |
+|| void | ```clear()``` | Queue의 데이터 모두 제거 |
+|객체<br>검색| Element | ```peek()```  | Queue 가장 앞쪽의 데이터 출력 <br> 인자가 없는 경우 ```null``` 반환|
+|| Element | ```element()```  | Queue 가장 앞쪽의 데이터 출력 <br> 인자가 없는 경우 .```NoSuchElementException``` 발생 |
 
 <br>
 
