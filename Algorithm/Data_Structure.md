@@ -50,9 +50,10 @@ Stack<T> stack = new Stack<>();
 ||void|```clear()``` | Stack의 데이터 모두 제거|
 |객체<br>검색|Element|```peek()``` | Stack 가장 상단의 데이터 출력|
 ||int|```size()``` | Stack의 크기 출력|
-||int|```search(Object o)``` | Object의 index 반환 <br> index는 스택의 최상단이 1부터 시작 <br> Object를 찾을 수 없는 경우 ```-1``` 반환|
+||int|```search(Object o)``` | Object의 index 리턴 <br> index는 스택의 최상단이 1부터 시작 <br> Object를 찾을 수 없는 경우 ```-1``` 리턴|
 ||boolean|```empty()``` | Stack이 비어있는지 확인|
 ||boolean|```contains(e)``` | Stack에 Object가 있는지 확인|
+||String|```show()```| Stack에 포함된 모든 데이터를 String 타입으로 반환하여 리턴|
 
 <br>
 
@@ -95,11 +96,11 @@ Queue<T> queue = new LinkedList<>();
 |기능	|리턴<br>타입	|메서드	|설명|
 |:-:|:-:|:-----|:------------------|
 |객체<br>추가| boolean | ```add(e)``` | Queue에 데이터 추가 <br> 큐가 꽉 찬 경우에는 ```IllegalStateException``` 발생 |
-|| boolean | ```offer(e)``` | Queue에 데이터 추가 / 실패한 경우 false 반환 |
-|객체<br>삭제| Element /<br> boolean | ```remove()``` /<br> ```remove(o)``` | 인자가 없는 경우 Queue 가장 앞쪽의 데이터 제거 <br> 인자가 있는 경우 해당 데이터를 제거 / 실패시 false 반환 |
-|| Element | ```poll()``` | Queue 가장 앞쪽의 데이터 제거<br>큐가 비어있으면 ```null``` 반환 |
+|| boolean | ```offer(e)``` | Queue에 데이터 추가 / 실패한 경우 false 리턴 |
+|객체<br>삭제| Element | ```poll()``` | Queue 가장 앞쪽의 데이터 제거<br>큐가 비어있으면 ```null``` 리턴 |
+|| Element /<br> boolean | ```remove()``` /<br> ```remove(o)``` | 인자가 없는 경우 Queue 가장 앞쪽의 데이터 제거 <br> 인자가 있는 경우 해당 데이터를 제거 / 실패시 false 리턴 |
 || void | ```clear()``` | Queue의 데이터 모두 제거 |
-|객체<br>검색| Element | ```peek()```  | Queue 가장 앞쪽의 데이터 출력 <br> 인자가 없는 경우 ```null``` 반환|
+|객체<br>검색| Element | ```peek()```  | Queue 가장 앞쪽의 데이터 출력 <br> 인자가 없는 경우 ```null``` 리턴|
 || Element | ```element()```  | Queue 가장 앞쪽의 데이터 출력 <br> 인자가 없는 경우 .```NoSuchElementException``` 발생 |
 
 <br>
