@@ -35,6 +35,7 @@
 | **Web Development** | **Algorithm** |
 |:-------------------:|:-------------:|
 |[Web Development Basics](https://github.com/H-JWANNA/TIL/blob/main/Development%20basics/%EC%9B%B9%20%EA%B0%9C%EB%B0%9C%20%EA%B8%B0%EC%B4%88.md "웹 개발 기초")|[Recursion](https://github.com/H-JWANNA/TIL/blob/main/Algorithm/Recursion.md "재귀")|
+|-|[Data Structure](https://github.com/H-JWANNA/TIL/blob/main/Algorithm/Data_Structure.md "자료 구조")|
 
 <br>
 
