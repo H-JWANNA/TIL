@@ -26,11 +26,13 @@ public class MainPage {
 
             switch (inputNum) {
                 case 1:
-                    SelectCustomer.printInfo();
+                    SelectCustomer selectCustomer = new SelectCustomer();
+                    selectCustomer.printInfo();
                     input.close();
                     break;
                 case 2:
-                    SelectOwner.printInfo();
+                    SelectOwner selectOwner = new SelectOwner();
+                    selectOwner.printInfo();
                     input.close();
                     break;
                 case 0 :
