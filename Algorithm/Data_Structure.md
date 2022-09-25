@@ -1,5 +1,17 @@
 # 자료 구조
 
+### 📌 &nbsp; **바로 가기**
+
+| 선형 구조                 | 비선형 구조         |
+|:----------------------:|:----------------:|
+| [Stack](#stack-스택)     | [Tree](#tree)    |
+| [Queue](#queue-큐)      | [Binary Search Tree](#binary-search-tree) |
+| [Deque](#deque-덱--디큐) | [Heap Tree](#heap-tree)  |
+| [Linked List](#linked-list-연결-리스트)  | [Graph](#graph) |
+|| [HashTable](#hash-table) |
+
+<br>
+
 자료 구조란 여러 데이터의 묶음을 저장하고, 사용하는 방법을 정의한 것으로
 
 자료 구조의 종류로는 ```Stack```, ```Queue```, ```Graph```, ```Tree```, ```Binary Search Tree```, ```Search Algorithm```, ```Deque```, ```Linked List```, ```Hash Table```, ```Heap Tree``` 등 여러 종류가 존재한다.
@@ -116,7 +128,116 @@ Queue<T> queue = new LinkedList<>();
 
 ### 📋 [**_추가 : Circle Queue_**](https://haruhiism.tistory.com/144)
 
+<br>
+
+## Deque (덱 / 디큐)
+
+Double-Ended Queue의 줄임말로 큐의 양쪽으로 데이터 입출력이 가능한 형태의 자료 구조이다.
+
+하나의 자료 구조에 스택과 큐를 합쳐놓은 형태와 비슷하다고 볼 수 있다.
+
+기본적으로는 양쪽으로 입출력이 가능하지만 입력이나 출력을 한쪽에서만 가능하도록 제한할 수 있고,  
+이 중에 입력을 한 쪽으로만 제한한 덱을 스크롤(Scroll)이라고 하며  
+출력을 한 쪽으로만 제한한 덱을 셸프(Shelf)라고 한다.
+
+<br>
+
+<img src = "https://javagoal.com/wp-content/uploads/2020/08/24-1.png" width = "90%"/>
+
+▲ _Deque_
+
+<br>
+
+### Deque 메서드
+
+```java
+Deque<String> deque1 = new ArrayDeque<>();
+Deque<String> deque2 = new LinkedBlockingDeque<>();
+Deque<String> deque3 = new ConcurrentLinkedDeque<>();
+Deque<String> deque4 = new LinkedList<>();
+```
+▲ _Deque 선언_
+
+<br>
+
+**Deque 메서드**
+
+Deque에서는 기본적으로 ```add()```, ```pop()```과 같은 Stack과 Queue의 메서드를 사용 할 수 있으며,  
+추가로 사용 가능한 메서드는 아래와 같다.
+
+|기능	|리턴<br>타입	|메서드	|설명|
+|:-:|:-:|:-----|:------------------|
+|객체<br>추가| boolean | ```addFirst(e)``` | Deque의 앞쪽에 데이터 추가 <br> 큐가 꽉 찬 경우 ```IllegalStateException``` 발생 |
+||  boolean | ```addLast(e)``` | Deque의 뒤쪽에 데이터 추가 <br> 큐가 꽉 찬 경우 ```IllegalStateException``` 발생 |
+|| boolean | ```offerFirst(e)``` | Deque의 앞쪽에 데이터 추가 / 실패 시 ```false``` 리턴 |
+|| boolean | ```offerLast(e)``` | Deque의 뒤쪽에 데이터 추가 / 실패 시 ```false``` 리턴 |
+|객체<br>삭제| Element | ```pollFirst()``` | Deque 가장 앞쪽의 데이터 제거<br>큐가 비어있으면 ```null``` 리턴 |
+|| Element | ```pollLast()``` | Deque 가장 뒤쪽의 데이터 제거<br>큐가 비어있으면 ```null``` 리턴 |
+|| Element | ```removeFirst()``` | Deque 가장 앞쪽의 데이터 제거<br>큐가 비어있는 경우 ```NoSuchElementException``` 발생 |
+|| Element | ```removeLast()``` | Deque 가장 뒤쪽의 데이터 제거<br>큐가 비어있는 경우 ```NoSuchElementException``` 발생 |
+||boolean| ```removeFirstOccurrence(o)``` | 앞쪽부터 찾아서 첫 번째 데이터를 제거 <br> 실패 시 ```false``` 리턴 |
+||boolean| ```removeLastOccurrence(o)``` | 뒤쪽부터 찾아서 첫 번째 데이터를 제거 <br> 실패 시 ```false``` 리턴 |
+|객체<br>검색| Element | ```peekFirst()``` | Deque 첫 번째 데이터 확인 <br> 인자가 없는 경우 ```null``` 리턴|
+|| Element | ```peekLast()``` | Deque 마지막 데이터 확인 <br> 인자가 없는 경우 ```null``` 리턴|
+|| Element | ```getFirst()``` | Deque 첫 번째 데이터 확인 <br> 큐가 비어있는 경우 ```NoSuchElementException``` 발생 |
+|| Element | ```getLast()``` | Deque 마지막 데이터 확인 <br> 큐가 비어있는 경우 ```NoSuchElementException``` 발생 |
+
+<br>
+
+```java
+// for-each문을 이용한 순회
+for (String el : deque1) {
+  System.out.println(el);
+}
+
+// Iterator를 이용한 순회
+Iterator<String> iterator = deque1.iterator();
+while (iterator.hasNext()) {
+  String el = iterator.next();
+  System.out.println(el);
+}
+
+// 역순 순회 
+Iterator<String> reverseIterator = deque1.descendingIterator();
+while (reverseIterator.hasNext()) {
+  String el = reverseIterator.next();
+  System.out.println(el);
+}
+```
+▲ _Deque의 순회_
+
 <br><br>
+
+## Linked List (연결 리스트)
+
+Linked List는 선형으로 그룹화된 데이터의 집합으로 데이터와  
+다음 데이터의 주소를 포함하고 있는 하나의 노드가 선형으로 연결된 자료 구조이다.
+
+> 삽입, 삭제가 중요한 곳에 사용 / 동적 기억장소 관리(Dynamic Storage Management) / Garbage collection
+
+<br>
+
+<img src = "./src/LinkedList.png" width = "90%"/>
+
+▲ _Array & Linked List in Memory_
+
+<br>
+
+### Linked List의 특징
+
+1. 노드의 추가 및 삭제가 빠르다.  
+   배열의 경우 값을 추가하거나 삭제할 때 메모리를 재할당해야하지만,  
+   연결 리스트의 경우 참조하는 메모리 정보만 설정하면 되기 때문에 O(1)의 시간복잡도를 가진다.
+
+2. 노드의 값을 찾기 위한 순회는 느리다.  
+   배열의 경우 해당 인덱스의 값을 찾는데 O(1)의 시간 복잡도를 가지지만,  
+   연결 리스트의 경우 메모리에 흩어져서 저장이 되므로 순회하는데에 최대 O(n)의 시간복잡도를 가진다.
+
+<br>
+
+***
+
+<br>
 
 ## Tree
 
@@ -152,6 +273,73 @@ Tree는 단방향 그래프의 구조로 하나의 최상위 뿌리(Root)로부�
 - 서브 트리 (Sub Tree)  
   루트에서 뻗어 나오는 큰 트리의 내부에, 트리 구조를 갖춘 **작은 트리**를 말한다.  
   부모와 자식 둘 이상 연결되면 최소 크기의 서브 트리가 만들어진다.
+
+<br><br>
+
+## Binary Search Tree
+
+이진 트리(Binary Tree)는 자식 노드가 최대 2개인 노드들로 구성된 트리를 말하고,  
+이진 탐색 트리(Binary Search Tree)는 모든 왼쪽 자식의 값이 루트나 부모보다 작고,  
+모든 오른쪽 자식의 값이 루트나 부모보다 큰 값을 가진다.
+
+> 이진 탐색 트리는 입력되는 값의 순서에 따라 한쪽으로 노드들이 몰리게 될 수 있다.  
+> 균형이 잡히지 않은 트리는 탐색하는 데 시간이 더 걸리는 경우도 있기 때문에  
+> 이 문제를 해결하기 위해 삽입과 삭제마다 트리의 구조를 재조정하는 알고리즘을 추가할 수 있다.
+
+<br>
+
+<img src = "https://static.packt-cdn.com/products/9781789801736/graphics/C09581_08_02.jpg" width = "90%">
+
+▲ _Binary Search Tree_
+
+<br>
+
+### 이진 트리의 종류
+
+- **정 이진 트리 (Full binary tree)**  
+  각 노드가 0개 혹은 2개의 자식 노드를 가진다.
+
+- **완전 이진 트리 (Complete binary tree)**  
+  마지막 레벨을 제외한 모든 노드가 가득 차 있어야 하며,  
+  마지막 레벨의 노드는 왼쪽부터 채워져야 한다.
+
+- **포화 이진 트리 (Perfect binary tree)**  
+  정 이진 트리이면서 완전 이진 트리인 경우  
+  모든 리프 노드의 레벨이 동일하고, 모든 레벨이 가득 채워져 있어야 한다.
+
+<br><br>
+
+## Heap Tree
+
+Heap tree는 일반적인 트리구조와 다르게, **우선순위에 따라서 빠르게 자료를 검색**할 수 있는 자료 구조이다.
+
+Heap tree는 느슨한 정렬 구조를 가지고 있다.
+
+> 💡 느슨한 정렬 구조  
+>
+> 부모 노드의 값은 항상 자식 노드의 값보다 크거나 작다.  
+> 하지만 자식 노드의 값에 따라 좌우 정렬은 하지 않기 때문에 느슨한 정렬 구조라고 한다.
+
+<br>
+
+<img src = "https://cdn.programiz.com/sites/tutorial2program/files/max-heap-min-heap.jpg" width = "90%"/>
+
+▲ _Heap Tree_
+
+<br>
+
+### Heap Tree의 특징
+
+1. 완전 이진 트리  
+   단순 최대값, 최소값을 찾기 위해 완전 이진 트리로 구성할 필요는 없지만,  
+   삽입 / 삭제 시 성능을 위해 완전 이진 트리로 구성하는 것이 유리하다.
+
+2. 중복된 값 저장  
+   단순히 최대, 최소값을 찾기 위한 구조이므로 일반 이진 트리와 다르게 중복된 값 저장이 가능하다.
+
+3. 최대 힙 / 최소 힙  
+   최대힙 : 루트에 가장 큰 값이 위치하며 자식 노드로 내려갈수록 작은 값이 위치한다.  
+   최소힙 : 루트에 가장 작은 값이 위치하며 자식 노드로 내려갈수록 큰 값이 위치한다.
 
 <br><br>
 
@@ -239,39 +427,124 @@ Tree는 단방향 그래프의 구조로 하나의 최상위 뿌리(Root)로부�
 
 <br><br>
 
-## Binary Search Tree
+## Hash Table
 
-이진 트리(Binary Tree)는 자식 노드가 최대 2개인 노드들로 구성된 트리를 말하고,  
-이진 탐색 트리(Binary Search Tree)는 모든 왼쪽 자식의 값이 루트나 부모보다 작고,  
-모든 오른쪽 자식의 값이 루트나 부모보다 큰 값을 가진다.
+hash table은 해시함수를 사용하여 변환한 해시를 index로 삼아 key와 value를 저장하는 자료 구조이다.
 
-> 이진 탐색 트리는 입력되는 값의 순서에 따라 한쪽으로 노드들이 몰리게 될 수 있다.  
-> 균형이 잡히지 않은 트리는 탐색하는 데 시간이 더 걸리는 경우도 있기 때문에  
-> 이 문제를 해결하기 위해 삽입과 삭제마다 트리의 구조를 재조정하는 알고리즘을 추가할 수 있다.
+> ex) 주소록, 블록체인, 자바스크립트 실행 엔진 (크롬, V8), Domain → DNS 변환
 
 <br>
 
-<img src = "https://static.packt-cdn.com/products/9781789801736/graphics/C09581_08_02.jpg" width = "90%">
+<img src = "https://khalilstemmler.com/img/blog/data-structures/hash-tables/hash-table.png" width = "90%"/>
 
-▲ _Binary Search Tree_
+▲ _Hash Table_
+
+<br>
+
+### Hash Table의 구조
+- **키(key)**  
+  해시 함수의 입력값으로 고유값이며 다양한 길이의 값이 들어올 수 있다.  
+  해시 함수를 통해 변환하지 않은 상태로 저장소에 저장이 되면 다양한 길이만큼의 저장소를 구성해 두어야 하기 때문에 해시 함수로 값을 바꾸어 저장
+
+- **해시함수(hash Function)**  
+  키(key)를 해시(hash)로 바꿔주는 역할을 한다.  
+  다양한 길이를 가진 키를 일정한 길이를 가진 해시로 변경하여 저장소를 효율적으로 운영할 수 있도록 한다.   
+
+  서로 다른 키가 같은 해시가 되는 경우를 해시 충돌(hash Collision)이라고 하는데,  
+  해시 충돌을 일으키는 확률을 최대한 줄이는 것이 중요하다.
+
+- **해시(hash)**  
+  키를 해시함수를 사용하여 만들어진 결과물로, 저장소에서 value와 매칭되어 저장된다.  
+  변환된 값을 배열의 index처럼 사용한다.
+
+- **데이터(value)**  
+  저장소에 최종적으로 저장되는 값으로 index와 매칭되어 저장한다.
 
 <br>
 
-### 이진 트리의 종류
+### Hash Table의 특징
 
-- **정 이진 트리 (Full binary tree)**  
-  각 노드가 0개 혹은 2개의 자식 노드를 가진다.
+💡 **장점**  
+저장, 삭제, 검색 과정이 모두 평균 O(1)의 시간복잡도를 가져 데이터를 다루는 속도가 매우 빠르다.
 
-- **완전 이진 트리 (Complete binary tree)**  
-  마지막 레벨을 제외한 모든 노드가 가득 차 있어야 하며,  
-  마지막 레벨의 노드는 왼쪽부터 채워져야 한다.
-
-- **포화 이진 트리 (Perfect binary tree)**  
-  정 이진 트리이면서 완전 이진 트리인 경우  
-  모든 리프 노드의 레벨이 동일하고, 모든 레벨이 가득 채워져 있어야 한다.
+💡 **단점**  
+해시함수의 의존도가 높다.  
+해시 충돌이 발생할 수 있다.  
+데이터가 저장되기 전에 저장공간을 미리 만들어놔야 하기 때문에 공간 효율성이 떨어진다.  
 
 <br>
+
+- 저장, 삭제, 검색 과정  
+해시 함수에 키값을 넣어 해시값을 만들고, 만들어진 해시값과 일치하는 index를 찾아 저장하거나 삭제, 검색한다.
+
+  > 기본적으로 해당 작업들의 시간복잡도는 O(1)이지만,  
+  > 해시 함수의 의존도가 높기 때문에 해시 함수가 복잡하다면 해시값을 만드는데 많은 시간이 소요된다.
+  > 
+  > 또한, 해싱 충돌이 발생하면 모든 index나 value를 찾아야하므로 O(n)의 시간복잡도를 가지게 된다.
+
+<br>
+
+**🔸 대표적인 해시 알고리즘**
+
+- Division Method  
+  Number type의 키를 저장소의 크기로 나누어 나온 나머지를 index로 사용하는 방법  
+  이때 저장소의 크기를 소수(Prime Number)로 정하고 2의 제곱수와 먼 값을 사용하는 것이 효과가 좋다.  
+  > ex) Key 값이 23일 때 테이블 크기가 7이라면 index는 2가 된다.
+
+- Digit Folding   
+  키의 문자열을 ASCII 코드로 바꾸고 그 값을 합해 저장소에서 index로 사용하는 방법  
+  만약 이때 index가 저장소의 크기를 넘어간다면 Division Method를 적용할 수 있다.
+
+- Multiplication Method   
+  숫자로 된 Key 값 ```K```, 0과1 사이의 실수 ```A```, 2의 제곱수인 ```m```을 아래와 같이 계산한 값을 index로 사용  
+  > index = (KA mod 1)m
+  
+- Universal Hashing  
+  다수의 해시함수를 만들어 특정한 장소에 넣어두고, 무작위로 해시함수를 선택해 해시값을 만드는 기법
+
+<br>
+
+### 해시 충돌 해결 방법
+
+<br>
+
+1. **개방 연결법 (Open Addressing)**  
+  해시 충돌이 발생하면 다른 index에 해당 자료를 삽입하는 방식
+  - *Linear Probing*  
+    현재 중복된 index로부터 고정된 숫자만큼 이동하여 비어있는 저장소(버킷)를 찾아 value를 저장
+
+  - *Quadratic Probing*  
+    현재 중복된 index로부터 이동할 숫자를 제곱으로 사용하는 방식  
+    > 처음 충돌이 발생하면 1(1^2)만큼,  
+    또 충돌이 발생한다면 4(2^2), 9(3^2), 16(4^2)만큼 이동하여 빈 공간을 탐색
+
+  - *Double Hasing Probing*  
+    한 해시함수에서 충돌이 발생하면 미리 지정해둔 다른 해시함수를 이용해 새로운 주소를 받아 사용하는 방법  
+    다른 방법들보다 많은 연산이 필요하다.
+
+<br>
+
+2. **분리 연결법(Seperate Chaining)**  
+  중복된 index의 버킷 데이터에 Linked List, Red-Black tree 등의 자료 구조를 활용해 충돌이 발생한 데이터의 주소를 저장하는 방법
+
+   💡 장점  
+  구현이 간단하며, value를 쉽게 삭제할 수 있다.  
+   💡 단점  
+  중복으로 저장되는 value가 많아지면 동일한 버킷에 연결되는 데이터가 많아져 검색 효율성이 감소한다.
+
+3. **저장소 확장(Resize)**  
+   저장소의 크기가 작다면 불필요한 메모리 사용을 줄일 수 있지만,  
+   해시 충돌이 발생하며 개방 연결법이나 분리 연결법을 사용해도 성능상 손실이 발생한다.
+
+   실제 HashMap은 key-value 데이터가 일정 이상(저장소의 75%)이 되면 저장소 크기를 2배로 늘리는데,  
+   이 방식으로 해시 충돌로 인한 성능이 감소하는 문제를 어느 정도 해결 가능하다.
+
+
+
+<br><br>
 
 ***
+
+_2022.09.25. Update_
 
 _2022.09.22. Update_
