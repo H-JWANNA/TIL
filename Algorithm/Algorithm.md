@@ -6,6 +6,14 @@
 
 <br>
 
+### **📌 바로가기**
+
+| [Tree traversal](#tree-traversal)  | [DFS](#dfs-depth-first-search-깊이-우선-탐색)  | [BFS](#bfs-breadth-first-search-너비-우선-탐색)  | [Binary Search](#binary-search-algorithm-이진-탐색-알고리즘) |
+|:-:|:-:|:-:|:-:|
+| [**Brute Force**](#brute-force-algorithm-완전-탐색-알고리즘) | [**Greedy**](#greedy-algorithm-탐욕-알고리즘) | [**DP**](#dynamic-programming-동적-프로그래밍) | |
+
+<br>
+
 ## 시간 복잡도 (Time Complexity)
 
 입력값의 변화에 따라 연산을 실행할 때, 연산 횟수에 비해 얼마만큼의 시간이 걸리는 지를 나타낸 것
@@ -394,6 +402,55 @@ public static void bfs(int i) {
 
 <br>
 
+## Brute Force Algorithm (완전 탐색 알고리즘)
+
+완전 탐색 알고리즘은 가능한 모든 경우의 수를 대입하여 해결하는 무차별 대입 방법을 나타내는 알고리즘이다.
+
+🔸 완전 탐색 알고리즘을 사용하는 경우
+
+1. 프로세스 속도를 높이는데 사용할 수 있는 다른 알고리즘이 없을 때 사용
+
+2. 문제를 해결하는 여러 솔루션이 있고 각 솔루션을 확인해야 할 때 사용
+
+<br>
+
+> 💡 Brute Force를 활용한 알고리즘  
+> 
+> - 순차 검색 알고리즘(Sequential Search)
+> - 문열 매칭 알고리즘(Brute-Force String Matching)
+> - 선택 정렬 알고리즘(Selection Sort)
+> - 버블 정렬 알고리즘(Bubble Sort)
+> - 동적 프로그래밍(Dynamic Programming, DP)
+> - 트리 구조의 완전 탐색 알고리즘 (BFS, DFS)
+
+<br>
+<details>
+<summary> &ensp; ✔︎ Brute Force Algorithm Sample Questions</summary>
+<div markdown="1">
+<br>
+
+📌 **BAEKJOON**
+| 레벨 | ID | 제목 |
+|:--:|:--:|:--:|
+| <img src = "https://static.solved.ac/tier_small/4.svg" height = "20"> | 2231 | 분해합 |
+| <img src = "https://static.solved.ac/tier_small/5.svg" height = "20"> | 2309 | 일곱 난쟁이 |
+| <img src = "https://static.solved.ac/tier_small/5.svg" height = "20"> | 10448 | 유레카 이론 |
+| <img src = "https://static.solved.ac/tier_small/7.svg" height = "20"> | 1018 | 체스판 다시 칠하기 |
+| <img src = "https://static.solved.ac/tier_small/8.svg" height = "20"> | 2503 | 숫자 야구 |
+| <img src = "https://static.solved.ac/tier_small/9.svg" height = "20"> | 3085 | 사탕게임 |
+| <img src = "https://static.solved.ac/tier_small/9.svg" height = "20"> | 1182 | 부분 수열의 합 ⭐️ |
+
+### 📋 [더 많은 문제](https://solved.ac/search?query=tag%3Abruteforcing%20)
+
+</div>
+</details>
+
+<br>
+
+***
+
+<br>
+
 ## Greedy Algorithm (탐욕 알고리즘)
 
 선택의 순간마다 당장 눈앞에 보이는 최적의 상황만을 쫓아 최종적인 해답에 도달하는 방법  
@@ -458,58 +515,11 @@ public static void bfs(int i) {
 
 <br>
 
-## Brute Force Algorithm (완전 탐색 알고리즘)
-
-완전 탐색 알고리즘은 가능한 모든 경우의 수를 대입하여 해결하는 무차별 대입 방법을 나타내는 알고리즘이다.
-
-🔸 완전 탐색 알고리즘을 사용하는 경우
-
-1. 프로세스 속도를 높이는데 사용할 수 있는 다른 알고리즘이 없을 때 사용
-
-2. 문제를 해결하는 여러 솔루션이 있고 각 솔루션을 확인해야 할 때 사용
-
-<br>
-
-> 💡 Brute Force를 활용한 알고리즘  
-> 
-> - 순차 검색 알고리즘(Sequential Search)
-> - 문열 매칭 알고리즘(Brute-Force String Matching)
-> - 선택 정렬 알고리즘(Selection Sort)
-> - 버블 정렬 알고리즘(Bubble Sort)
-> - 동적 프로그래밍(Dynamic Programming, DP)
-> - 트리 구조의 완전 탐색 알고리즘 (BFS, DFS)
-
-<br>
-<details>
-<summary> &ensp; ✔︎ Brute Force Algorithm Sample Questions</summary>
-<div markdown="1">
-<br>
-
-📌 **BAEKJOON**
-| 레벨 | ID | 제목 |
-|:--:|:--:|:--:|
-| <img src = "https://static.solved.ac/tier_small/4.svg" height = "20"> | 2231 | 분해합 |
-| <img src = "https://static.solved.ac/tier_small/5.svg" height = "20"> | 2309 | 일곱 난쟁이 |
-| <img src = "https://static.solved.ac/tier_small/5.svg" height = "20"> | 10448 | 유레카 이론 |
-| <img src = "https://static.solved.ac/tier_small/7.svg" height = "20"> | 1018 | 체스판 다시 칠하기 |
-| <img src = "https://static.solved.ac/tier_small/8.svg" height = "20"> | 2503 | 숫자 야구 |
-| <img src = "https://static.solved.ac/tier_small/9.svg" height = "20"> | 3085 | 사탕게임 |
-| <img src = "https://static.solved.ac/tier_small/9.svg" height = "20"> | 1182 | 부분 수열의 합 ⭐️ |
-
-### 📋 [더 많은 문제](https://solved.ac/search?query=tag%3Abruteforcing%20)
-
-</div>
-</details>
-
-<br>
-
-***
-
-<br>
-
 ## Binary Search Algorithm (이진 탐색 알고리즘)
 
 정렬된 상태의 데이터를 절반씩 범위를 나눠 분할 정복기법으로 특정 값을 찾아내는 알고리즘
+
+<br>
 
 ### 📋 [이진 탐색 알고리즘의 구현](#🔸-olog-n)
 
@@ -537,9 +547,106 @@ public static void bfs(int i) {
 </div>
 </details>
 
+<br>
+
+***
+
+<br>
+
+## Dynamic Programming (동적 프로그래밍)
+
+주어진 문제를 여러 개의 부분으로 나누어 푼 다음, 그 결과들로 주어진 문제를 해결하는 알고리즘
+
+단, 분할 정복과 다르게 **하나의 문제를 한 번만 푼다는 점**에서 다르다.
+
+중복에 대한 문제를 메모이제이션(Memoization)을 통해 해결하며,  
+Greedy 알고리즘보다 폭 넓은 범위에서 근사치가 아닌 **정확한 값**을 얻어낸다.
+
+> ex) 피보나치 수열 재귀 문제 해결 (이미 계산된 결과는 저장)
+
+<br>
+
+```java
+public int fib(int n) {
+  if(n < 2) return n;
+
+  return fib(n - 2) + fib(n - 1);
+}
+```
+▲ _일반 피보나치 수열_
+
+<br>
+
+피보나치 수열의 단점으로 꼽히는 문제는 재귀 호출에 의한 O(2<sup>n</sup>)의 시간 복잡도이다.
+
+<br>
+
+<img src = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FufkZW%2FbtraTbd0GQF%2FkUnH9bbEB4UK5rK59OGc4K%2Fimg.png" width = "90%"/>
+
+▲ _fib(5)를 실행했을 때, 발생하는 재귀_
+
+<br>
+
+위의 사진에서만 보더라도 fib(2)에 대한 값이 저장되어 있지 않아서  
+fib(2)가 불필요한 재귀를 반복하는 것을 볼 수 있다.
+
+<br>
+
+```java
+int fib(int n){
+  if(n < 2) return n;
+
+  // 값이 존재하면 재귀호출 하지 않고 리턴
+  if(dp[n] != 0) return dp[n];
+
+  // 존재하지 않는다면 재귀호출 하여 값을 보관
+  dp[n] = fib(n - 2) + fib(n - 1);
+
+  return dp[n];
+ }
+```
+▲ _Memoization을 통한 피보나치 수열_
+
+<br>
+
+만약 ```dp[n]```에 해당 값이 저장되어 있다면, 재귀호출을 하지 않고 해당 값을 리턴하기 때문에  
+위의 코드는 O(n)의 시간 복잡도를 가지게 된다.
+
+<br>
+<details>
+<summary> &ensp; ✔︎ Dynamic Programming Sample Questions</summary>
+<div markdown="1">
+<br>
+
+📌 **BAEKJOON**
+| 레벨 | ID | 제목 |
+|:--:|:--:|:--:|
+| <img src = "https://static.solved.ac/tier_small/8.svg" height = "20"> | 1463 | 1로 만들기 |
+| <img src = "https://static.solved.ac/tier_small/8.svg" height = "20"> | 2193 | 이진수 |
+| <img src = "https://static.solved.ac/tier_small/8.svg" height = "20"> | 1904 | 01타일 |
+| <img src = "https://static.solved.ac/tier_small/8.svg" height = "20"> | 11726 | 2xn 타일링 |
+| <img src = "https://static.solved.ac/tier_small/8.svg" height = "20"> | 11727 | 2xn 타일링 2 |
+| <img src = "https://static.solved.ac/tier_small/8.svg" height = "20"> | 11051 | 이항 계수 2  |
+| <img src = "https://static.solved.ac/tier_small/9.svg" height = "20"> | 1699 | 제곱수의 합  |
+| <img src = "https://static.solved.ac/tier_small/9.svg" height = "20"> | 11055 | 가장 큰 증가 부분 수열 ⭐️ |
+| <img src = "https://static.solved.ac/tier_small/10.svg" height = "20"> | 9465 | 스티커 |
+| <img src = "https://static.solved.ac/tier_small/10.svg" height = "20"> | 11052 | 카드 구매하기  |
+| <img src = "https://static.solved.ac/tier_small/10.svg" height = "20"> | 10844 | 쉬운 계단 수  |
+| <img src = "https://static.solved.ac/tier_small/10.svg" height = "20"> | 11057 | 오르막 수  |
+| <img src = "https://static.solved.ac/tier_small/11.svg" height = "20"> | 2294 | 동전 2  |
+| <img src = "https://static.solved.ac/tier_small/11.svg" height = "20"> | 12865 | 평범한 배낭 ⭐️ |
+| <img src = "https://static.solved.ac/tier_small/11.svg" height = "20"> | 16500 | 문자열 판별 ⭐️ |
+
+### 📋 [더 많은 문제](https://solved.ac/search?query=tag%3Adp)
+
+</div>
+</details>
+
 <br><br>
 
 ***
+
+_2022.09.28. Update_
 
 _2022.09.27. Update_
 
