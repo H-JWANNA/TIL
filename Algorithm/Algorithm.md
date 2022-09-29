@@ -10,7 +10,7 @@
 
 | [Tree traversal](#tree-traversal)  | [DFS](#dfs-depth-first-search-깊이-우선-탐색)  | [BFS](#bfs-breadth-first-search-너비-우선-탐색)  | [Binary Search](#binary-search-algorithm-이진-탐색-알고리즘) |
 |:-:|:-:|:-:|:-:|
-| [**Brute Force**](#brute-force-algorithm-완전-탐색-알고리즘) | [**Greedy**](#greedy-algorithm-탐욕-알고리즘) | [**DP**](#dynamic-programming-동적-프로그래밍) | |
+| [**Brute Force**](#brute-force-algorithm-완전-탐색-알고리즘) | [**Greedy**](#greedy-algorithm-탐욕-알고리즘) | [**DP**](#dynamic-programming-동적-프로그래밍) | [**Algorithm with Math**](#algorithm-with-math) |
 
 <br>
 
@@ -642,9 +642,216 @@ int fib(int n){
 </div>
 </details>
 
+<br>
+
+***
+
+<br>
+
+## Algorithm with Math
+
+<br>
+
+### 최대공약수 (Greatest Common Divisor, GCD)
+
+> 0이 아닌 2개 이상의 정수의 공통 약수 중 가장 큰 수
+
+<br>
+
+### 최소 공배수 (Least Common Multiple, LCM) 
+
+> 0이 아닌 2개 이상의 정수의 양의 공배수 중 가장 작은 수
+
+<br>
+
+```java
+int num1 = 8;
+int num2 = 12;
+
+int gcd = 0;  // 최대 공약수
+
+for(int i = 1; i <= num1 && i <= num2; i++) {
+  if(num1 % i == 0 && num2 % i == 0) {
+    max = i;
+  }
+}
+
+int lcm = (num1 * num2) / gcd;  // 최소 공배수
+
+// 최대 공약수
+System.out.println(gcd);
+
+// 최소 공배수
+System.out.println(lcm);
+```
+
+▲ _쉽게 풀 수 있는 방법_
+
+<br>
+
+```java
+/*
+반복문을 통한 유클리드 호제법의 구현
+*/
+
+int gcd(int a, int b) {
+  if (a < b) {  // 유클리드 호제법의 조건
+    // a를 b로 나누어야 하기 때문에 b가 더 크다면 a와 b를 바꿔준다.
+    int temp = a;
+    a = b;
+    b = temp;
+  } 
+  while(b != 0) { // 유클리드 호제법
+    int r = a % b;
+    a = b;
+    b = r;
+  }
+  return a; // 최대 공약수
+}
+
+int lcm(int a, int b) {
+  return (a * b) / gcd(a, b); // 최소 공배수
+}
+
+
+/*
+재귀를 통한 유클리드 호제법의 구현
+*/
+
+int gcd(int a, int b) {
+  // 큰 숫자를 작은 숫자로 나눈 나머지 r
+  int r = a % b;
+
+  // r이 0이 되면 나누게 된 작은 숫자 b가 최대 공약수이다.
+  if (r == 0) return b;
+
+  // r이 0이 되지 않으면 작은 수 -> 큰 수, 나머지 -> 작은 수로 옮겨 계산한다.
+  return gcd(b, r);
+}
+```
+
+▲ _유클리드 호제법_
+
+<br>
+
+### 조합 (Combination)
+
+<br>
+
+> 서로 다른 n개에서 **순서 없이** r개를 뽑는 경우의 수
+
+```java
+public class AlgorithmStudy {
+   public static void combination(int[] arr, boolean[] visited, int start, int depth, int r){
+      if(depth == r){
+         for(int i=0; i<arr.length; i++){
+            if(visited[i]) System.out.print(arr[i]);
+         }
+         System.out.println();
+         return;
+      }
+      for(int i=start; i<arr.length; i++){
+         if(!visited[i]){
+            visited[i] = true;
+            combination(arr, visited, i+1, depth+1, r);
+            visited[i] = false;
+         }
+      }
+   }
+
+   public static void main(String[] args){
+      int[] arr = {1, 2, 3};
+      int r = 2;
+      combination(arr, new boolean[arr.length], 0, 0, r);
+   }
+}
+```
+
+<br>
+
+### 순열 (Permutation)
+
+<br>
+
+> 서로 다른 n개에서 r개를 뽑아서 **정렬**하는 경우의 수 (nPr)  
+> 
+> 순서가 존재한다.
+
+```java
+public class AlgorithmwithMath {
+   public static void permutation(int[] arr, int[] out, boolean[] visited, int depth, int r){
+      if(depth == r){
+         for(int num: out) System.out.print(num);
+            System.out.println();
+            return;
+      }
+      for(int i=0; i<arr.length; i++){
+         if(!visited[i]){
+            visited[i] = true;
+            out[depth] = arr[i];
+            permutation(arr, out, visited, depth+1, r);
+            visited[i] = false;
+         }
+      }
+   }
+
+   public static void main(String[] args){
+      int[] arr = {1, 2, 3};
+      int r = 2;
+      permutation(arr, new int[r], new boolean[arr.length], 0, r);
+   }
+}
+```
+
+<br>
+
+### 멱집합 (Power Set)
+
+> 해당 집합의 모든 부분 집합을 모아둔 집합 (주로 집합을 사용하여 해결)
+>
+> ex) 집합 {1, 2, 3}의  
+> 부분 집합 : {}, {1}, {2}, {3}, {1, 2}, {1, 3}, {2, 3}, {1, 2, 3}  
+> 멱집합 : { {}, {1}, {2}, {3}, {1, 2}, {1, 3}, {2, 3}, {1, 2, 3} }
+
+<br>
+
+```java
+int[] nums = { 1, 2, 3 };
+
+// 최대 원소의 개수
+int max_cnt;
+
+// 각 부분 집합을 저장할 배열
+int[] subset;
+
+public void main(String[] args) {
+  // 원소를 선택하는 개수 0 ~ 3개.
+   for (int i = 0; i <= 3; i++) {
+      max_cnt = i;
+      subset = new int[i];
+      // 대상 집합에서 원소를 0 ~ 3개를 선택하는 조합을 모두 구한다.
+      Combination(0, 0);
+   }
+}
+
+private void Combination(int cnt, int k) {
+   if (cnt == max_cnt) {
+      System.out.println(Arrays.toString(subset));
+      return;
+   }
+   for (int i = k; i < nums.length; i++) {
+      subset[cnt] = nums[i];
+      Combination(cnt + 1, i + 1);
+   }
+}
+```
+
+
 <br><br>
 
 ***
+
+_2022.09.29. Update_
 
 _2022.09.28. Update_
 
