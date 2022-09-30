@@ -741,7 +741,7 @@ int gcd(int a, int b) {
 > 서로 다른 n개에서 **순서 없이** r개를 뽑는 경우의 수
 
 ```java
-public class AlgorithmStudy {
+public class AlgorithmwithMath {
    public static void combination(int[] arr, boolean[] visited, int start, int depth, int r){
       if(depth == r){
          for(int i=0; i<arr.length; i++){
