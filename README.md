@@ -32,11 +32,13 @@
 
 # 📌 CS
 
-| **Web Development** | **Algorithm** |
+| **Web Development** | **Data Structure** |
 |:-------------------:|:-------------:|
-|[Web Development Basics](https://github.com/H-JWANNA/TIL/blob/main/Web%20Development/Web_Development_Basic.md "웹 개발 기초")|[Recursion](https://github.com/H-JWANNA/TIL/blob/main/Algorithm/Recursion.md "재귀")|
-|-|[Data Structure](https://github.com/H-JWANNA/TIL/blob/main/Algorithm/Data_Structure.md "자료 구조")|
-|-|[Algorithm](https://github.com/H-JWANNA/TIL/blob/main/Algorithm/Algorithm.md "알고리즘")|
+|[Web Development Basics](https://github.com/H-JWANNA/TIL/blob/main/Web%20Development/Web_Development_Basic.md "웹 개발 기초")|[Data Structure](https://github.com/H-JWANNA/TIL/blob/main/Algorithm/Data_Structure.md "자료 구조")|
+|[Network](https://github.com/H-JWANNA/TIL/blob/main/Web%20Development/Network.md "네트워크")|[Recursion](https://github.com/H-JWANNA/TIL/blob/main/Algorithm/Recursion.md "재귀")|
+|[Web](https://github.com/H-JWANNA/TIL/blob/main/Web%20Development/Web.md "웹")|[Algorithm](https://github.com/H-JWANNA/TIL/blob/main/Algorithm/Algorithm.md "알고리즘")|
+|[HTTP](https://github.com/H-JWANNA/TIL/blob/main/Web%20Development/Web.md "HTTP") | - |
+
 
 <br>
 
