@@ -97,6 +97,8 @@ Request Header에는 헤더 이름, 콜론(:), 값이 입력된다.
 - Entity headers (Representation headers)  
   body에 담긴 리소스의 정보(콘텐츠 길이, MIME 타입 등)를 포함하는 헤더
 
+  📋 [**_MIME 타입이란?_**](https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types)
+
 <br>
 
 **🔸 Body**
