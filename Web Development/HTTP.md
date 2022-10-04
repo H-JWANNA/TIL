@@ -135,6 +135,14 @@ Body는 2가지 종류로 나눌 수 있다.
 
 이들이 합쳐저 ```HTTP/1.1 404 Not Found.```와 같은 Status Line이 생성된다.
 
+<br>
+
+> 💡 Status Code
+> - 2xx : 성공
+> - 3xx : 리다이렉션 필요 (요청을 완수하기 위해 추가적인 방법이 필요)
+> - 4xx : 클라이언트 요청 오류 (잘못된 요청 / 문법 에러)
+> - 5xx : 서버 내부 오류
+
 ### 📋 [**_HTTP Status Code_**](https://developer.mozilla.org/ko/docs/Web/HTTP/Status)
 
 <br>
@@ -199,6 +207,225 @@ Body는 2가지 종류로 나눌 수 있다.
 
 ### 📋 [**_HTTP API Design_**](https://koreanjson.com/)
 
+<br>
+
+***
+
+<br>
+
+## REST API
+
+REST API는 Respresentational State Transfer Application Programming Interface의 약자로  
+로이 필딩의 박사학위 논문에서 웹(HTTP)의 장점을 최대한 활용할 수 있는 아키텍처로써 처음 소개되었다.   
+
+REST API는 웹에서 사용되는 **데이터나 자원(Resource)을 HTTP URI로 표현**하고,  
+HTTP 프로토콜을 통해 요청과 응답을 정의하는 방식을 말한다.
+
+<br>
+
+<img src = "https://devopedia.org/images/article/252/1821.1579540894.jpg" width = "90%" />
+
+▲ _Richardson 성숙도 모델_
+
+> 로이 필딩은 모든 단계를 충족해야 REST API라고 부를 수 있다고 했지만,  
+> 실제로 3단계까지 지키기 어렵기 때문에 2단계까지만 적용해도 좋은 API Design이라고 볼 수 있고,  
+> 이러한 경우에는 HTTP API라고도 부른다.
+
+<br>
+
+### 0단계
+
+0단계에서는 단순히 **HTTP 프로토콜을 사용**만 해도 된다.
+
+```json
+// (Request) 예약 가능 시간 확인 
+POST /appointment HTTP/1.1
+~Skip Header~
+
+{
+  "date":"2022-10-04",
+  "doctor":"Schweitzer"
+}
+```
+
+```json
+// (Request) 예약 
+POST /appointment HTTP/1.1
+~Skip Header~
+
+{
+  "doctor":"Schweitzer",
+  "start":"14:00",
+  "end":"15:00",
+  "patient":"H-JWANNA"
+}
+```
+
+<br>
+
+### 1단계
+
+1단계에서는 **개별 리소스와의 통신을 준수**해야한다.
+
+모든 자원은 개별 리소스에 맞는 엔드포인트(Endpoint)를 사용해야 하고,  
+요청하고 받은 자원에 대한 정보를 응답으로 전달해야 한다.
+
+```json
+// (Request) 예약 가능 시간 확인 
+POST /doctor/Schweitzer HTTP/1.1  // 개별 엔드포인트
+~Skip Header~
+
+{
+  "date":"2022-10-04",
+}
+```
+
+```json
+// (Response) 예약 가능 시간 확인 
+HTTP/1.1 200 OK
+~Skip Header~
+
+{
+  "slots": [
+    { "id":123,"doctor":"Schweitzer","start":"09:00","end":"12:00"},
+    { "id":124,"doctor":"Schweitzer","start":"14:00","end":"16:00"},
+  ]
+}
+```
+
+```json
+// (Request) 예약 
+POST /slots/123 HTTP/1.1
+~Skip Header~
+
+{
+  "patient":"H-JWANNA"
+}
+```
+
+```json
+// (Response) 예약 
+HTTP/1.1 409 Conflict
+~Skip Header~
+
+{
+  "appointmentFailure": {
+    { "id":123, … },
+    "patient":"H-JWANNA",
+    "reason":"해당 시간은 예약이 마감되었습니다."
+  }
+}
+```
+
+▲ _응답을 전달할 때에도 성공, 실패 여부를 포함한 응답을 전달한다._
+
+<br>
+
+**💡 Endpoint 작성 요령**
+
+- 행위를 나타내는 동사형으로 작성하기보다 명사형(목적어)으로 작성한다.  
+  <span style = "color:gray">(리소스를 어떻게 할지에 대한 동사는 HTTP Method에서 선언)</span>
+
+- 리소스는 소문자로만 작성하고, 길어지는 경우에 하이픈(-)으로 단어를 구분한다.
+  
+- 위 예시처럼 바디에 적는 것 보다 쿼리파라미터에 적는 것이 좋다.
+
+<br>
+
+### 2단계
+
+2단계에서는 CRUD에 맞는 적절한 HTTP Method를 사용하는 것에 중점을 둔다.
+
+추가로, ```GET``` 메서드는 바디를 가지지 않기 때문에 쿼리파라미터를 통해 필요한 리소스를 전달한다.
+
+```json
+// (Request) 예약 가능 시간 확인 
+GET /doctor/Schweitzer/slots?date=2022-10-04 HTTP/1.1  // 개별 엔드포인트
+~Skip Header~
+
+```
+
+```json
+// (Request) 예약 
+POST /slots/123 HTTP/1.1
+~Skip Header~
+
+{
+  "patient":"H-JWANNA"
+}
+```
+
+<br>
+
+**💡 HTTP Method 사용 시 주의사항**
+
+- ```GET``` 메서드는 서버의 데이터를 변화시키지 않는 요청에 사용한다.
+- ```PUT```과 ```PATCH``` 둘 다 UPDATE와 관련된 메서드이지만  
+  ```PUT```은 교체. 즉 전체를 수정할 때 주로 사용하고,  
+  ```PATCH```는 수정. 즉 일부분을 수정할 때 주로 사용한다.
+
+<br>
+
+### 3단계
+
+3단계는 HATEOAS(Hypertext As The Engine Of Application State)라고 하는 하이퍼미디어 컨트롤을 적용한다.
+
+요청은 2단계와 동일하지만, 응답에는 리소스의 URI를 포함한 링크 요소를 삽입하여 작성한다.
+
+이때, 링크 요소는 응답을 받은 이후에 할 수 있는 다양한 액션들을 위해 많은 하이퍼미디어 컨트롤을 포함한다.
+
+```json
+// (Response) 예약 가능 시간 확인 
+HTTP/1.1 200 OK
+~Skip Header~
+
+{
+  "slots": [
+    { "id":123,"doctor":"Schweitzer","start":"09:00", … }, …
+  ],
+  "links": {
+    "appointment": {
+      "href":"http://localhost:8080/slots/123",
+      "method":"POST"
+    }
+  }
+}
+```
+
+```json
+// (Response) 예약
+HTTP/1.1 201 Created
+Location: slots/123/appointment
+~Skip Header~
+
+{
+  "appointment": {
+    "slot": { "id":123, … },
+    "patient":"H-JWANNA",
+  },
+  "links": {
+    "self": {
+      "href":"http://localhost:8080/slots/123",
+      "method":"GET"
+    },
+    "cancel": {
+      "href": "http://localhost:8080/slots/123/cancel",
+      "method":"DELETE"
+    }
+  }
+}
+```
+
+<br>
+
+위처럼 예약 가능 시간을 확인한 이후에는 예약을 할 수 있는 링크를 삽입하고,  
+예약을 완료한 후에는 확인 또는 취소할 수 있도록 하여 **새로운 기능에 접근할 수 있도록 하는 것**이 3단계의 포인트이다.
+
+<br>
+
+### 📋 [**_5 Basic REST API Design Guidelines_**](https://blog.restcase.com/5-basic-rest-api-design-guidelines/)
+### 📋 [**_Microsoft REST API Guidelines_**](https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md)
+### 📋 [**_Google API Design Guide_**](https://cloud.google.com/apis/design?hl=ko)
 
 <br><br>
 
