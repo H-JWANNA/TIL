@@ -32,10 +32,10 @@
 
 ## &ensp; 📋 ***Database***
 
-| **RDBMS** | **NoSQL** |
-|:-------------------:|:-------------:|
-|[RDB](https://github.com/H-JWANNA/TIL/blob/main/Database/RDB.md "관계형 데이터베이스") | [NoSQL](https://github.com/H-JWANNA/TIL/blob/main/Database/NoSQL.md "비관계형 데이터베이스") |
-|[SQL](https://github.com/H-JWANNA/TIL/blob/main/Database/SQL.md "SQL")|  |
+|**DB Common**| **RDBMS** | **NoSQL** |
+|:-------------------:|:-------------:|:-:|
+|[Schema](https://github.com/H-JWANNA/TIL/blob/main/Database/Schema.md "스키마")|[RDB](https://github.com/H-JWANNA/TIL/blob/main/Database/RDB.md "관계형 데이터베이스") | [NoSQL](https://github.com/H-JWANNA/TIL/blob/main/Database/NoSQL.md "비관계형 데이터베이스") |
+|[DB Normalization](https://github.com/H-JWANNA/TIL/blob/main/Database/DB_Normalization.md "데이터베이스 정규화")|[SQL](https://github.com/H-JWANNA/TIL/blob/main/Database/SQL.md "SQL")|  |
 
 <br>
 
