@@ -20,7 +20,7 @@ Query는 '질의문'이라는 뜻을 가지고 있으며, 검색할 때 입력�
 
 <br>
 
-### Database Command
+### 📌 Database Command
 
 <br>
 
@@ -93,10 +93,10 @@ CREATE TABLE table_name (
 ```sql
 DELETE FROM table_name
 
-// 조건을 붙이면 해당 행만 삭제
+-- 조건을 붙이면 해당 행만 삭제
 WHERE sheet = 'D11'
 
-// 커밋을 하기 전이라면 롤백할 수 있다.
+-- 커밋을 하기 전이라면 롤백할 수 있다.
 ROLLBACK
 COMMIT
 ```
@@ -107,7 +107,7 @@ COMMIT
 ```sql
 TRUNCATE TABLE table_name
 
-// 자동 커밋이 되기 때문에 롤백이 불가능하다.
+-- 자동 커밋이 되기 때문에 롤백이 불가능하다.
 ```
 ▲ _테이블의 데이터와 해당 인덱스가 삭제되지만, 구조는 남아있다._
 
@@ -116,7 +116,7 @@ TRUNCATE TABLE table_name
 ```sql
 DROP TABLE table_name
 
-// 자동 커밋이 되기 때문에 롤백이 불가능하다.
+-- 자동 커밋이 되기 때문에 롤백이 불가능하다.
 ```
 ▲ _테이블의 존재 자체를 지워버린다._
 
@@ -129,13 +129,13 @@ DROP TABLE table_name
 **🔸 테이블 수정**
 
 ```sql
-// 새로운 필드 추가
+-- 새로운 필드 추가
 ALTER TABLE table_name ADD field_name field_type
 
-// 기존 필드 삭제
+-- 기존 필드 삭제
 ALTER TABLE table_name DROP field_name
 
-// 필드 타입 변경
+-- 필드 타입 변경
 ALTER TABLE table_name MODIFY COLUMN field_name field_type
 ```
 
@@ -165,7 +165,7 @@ mysql> describe user;
 
 <br>
 
-### SQL Command
+### 📌 SQL Command
 
 <br>
 
@@ -176,13 +176,13 @@ mysql> describe user;
 ```sql
 SELECT column_name
 
-// 문자열
+-- 문자열
 SELECT 'hello world'
 
-// 숫자
+-- 숫자
 SELECT 2
 
-// 연산
+-- 연산
 SELECT 15 + 3
 ```
 
@@ -208,21 +208,21 @@ FROM table_name AS db_name
 SELECT *
 FROM table_name
 
-// 비교 연산자 사용 가능
+-- 비교 연산자 사용 가능
 WHERE gender = 'Male'
 
-// 사이값 찾기
+-- 사이값 찾기
 WHERE salary BETWEEN 300 AND 500
 
-// 비슷한 값을 찾을 때 (% 또는 _ 사용 /feat.정규식)
+-- 비슷한 값을 찾을 때 (% 또는 _ 사용 /feat.정규식)
 WHERE name LIKE "홍%"
 WHERE name LIKE "홍_완"
 WHERE name LIKE "[가-힇]%"
 
-// 일치하는 값 여러개를 찾을 때
+-- 일치하는 값 여러개를 찾을 때
 WHERE salary IN (200, 300, 400)
 
-// 값이 없는 경우를 제외하고 찾을 때
+-- 값이 없는 경우를 제외하고 찾을 때
 WHERE company IS NOT NULL
 ```
 
@@ -244,10 +244,10 @@ WHERE company IS NOT NULL
 SELECT *
 FROM table_name
 
-// 오름차순 (ASC 생략 가능)
+-- 오름차순 (ASC 생략 가능)
 ORDER BY column_name ASC
 
-// 내림차순
+-- 내림차순
 ORDER BY column_name DESC
 ```
 
@@ -283,7 +283,7 @@ HAVING salary >= 300
 테이블에 새로운 레코드를 추가한다.
 
 ```sql
-// column_name은 생략 가능
+-- column_name은 생략 가능
 INESRT INTO table_name (column_name_1, column_name_2, …)
 VALUES (data_1, data_2, …)
 ```
@@ -298,7 +298,7 @@ VALUES (data_1, data_2, …)
 UPDATE table_name
 SET column_1 = data_1, column_2 = data_2, …
 
-// 조건을 붙이지 않으면 모든 레코드 값이 변경된다.
+-- 조건을 붙이지 않으면 모든 레코드 값이 변경된다.
 WHERE column_3 = data_3
 ```
 
@@ -357,13 +357,13 @@ JOIN table_name_2 ON table_name_1.column_1 = table_name_2.column_A
 SELECT *
 FROM table_name
 
-// 왼쪽 테이블의 모든 값을 기준으로 조인
+-- 왼쪽 테이블의 모든 값을 기준으로 조인
 LEFT OUTER JOIN table_name_2 ON table_name_1.column_1 = table_name_2.column_A
 
-// 오른쪽 테이블의 모든 값을 기준으로 조인
+-- 오른쪽 테이블의 모든 값을 기준으로 조인
 RIGHT OUTER JOIN table_name_2 ON table_name_1.column_1 = table_name_2.column_A
 
-// 양쪽 테이블의 모든 값을 기준으로 조인
+-- 양쪽 테이블의 모든 값을 기준으로 조인
 FULL OUTER JOIN table_name_2 ON table_name_1.column_1 = table_name_2.column_A
 ```
 
@@ -377,7 +377,51 @@ FULL OUTER JOIN table_name_2 ON table_name_1.column_1 = table_name_2.column_A
 
 <br><br>
 
+## SQL의 종류
+
+**🔸 DDL (Data Definition Language)**
+
+DDL은 데이터를 정의할 때 사용하는 언어이다. 
+
+```CREATE```, ```DROP``` 등 DB의 테이블과 같은 오브젝트를 정의할 때 사용한다.
+
+<br>
+
+**🔸 DML (Data Manipulation Languate)**
+
+DML은 DB에 데이터를 저장할 때 사용하는 언어이다.  
+
+```INSERT INTO```, ```DELETE```, ```UPDATE``` 등 데이터를 추가, 삭제, 수정할 때 사용한다.
+
+<br>
+
+**🔸 DCL (Data Control Languate)**
+
+DCL은 유저의 데이터베이스 접근 권한과 관련된 문법이다.  
+
+권한을 주는 ```GRANT```, 권한을 뺏는 ```REVOKE``` 등이 DCL에 포함된다.
+
+<br>
+
+**🔸 DQL (Data Query Languate)**
+
+DQL은 정해진 스키마 내에서 쿼리할 수 있는 언어이다.  
+
+```SELECT```가 DQL에 해당하며, DQL은 DML의 일부로 취급되기도 한다.
+
+<br>
+
+**🔸 TCL (Transcation Control Languate)**
+
+TCL은 DML을 거친 데이터의 변경사항을 수정할 수 있다.  
+
+```COMMIT```, ```ROLLBACK``` 등 작업 내용을 커밋하거나 롤백할 때 사용한다.
+
+<br><br>
+
 ***
+
+_2022.10.07. Update_
 
 _2022.10.06. Modified_
 
