@@ -244,6 +244,9 @@ public class MenuServiceStub implements MenuService {
 ```MenuController``` 클래스가 생성자로 ```MenuService``` 인터페이스를 주입받았기 때문에  
 ```MenuService``` 인터페이스의 구현 클래스라면 모든 클래스가 주입받을 수 있다.
 
+
+### 📋 [***Spring DI를 위한 추가 정보***](https://github.com/H-JWANNA/TIL/blob/main/Spring/DI.md)
+
 <br>
 
 ## AOP (Aspect Oriented Programming)
