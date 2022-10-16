@@ -77,6 +77,15 @@ public interface ApplicationContext extends EnvironmentCapable, ListableBeanFact
 
 <br>
 
+> ❓ Metadata  
+> 
+> 애플리케이션이 처리해야 할 데이터가 아니라,  
+> 컴파일 과정과 실행 과정에서 코드를 어떻게 컴파일하고 처리할 것인지 알려주는 정보  
+> 
+> 직접 정의해서 사용할 일은 크게 없지만 스프링 프레임워크를 사용한다면 자주 사용하게 되므로 읽을 줄은 아는 것이 좋음
+
+<br>
+
 스프링 컨테이너는 Configuration Metadata와 파라미터로 넘어온 설정 클래스 정보를 사용해서 스프링 빈을 등록한다.
 
 ```new AnnotationConfigApplicationContext(구성정보.class)```로 스프링에 있는 ```@Bean```의 메서드를 등록한다.
