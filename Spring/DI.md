@@ -267,6 +267,14 @@ ApplicationContext ac = AnnotationConfigApplicationContext(Example.class);
 
 <br>
 
+### 💡 Spring Bean 등록 방법
+
+- ```@Bean``` : 해당 어노테이션을 사용해 직접 등록할 수 있다.
+- ```@Component``` : ```@ComponentScan```을 사용해 자동으로 등록할 수 있다.
+- ```@Import``` : 주로 ```@Configuration``` 설정 파일을 추가할 때 사용한다. (스프링 빈도 등록 가능)
+
+<br>
+
 ***
 
 <br>
@@ -588,5 +596,7 @@ public class CoffeeService {
 <br><br>
 
 ***
+
+_2022.10.18. Modified_
 
 _2022.10.13. Update_

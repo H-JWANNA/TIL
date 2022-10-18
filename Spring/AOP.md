@@ -107,6 +107,10 @@ Weaving을 통해 핵심 기능 코드에 영향을 주지 않고 부가 기능�
 
 AOP 기능을 구현하기 위해 만든 프록시 객체이다.
 
+프록시는 어떤 객체를 사용하고자 할 때, 해당 객체에 직접 요청하는 것이 아닌 중간에 프록시 객체를 두어 프록시 객체가 대신해서 요청을 받아 실제 객체를 호출해 주도록 한다.
+
+프록시 객체 내부에는 실제 Bean을 요청하는 로직이 들어있어, 클라이언트의 요청이 들어오면 그 때 실제 Bean을 호출한다.
+
 Spring에서 AOP Proxy는 JDK 동적 프록시 또는 CGLIB 프록시이다.
 
 <br>
@@ -262,6 +266,10 @@ PointCut 표현식은 ```execution```과 같은 포인트컷 지시자로 시작
 
 ### 일반적인 PointCut 표현식
 
+포인트컷 표현식은 ```@Pointcut``` 어노테이션을 사용하여 표시된다.
+
+포인트컷 선언은 이름과 매개변수를 포함하는 서명과  
+메소드 실행을 정확히 결정하는 Pointcut 표현식의 두 부분으로 구성된다.
 
 🔸 ```execution(public * *(..))```  
 &emsp; : 모든 공개 메서드 실행
@@ -335,6 +343,53 @@ private void tradingOperation() {}
 
 <br>
 
+### @AspectJ
+
+@AspectJ는 어노테이션이 있는 일반 Java 클래스로 관점을 선언하는 스타일을 말한다.
+
+- Java에서 @AspectJ 활성화 방법
+
+```java
+@Configuration
+@EnableAspectJAutoProxy
+public class AppConfig {
+
+}
+```
+▲ _```@Configuration```으로 @AspectJ 활성화를 위해서 ```@EnableAspectAutoProxy``` 어노테이션을 추가한다._
+
+<br>
+
+- XML에서 @AspectJ 활성화 방법
+
+```xml
+<aop:aspectj-autoproxy/>
+```
+▲ _@AspectJ 활성화를 위해 ```aop:aspectj-autoproxy```를 사용한다._
+
+<br>
+
+@AspectJ 지원이 활성화되면, @AspectJ 관점이 있는 클래스(```@Aspect```)로 어플리케이션 컨텍스트에 정의된 모든 Bean이 Spring에서 자동으로 감지되고, Spring AOP를 구성하는데 사용된다.
+
+```java
+import org.aspectj.lang.annotation.Aspect;
+
+@Aspect
+public class NotVeryUsefulAspect {}
+```
+▲ _Java AspectJ_
+
+<br>
+
+```xml
+<bean id="myAspect" class="org.xyz.NotVeryUsefulAspect">
+    <!-- configure properties of the aspect here -->
+</bean>
+```
+▲ _xml AspectJ_
+
+<br>
+
 ***
 
 <br>
@@ -403,5 +458,7 @@ JoinPoint 메서드는 Advice 종류에 따라 사용 방법이 다르지만,
 <br><br>
 
 ***
+
+_2022.10.18. Modified_
 
 _2022.10.17. Update_
