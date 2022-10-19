@@ -66,12 +66,20 @@ public class MessageForm extends ActionForm {
 
 <br>
 
+***
+
+<br>
+
 ## IoC (Inversion of Control)
 
 IoC는 직역하면 제어의 역전이라는 뜻으로,  
 메서드나 객체의 호출을 개발자가 결정하는 것이 아닌 외부에서 결정되는 것을 의미한다. 
 
 Spring에서는 어플리케이션 흐름의 주도권을 Spring이 갖는다라고 보면 된다.
+
+<br>
+
+***
 
 <br>
 
@@ -249,6 +257,10 @@ public class MenuServiceStub implements MenuService {
 
 <br>
 
+***
+
+<br>
+
 ## AOP (Aspect Oriented Programming)
 
 AOP는 관심 지향 프로그래밍이라는 뜻으로,  
@@ -273,6 +285,14 @@ AOP는 관심 지향 프로그래밍이라는 뜻으로,
 <img src = "https://www.codejava.net/images/articles/frameworks/spring/Understanding%20Spring%20AOP/CrossCuttingConcersn.png" width = "80%" />
 
 ▲ _가로 Layer는 Core Concern, 세로 Layer는 Cross Cutting Concern을 나타낸다._
+
+<br>
+
+### 📋 [***Spring AOP를 위한 추가 정보***](https://github.com/H-JWANNA/TIL/blob/main/Spring/AOP.md)
+
+<br>
+
+***
 
 <br>
 

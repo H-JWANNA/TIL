@@ -218,10 +218,11 @@ Body는 2가지 종류로 나눌 수 있다.
 ## REST API
 
 REST API는 Respresentational State Transfer Application Programming Interface의 약자로  
-로이 필딩의 박사학위 논문에서 웹(HTTP)의 장점을 최대한 활용할 수 있는 아키텍처로써 처음 소개되었다.   
+로이 필딩의 박사학위 논문에서 **웹(HTTP)의 장점을 최대한 활용할 수 있는 아키텍처**로써 처음 소개되었다.   
 
 REST API는 웹에서 사용되는 **데이터나 자원(Resource)을 HTTP URI로 표현**하고,  
-HTTP 프로토콜을 통해 요청과 응답을 정의하는 방식을 말한다.
+HTTP Method를 통해 **데이터의 행위를 지정**하며,  
+HTTP 프로토콜을 통해 **요청과 응답을 정의**하는 방식을 말한다.
 
 <br>
 
@@ -240,7 +241,7 @@ HTTP 프로토콜을 통해 요청과 응답을 정의하는 방식을 말한다
 0단계에서는 단순히 **HTTP 프로토콜을 사용**만 해도 된다.
 
 ```json
-// (Request) 예약 가능 시간 확인 
+(Request) 예약 가능 시간 확인 
 POST /appointment HTTP/1.1
 ~Skip Header~
 
@@ -251,7 +252,7 @@ POST /appointment HTTP/1.1
 ```
 
 ```json
-// (Request) 예약 
+(Request) 예약 
 POST /appointment HTTP/1.1
 ~Skip Header~
 
@@ -273,8 +274,8 @@ POST /appointment HTTP/1.1
 요청하고 받은 자원에 대한 정보를 응답으로 전달해야 한다.
 
 ```json
-// (Request) 예약 가능 시간 확인 
-POST /doctor/Schweitzer HTTP/1.1  // 개별 엔드포인트
+(Request) 예약 가능 시간 확인 
+POST /doctor/Schweitzer HTTP/1.1  -> 개별 엔드포인트
 ~Skip Header~
 
 {
@@ -283,7 +284,7 @@ POST /doctor/Schweitzer HTTP/1.1  // 개별 엔드포인트
 ```
 
 ```json
-// (Response) 예약 가능 시간 확인 
+(Response) 예약 가능 시간 확인 
 HTTP/1.1 200 OK
 ~Skip Header~
 
@@ -296,7 +297,7 @@ HTTP/1.1 200 OK
 ```
 
 ```json
-// (Request) 예약 
+(Request) 예약 
 POST /slots/123 HTTP/1.1
 ~Skip Header~
 
@@ -306,7 +307,7 @@ POST /slots/123 HTTP/1.1
 ```
 
 ```json
-// (Response) 예약 
+(Response) 예약 
 HTTP/1.1 409 Conflict
 ~Skip Header~
 
@@ -341,14 +342,14 @@ HTTP/1.1 409 Conflict
 추가로, ```GET``` 메서드는 바디를 가지지 않기 때문에 쿼리파라미터를 통해 필요한 리소스를 전달한다.
 
 ```json
-// (Request) 예약 가능 시간 확인 
-GET /doctor/Schweitzer/slots?date=2022-10-04 HTTP/1.1  // 개별 엔드포인트
+(Request) 예약 가능 시간 확인 
+GET /doctor/Schweitzer/slots?date=2022-10-04 HTTP/1.1  -> 개별 엔드포인트
 ~Skip Header~
 
 ```
 
 ```json
-// (Request) 예약 
+(Request) 예약 
 POST /slots/123 HTTP/1.1
 ~Skip Header~
 
@@ -377,7 +378,7 @@ POST /slots/123 HTTP/1.1
 이때, 링크 요소는 응답을 받은 이후에 할 수 있는 다양한 액션들을 위해 많은 하이퍼미디어 컨트롤을 포함한다.
 
 ```json
-// (Response) 예약 가능 시간 확인 
+(Response) 예약 가능 시간 확인 
 HTTP/1.1 200 OK
 ~Skip Header~
 
@@ -395,7 +396,7 @@ HTTP/1.1 200 OK
 ```
 
 ```json
-// (Response) 예약
+(Response) 예약
 HTTP/1.1 201 Created
 Location: slots/123/appointment
 ~Skip Header~
