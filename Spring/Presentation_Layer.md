@@ -88,7 +88,7 @@ Spring Boot 기반의 어플리케이션에서 주로 사용되는 Java 패키�
 
 - 나누어진 패키지 안에는 하나의 기능을 완성하기 위한 계층별 클래스들이 모여있다.
 
-<img src = "./src/package-by-feature.png" width = "30%">
+<img src = "./src/package-by-feature.png" width = "20%">
 
 <br>
 
@@ -96,7 +96,7 @@ Spring Boot 기반의 어플리케이션에서 주로 사용되는 Java 패키�
 
 - 패키지를 하나의 계층(Layer)으로 보고 **클래스들을 계층별로 묶어서 관리하는 구조**를 말한다.
 
-<img src = "./src/package-by-layer.png" width = "30%">
+<img src = "./src/package-by-layer.png" width = "20%">
 
 - ```controller```, ```dto``` 패키지는 **Presentation Layer**  
 - ```model```, ```service``` 패키지는 **Service Layer**  
