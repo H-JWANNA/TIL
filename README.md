@@ -34,10 +34,10 @@
 
 |**Spring Core**|**Spring MVC**|**Spring Security**|**Spring Webflux**|
 |:-------------:|:------------:|:-----------------:|:----------------:|
-|[Spring Basic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Basic.md "Spring Framework 기본")||||
-|[Spring Characteristic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Characteristic.md "Spring Framework 특징")||||
-|[Spring Boot Basic](https://github.com/H-JWANNA/TIL/blob/main/Spring/SpringBoot_Basic.md "Spring Boot 기본")||||
-|[DI](https://github.com/H-JWANNA/TIL/blob/main/Spring/DI.md "의존성 주입")||||
+|[Spring Basic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Basic.md "Spring Framework 기본")|[Spring MVC](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC.md)|||
+|[Spring Characteristic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Characteristic.md "Spring Framework 특징")|[Presentation Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/Presentation_Layer.md "프레젠테이션 계층")|||
+|[Spring Boot Basic](https://github.com/H-JWANNA/TIL/blob/main/Spring/SpringBoot_Basic.md "Spring Boot 기본")|[Service Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/Service_Layer.md "서비스 계층")|||
+|[DI](https://github.com/H-JWANNA/TIL/blob/main/Spring/DI.md "의존성 주입")|[Data Access Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/DataAccess_Layer.md "데이터 액세스 계층")|||
 |[AOP](https://github.com/H-JWANNA/TIL/blob/main/Spring/AOP.md "관점 지향 프로그래밍") ||||
 
 <br>
