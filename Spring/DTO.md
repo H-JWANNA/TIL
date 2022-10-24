@@ -124,6 +124,14 @@ Spring MVC에서 Handler Method에 ```@ResponseBody```가 붙거나 리턴 값�
 
 <br>
 
+> **💡 HttpMessageConverter**
+>
+> - Request Body를 Java 객체로 변환해준다.  
+> - Java 객체를 Response Body로 변환해준다.  
+> - DTO에 setter가 필요없다.
+
+<br>
+
 ***
 
 <br>
@@ -342,5 +350,7 @@ public class MemberPatchDto {
 <br><br>
 
 ***
+
+_2022.10.24. Update_
 
 _2022.10.20. Update_
