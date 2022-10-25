@@ -139,6 +139,10 @@ Spring 웹 계층에서 MVC는 Presentation Layer를 담당한다.
 
 ### 📋 [***Presentation Layer***](https://github.com/H-JWANNA/TIL/blob/main/Spring/Presentation_Layer.md "프레젠테이션 계층")
 
+### 📋 [***Service Layer***](https://github.com/H-JWANNA/TIL/blob/main/Spring/Service_Layer.md "서비스 계층")
+
+### 📋 [***Data Access Layer***](https://github.com/H-JWANNA/TIL/blob/main/Spring/DataAccess_Layer.md "데이터 액세스 계층")
+
 <br><br>
 
 ***
