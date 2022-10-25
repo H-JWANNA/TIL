@@ -38,7 +38,8 @@
 |[Spring Boot Basic](https://github.com/H-JWANNA/TIL/blob/main/Spring/SpringBoot_Basic.md "Spring Boot 기본")|[Presentation Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/Presentation_Layer.md "프레젠테이션 계층")|||
 |[Spring Characteristic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Characteristic.md "Spring Framework 특징")|[DTO](https://github.com/H-JWANNA/TIL/blob/main/Spring/DTO.md "Data Transfer Object")|||
 |[DI](https://github.com/H-JWANNA/TIL/blob/main/Spring/DI.md "의존성 주입")|[Service Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/Service_Layer.md "서비스 계층")|||
-|[AOP](https://github.com/H-JWANNA/TIL/blob/main/Spring/AOP.md "관점 지향 프로그래밍") |[Data Access Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/DataAccess_Layer.md "데이터 액세스 계층")|||
+|[AOP](https://github.com/H-JWANNA/TIL/blob/main/Spring/AOP.md "관점 지향 프로그래밍") |[Exception](https://github.com/H-JWANNA/TIL/blob/main/Spring/Exception.md "예외 처리")|||
+||[Data Access Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/DataAccess_Layer.md "데이터 액세스 계층")|||
 
 <br>
 
