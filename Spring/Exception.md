@@ -58,7 +58,7 @@ JSON 형식의 데이터를 Response Body로 전송하기 위해 ResponseEntity�
 
 아래는 다양한 예외에 대해 특정한 정보를 받기 위한 클래스와 Controller 전역에서 발생하는 예외를 처리하기 위한 클래스이다.
 
-<span style = "color : gray">(아래 요약 있음)</span>
+<span style = "color : gray">_(아래 요약 있음)_</span>
 
 <br>
 
@@ -219,6 +219,7 @@ public static class ConstraintViolationError {
 <br>
 
 > **💡 원하는 정보만 담지 않으면**  
+> 
 > 해당 객체가 가진 defaultMessage, objectName, field, rejectedValue, bindingFailure 등  
 > 모든 정보를 리턴하기 때문에 원하는 정보만 골라서 담는다.
 
@@ -230,6 +231,7 @@ public static class ConstraintViolationError {
 > 외부 인스턴스 멤버의 직접 참조가 필요하지 않은 경우라면 static 클래스로 만들어 메모리를 확보한다.
 > 
 > **결론 : 성능의 효율을 위해서 사용한다.**  
+> 
 > 📋 [***참고 사이트***](https://velog.io/@agugu95/%EC%99%9C-Inner-class%EC%97%90-Static%EC%9D%84-%EB%B6%99%EC%9D%B4%EB%8A%94%EA%B1%B0%EC%A7%80)
 
 <br><br>
@@ -294,15 +296,182 @@ public class GlobalExceptionAdvice {
 
 ## Service Layer 예외 처리
 
-<br>
+Service Layer의 비즈니스 로직은 Presentation Layer의 Controller가 처리하므로  
+비즈니스 로직에서 발생한 예외도 Controller의 핸들러 메서드에서 잡아서 처리할 수 있다.
+
+위에서 Controller에서 발생하는 예외를 Exception Advice에서 처리하도록 공통화 해두었으니  
+서비스 계층에서 발생한 예외도 Exception Advice에서 처리할 수 있다.
 
 <br>
 
-<br>
+1. 먼저, 예외를 처리하기 위해서는 ErrorResponse 클래스에 출력하고자하는 필드 변수와 생성자를 생성한다.
+
+```java
+@Getter
+public class ErrorResponse {
+
+    private int status;
+    private String message;
+    private List<FieldError> fieldErrors;
+    private List<ConstraintViolationError> violationErrors;
+
+    public ErrorResponse(int status, String message) {
+        this.status = status;
+        this.message = message;
+    }
+    ...
+}
+```
+
+기존의 fieldErrors, violationErrors 외에 ```status```, ```message``` 정보를 출력하기 위해 변수와 생성자를 만든다.
+
+<br><br>
+
+2. 그 후, HTTP 상태에 따른 status와 reasonPhrase를 생성자에 담는다.
+
+```java
+public static ErrorResponse of(HttpStatus httpStatus) {
+    return new ErrorResponse(httpStatus.value(), httpStatus.getReasonPhrase());
+}
+```
+
+<br><br>
+
+3. 위에서 정의한 생성자를 통해 Exception Advice 클래스에 핸들러 메서드를 정의한다.
+
+```java
+@RestControllerAdvice
+public class GlobalExceptionAdvice {
+    ...
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorResponse handleException(RuntimeException e) {
+
+        System.out.println(e.getMessage());
+
+        final ErrorResponse response = 
+                            ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR)
+
+        return response;
+    }
+}
+```
+▲ _500, Internal Server Error가 발생하면 예외를 클라이언트에 전송하기 위한 메서드_
 
 <br>
 
+위와 같이 기존 Controller에서 사용하던 예외 처리 클래스에 **서비스 계층에서 발생한 예외**를 던지면 된다.
+
+<br><br>
+
+### **🔸 사용자 정의 예외 (Custom Exception)**
+
+사용자 정의 예외는 사용자가 원하는 에러 값을 Response Body로 전송하기 위해 만드는 예외이다.
+
 <br>
+
+1. 에러 코드 작성
+
+```java
+public enum ExceptionCode {
+    MEMBER_NOT_FOUND(404, "Member Not Found");
+
+    @Getter
+    private int status;
+
+    @Getter
+    private String message;
+
+    ExceptionCode(int status, String message) {
+        this.status = status;
+        this.message = message;
+    }
+}
+```
+
+```enum```을 통해 정의할 수 있으며 여러가지 에러를 생성할 수 있다.
+
+> 가장 예시로 보기 좋은 enum을 통한 Exception은 HttpStatus이다.
+
+<br><br>
+
+2. 서비스 계층에서 사용할 Custom Exception을 정의
+
+```java
+public class BusinessLogicException extends RuntimeException {
+    @Getter
+    private ExceptionCode exceptionCode;
+
+    public BusinessLogicException(ExceptionCode exceptionCode) {
+        super(exceptionCode.getMessage());
+        this.exceptionCode = exceptionCode;
+    }
+}
+```
+
+BusinessLogicException은 ```RuntimeException```을 상속하고 있으며,  
+ExceptionCode를 멤버 변수로 지정하여 생성자를 통해 위에서 **정의한 예외 정보를 제공**할 수 있다.
+
+- 상위 클래스인 RuntimeException의 생성자(super)로 예외 메시지를 전달한다.
+
+- BusinessLogicException은 서비스 계층에서 개발자가 의도적으로 예외를 던져야 하는 다양한 상황에서  
+  ExceptionCode 정보만 바꿔가며 던질 수 있다.
+
+<br><br>
+
+3. ErrorResponse 클래스에 ExceptionCode의 getter를 생성자 파라미터로 전달
+
+```java
+public static ErrorResponse of(ExceptionCode exceptionCode) {
+        return new ErrorResponse(exceptionCode.getStatus(), exceptionCode.getMessage());
+    }
+```
+
+<br><br>
+
+4. Exception Advice 클래스에 CustomException을 처리할 핸들러 메서드를 작성
+   
+```java
+@ExceptionHandler
+public ResponseEntity handleBusinessLogicException(BusinessLogicException e) {
+   System.out.println(e.getExceptionCode().getStatus());
+   System.out.println(e.getMessage());
+
+   final ErrorResponse response = ErrorResponse.of(e.getExceptionCode());
+
+   return new ResponseEntity<>(response, 
+                        HttpStatus.valueOf(e.getExceptionCode().getStatus()));
+}
+```
+
+```ErrorResponse.of()```의 파라미터로 ```ExceptionCode```를 받았기 때문에  
+
+위에서 정의한 ```new ErrorResponse(exceptionCode.getStatus(), exceptionCode.getMessage())```를 반환한다.
+
+<br><br>
+
+### **🔸 의도적으로 예외 발생 시키기 (throw/catch)**
+
+위에서 작성한 BusinessLogicException은 catch를 위한 부분이고,  
+
+서비스 계층에서 의도적으로 예외를 발생시켜 에러 핸들링을 테스트할 수 있다.
+
+```java
+@Service
+public class MemberService {
+    ...
+
+    public Member findMember(long memberId) {
+
+        throw new RuntimeException("Not found member");
+    }
+}
+```
+
+<br>
+
+서비스 로직에서 ```throw```를 통해 새로운 Exception 객체를 생성해서 의도적으로 예외를 발생시킬 수 있다.
 
 <br><br>
 
