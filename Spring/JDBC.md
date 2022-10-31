@@ -485,12 +485,297 @@ CREATE TABLE IF NOT EXISTS ORDER_COFFEE (
 
 <br>
 
-Service 클래스가 Repository를 사용하므로 Repository를 먼저 구현하는 것이 좋다.
+🛠 Service 클래스가 Repository를 사용하므로 Repository를 먼저 구현하는 것이 좋다.
 
+<br>
 
+```java
+public interface CoffeeRepository extends CrudRepository<Coffee, Long> {
+
+    Optional<Coffee> findByCoffeeCode(String coffeeCode);
+
+    @Query("SELECT * FROM COFFEE WHERE COFFEE_ID = :coffeeId")
+    Optional<Coffee> findByCoffee(@Param("coffeeId")Long coffeeId);
+}
+```
+
+```findBy~```는 쿼리 메서드로 SQL 쿼리문을 사용하지 않고 DB에 질의를 할 수 있도록 한다.  
+
+기본적으로 상속받은 상위 인터페이스에 정의되지 않은 메서드를 정의할 때,  
+```find + By + WHERE 절의 Column 이름 + (WHERE 절의 조건이 되는 데이터)```와 같이 사용하며,  
+Column 이름에는 SQL Column 이름이 아닌 Entity 클래스의 멤버 변수명을 적어줘야 한다. 
+> ex) findByFirstName ⭕️  /  findByFIRST_NAME ❌
+
+<br>
+
+```@Query``` 어노테이션을 사용하면 SQL 쿼리문을 직접 작성할 수 있다.  
+
+쿼리문을 작성하지 않으면 ```SELECT "COFFEE"."KOR_NAME" AS "KOR_NAME", ... , "COFFEE"."COFFEE_ID" AS "COFFEE_ID" FROM "COFFEE" WHERE "COFFEE"."COFFEE_ID" = ?```와 같이 내부적으로 쿼리문을 생성한다.  
+_(위의 쿼리문은 findById와 같은 의미이다.)_
+
+> ```@Param("")``` 어노테이션은 Java8 이상에서는 자동으로 등록이 되므로 사용하지 않아도 된다.
+
+<br>
+
+Spring JDBC에서는 리턴 값을 Optional로 래핑할 수 있어 코드를 효율적이고 간결하게 작성할 수 있다.
+
+<br><br>
+
+🛠 Repository 구현이 완료되면 Service 클래스를 구현할 수 있다.
+
+<br>
+<details>
+<summary> &ensp; ✔︎ CoffeeService Code</summary>
+<div markdown="1">
+<br>
+
+```java
+@Service
+public class CoffeeService {
+    private CoffeeRepository coffeeRepository;
+
+    public CoffeeService(CoffeeRepository coffeeRepository) {
+        this.coffeeRepository = coffeeRepository;
+    }
+
+    public Coffee createCoffee(Coffee coffee) {
+        // 커피 코드를 대문자로 변경 - 사용자 편의성을 위함
+        String coffeeCode = coffee.getCoffeeCode().toUpperCase();
+
+        // 이미 등록된 커피 코드인지 확인
+        verifyExistCoffee(coffeeCode);
+        coffee.setCoffeeCode(coffeeCode);
+
+        return coffeeRepository.save(coffee);
+    }
+
+    public Coffee updateCoffee(Coffee coffee) {
+        // 조회하려는 커피가 존재하는 커피인지 확인
+        Coffee findCoffee = findVerifiedCoffee(coffee.getCoffeeId());
+
+        Optional.ofNullable(coffee.getKorName())
+                .ifPresent(korName -> findCoffee.setKorName(korName));
+        Optional.ofNullable(coffee.getEngName())
+                .ifPresent(engName -> findCoffee.setEngName(engName));
+        Optional.ofNullable(coffee.getPrice())
+                .ifPresent(price -> findCoffee.setPrice(price));
+
+        return coffeeRepository.save(findCoffee);
+    }
+
+    public Coffee findCoffee(long coffeeId) {
+        return findVerifiedCoffeeByQuery(coffeeId);
+    }
+
+	// 주문에 해당하는 커피 정보 조회
+    public List<Coffee> findOrderedCoffees(Order order) {
+        return order.getOrderCoffees()
+                .stream()
+                .map(coffeeRef -> findCoffee(coffeeRef.getCoffeeId()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Coffee> findCoffees() {
+        return (List<Coffee>) coffeeRepository.findAll();
+    }
+
+    public void deleteCoffee(long coffeeId) {
+        Coffee coffee = findVerifiedCoffee(coffeeId);
+        coffeeRepository.delete(coffee);
+    }
+
+    public Coffee findVerifiedCoffee(long coffeeId) {
+        Optional<Coffee> optionalCoffee = coffeeRepository.findById(coffeeId);
+        Coffee findCoffee =
+                optionalCoffee.orElseThrow(() ->
+                        new BusinessLogicException(ExceptionCode.COFFEE_NOT_FOUND));
+
+        return findCoffee;
+    }
+
+    private void verifyExistCoffee(String coffeeCode) {
+        Optional<Coffee> coffee = coffeeRepository.findByCoffeeCode(coffeeCode);
+        if(coffee.isPresent())
+            throw new BusinessLogicException(ExceptionCode.COFFEE_CODE_EXISTS);
+    }
+
+    private Coffee findVerifiedCoffeeByQuery(long coffeeId) {
+        Optional<Coffee> optionalCoffee = coffeeRepository.findByCoffee(coffeeId);
+        Coffee findCoffee =
+                optionalCoffee.orElseThrow(() ->
+                        new BusinessLogicException(ExceptionCode.COFFEE_NOT_FOUND));
+
+        return findCoffee;
+    }
+}
+```
+
+</div>
+</details>
+
+<br>
+<details>
+<summary> &ensp; ✔︎ OrderService Code</summary>
+<div markdown="1">
+<br>
+
+```java
+@Service
+public class OrderService {
+    // DI
+    final private OrderRepository orderRepository;
+    final private MemberService memberService;
+    final private CoffeeService coffeeService;
+
+    public OrderService(OrderRepository orderRepository,
+                        MemberService memberService,
+                        CoffeeService coffeeService) {
+        this.orderRepository = orderRepository;
+        this.memberService = memberService;
+        this.coffeeService = coffeeService;
+    }
+
+    public Order createOrder(Order order) {
+        // 회원이 존재하는지 확인
+        memberService.findVerifiedMember(order.getMemberId().getId());
+
+        // 커피가 존재하는지 확인
+        order.getOrderCoffees() // Set<CoffeeRef>
+                .stream()
+                .forEach(coffeeRef -> {
+                    coffeeService.findVerifiedCoffee(coffeeRef.getCoffeeId()); 
+                });
+        return orderRepository.save(order);
+    }
+
+    public Order findOrder(long orderId) {
+        return findVerifiedOrder(orderId);
+    }
+
+    public List<Order> findOrders() {
+        return (List<Order>) orderRepository.findAll();
+    }
+
+    public void cancelOrder(long orderId) {
+        Order findOrder = findVerifiedOrder(orderId);
+        int step = findOrder.getOrderStatus().getStepNumber();
+
+        // 주문 확인 후에는 취소할 수 없다.
+        if (step >= 2) {
+            throw new BusinessLogicException(ExceptionCode.CANNOT_CHANGE_ORDER);
+        }
+
+        findOrder.setOrderStatus(Order.OrderStatus.ORDER_CANCEL);
+        orderRepository.save(findOrder);
+    }
+
+    private Order findVerifiedOrder(long orderId) {
+        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+        Order findOrder =
+                optionalOrder.orElseThrow(() ->
+                        new BusinessLogicException(ExceptionCode.ORDER_NOT_FOUND));
+        return findOrder;
+    }
+}
+```
+
+</div>
+</details>
+
+<br>
+
+위의 코드를 살펴보면 Service 클래스에서 Repository 클래스를 생성자 주입하여 사용할 수 있다.
+
+**내부적으로 검증에 대한 메서드를 작성**하고, Repository 클래스의 메서드를 활용하여 Service 클래스를 완성시킨다.
+
+- ```isNullable``` : null 값을 허용한다는 뜻이다. update의 경우 변경하고자 하는 값이 선택적일 수 있으므로 사용한다.
+- ```isPresent()``` : 값이 null면 true, 반대의 경우는 false를 반환한다.
+- ```ifPresent()``` : 값이 null이 아니라면 파라미터를 실행하고, 반대의 경우는 아무 동작도 하지 않는다.
+- ```orElseThrow()``` : 값이 null이 아니라면 해당 객체를 리턴하고, 반대의 경우에는 예외를 발생시킨다.
+
+<br>
+
+Spring JDBC에서는 ```@Id```가 추가된 멤버 변수의 값이 ```0``` 또는 ```null```이면 ```INSERT``` 쿼리를 전송하고,  
+반대의 경우에는 ```UPDATE``` 쿼리를 전송하게 되므로 create와 update 모두 ```save()``` 메서드를 사용할 수 있다.
+
+<br>
+
+현재 delete를 사용해 테이블의 데이터 자체를 삭제하고 있지만,  
+실제로는 ```MEMBER_STATUS```와 같은 Column을 두어 가입, 휴면, 탈퇴 등의 상태 정보로 나누어서 관리한다.
+
+<br><br>
+
+🛠 이후 기존 DTO나 Mapper 클래스, Controller 클래스, enum 등을 수정한 뒤 Sample Application을 실행하여 확인한다.
+
+<br>
+
+복잡한 DTO 클래스와 Entity 클래스의 매핑은 Mapper에 **default 메서드를 직접 구현**해서 직접 매핑 로직을 작성할 수 있다.
+
+<details>
+<summary> &ensp; ✔︎ OrderMapper Code</summary>
+<div markdown="1">
+<br>
+
+```java
+@Mapper(componentModel = "spring")
+public interface OrderMapper {
+
+    default Order orderPostDtoToOrder(OrderPostDto orderPostDto) {
+        Order order = new Order();
+        order.setMemberId(
+					new AggregateReference.IdOnlyAggregateReference(orderPostDto.getMemberId()));
+        Set<CoffeeRef> orderCoffees = orderPostDto.getOrderCoffees()
+                .stream()
+                .map(orderCoffeeDto -> new CoffeeRef(orderCoffeeDto.getCoffeeId(),
+                        orderCoffeeDto.getQuantity()))
+                .collect(Collectors.toSet());
+        order.setOrderCoffees(orderCoffees);
+
+        return order;
+    }
+
+    default OrderResponseDto orderToOrderResponseDto(CoffeeService coffeeService,
+                                                     Order order) {
+
+        long memberId = order.getMemberId().getId();
+
+        List<OrderCoffeeResponseDto> orderCoffees =
+                orderToOrderCoffeeResponseDto(coffeeService, order.getOrderCoffees());
+
+        OrderResponseDto orderResponseDto = new OrderResponseDto();
+        orderResponseDto.setOrderCoffees(orderCoffees);
+        orderResponseDto.setMemberId(memberId);
+        orderResponseDto.setCreatedAt(order.getCreatedAt());
+        orderResponseDto.setOrderId(order.getOrderId());
+        orderResponseDto.setOrderStatus(order.getOrderStatus());
+
+        return orderResponseDto;
+    }
+
+    default List<OrderCoffeeResponseDto> orderToOrderCoffeeResponseDto(
+                                                        CoffeeService coffeeService,
+                                                        Set<CoffeeRef> orderCoffees) {
+        return orderCoffees.stream()
+                .map(coffeeRef -> {
+                    Coffee coffee = coffeeService.findCoffee(coffeeRef.getCoffeeId());
+
+                    return new OrderCoffeeResponseDto(coffee.getCoffeeId(),
+                            coffee.getKorName(),
+                            coffee.getEngName(),
+                            coffee.getPrice(),
+                            coffeeRef.getQuantity());
+                }).collect(Collectors.toList());
+    }
+}
+```
+
+</div>
+</details>
 
 <br><br>
 
 ***
+
+_2022.11.01. Update_
 
 _2022.10.29. Update_
