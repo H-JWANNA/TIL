@@ -543,10 +543,364 @@ public class Coffee {
 }
 ```
 
+<br>
+
+추가로 위 어노테이션들에는 ```cascade```나 ```fetch```와 같은 Attribute를 정의할 수 있다.
+
+<br>
+
+```cascade```는 특정 Entity를 영속성 컨텍스트에서 관리할 때 연관된 Entity도 같이 관리하고자 사용한다.
+
+주로 ```@ManyToOne```에서 많이 사용하며, 타입은 아래와 같다.
+
+- ALL : 모든 cascade를 적용
+  
+- PERSIST : 연관된 Entity까지 영속화
+  
+- REMOVE : Entity를 삭제할 때, 연관된 Entity까지 삭제  
+  _(외래키를 가진 Entity가 먼저 삭제되어야하는데 그 작업을 자동으로 해준다)_
+  
+- MERGE : Entity 상태를 병합할 때, 연관된 Entity도 모두 병합
+  
+- REFRESH : 상위 Entity를 새로고침할 때, 연관된 Entity도 새로고침
+  
+- DETACH : 부모 Entity를 detach() 수행하면, 연관 Entity도 detach() 상태가 되어 변경 사항 반영 X
+
+<br>
+
+```CascadeType.PERSIST```, ```CascadeType.REMOVE```를 주로 사용한다.
+
+<br>
+
+```java
+// Member Entity
+@OneToOne(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+private Stamp stamp;
+
+public void setStamp(Stamp stamp) {
+    this.stamp = stamp;
+    if (stamp.getMember() != this) {
+        stamp.setMember(this);
+    }
+}
+
+
+// Member Controller
+@PostMapping
+public ResponseEntity postMember(...) {
+    member.setStamp(new Stamp());
+}
+```
+
+<br><br>
+
+```fetch```는 객체 그래프 탐색을 통해 연관 관계를 맺고 있는 객체를 어느 시점에 조회할지 결정하고자 사용한다.
+
+- EAGER (즉시 로딩) : 연관 관계로 매핑된 Entity의 데이터까지 즉시 가져온다.
+  
+- LAZY (지연 로딩) : 연관 관계로 매핑된 Entity를 가져오는 메서드를 호출하는 시점에 데이터를 가져온다.
+
+```@OneToOne```, ```@ManyToOne```처럼 연관된 Entity가 하나일 경우 ```FetchType.EAGER```이 기본값이고,
+
+```@OneToMany```처럼 연관된 Entity가 여러개거나 컬렉션이면 ```FetchType.LAZY```가 기본값이다.
+
+<br>
+
+***
+
+<br>
+
+## 🔸 Spring Data JPA
+
+<br>
+
+**💡 JPA vs Hibernate ORM vs Spring Data JPA**
+
+- JPA는 Java 어플리케이션에서 관계형 데이터베이스를 사용하기 위해 정해 놓은 표준 스펙(또는 사양, Specification)이다.  
+  **’이 기술은 무엇이고, 이 기술은 이렇게 이렇게 구현해서 사용하면 돼’** 라고 적어 놓은 기술 명세라고 생각할 수 있다.
+
+- Hibernate ORM은 **실제 우리가 사용할 수 있는 API**로 JPA라는 표준 스펙을 구현한 구현체이다.
+
+
+- Spring Data JPA는 JPA 스펙을 구현한 구현체의 API(일반적으로 Hibernate ORM)를 쉽게 사용할 수 있도록 해주는 모듈이다.
+
+<br>
+
+Spring Data JPA의 기술의 적용 순서
+
+**1. Entity 클래스를 Spring Data JPA에 맞게 수정**
+
+- 위에서 진행한 Entity 매핑에 추가적인 기능에 대한 매핑만 진행
+
+<br>
+
+**2. 리포지토리(Repository) 인터페이스 구현**
+
+```java
+public interface CoffeeRepository extends JpaRepository<Coffee, Long> {
+
+   Optional<Coffee> findByCoffeeCode(String coffeeCode);
+
+   @Query(value = "SELECT c FROM Coffee c WHERE c.coffeeId = :coffeeId")
+   Optional<Coffee> findByCoffee(long coffeeId);
+}
+```
+
+```JpaRepository```를 상속하여 Repository 인터페이스를 구성한다.  
+
+JpaRepository는 JPA에 특화된 많은 기능을 포함하고 있다.
+
+<br>
+
+JPA에서는 JPQL이라는 객체 지향 쿼리를 통해 DB 내의 테이블을 조회할 수 있다.
+
+JPQL의 특징은 테이블을 대상으로 조회하는 것이 아닌, **Entity 클래스의 객체**를 대상으로 조회한다는 점이다.
+
+> JPQL 대신에 Querydsl이나 JOOQ와 같은 기술도 많이 사용된다.
+
+<br>
+
+```java
+@Query(value = "SELECT c FROM Coffee c WHERE c.coffeeId = :coffeeId")
+```
+
+해당 코드는 ```FROM Coffee c```를 통해 Coffee 객체를 생성해서, 해당 객체로 필드를 조회하고 있다.
+
+```c.coffeeId```는 'Coffee의 coffeeId가'라는 의미이며, ```:coffeeId```는 해당 파라미터에 입력된 coffeeId를 말한다.
+
+<br>
+
+아래와 같이 ```SELECT```문을 생략하여 사용할 수도 있다.
+
+```java
+@Query(value = "FROM Coffee c WHERE c.coffeeId = :coffeeId")
+```
+
+<br>
+
+```nativeQuery``` 속성 값을 true로 설정하면, 네이티브 SQL 쿼리를 적용할 수 있다.
+
+```java
+@Query(value = "SELECT * FROM COFFEE WHERE COFFEE_ID = :coffeeId", nativeQuery = true)
+```
+
+<br>
+
+> **💡 Spring Data JDBC와 Spring Data JPA의 @Query**
+>
+> Spring Data JDBC의 @Query는 아래 경로에 위치하고,  
+> ```org.springframework.data.jdbc.repository.query.Query```
+>
+> Spring Data JPA의 @Query는 아래 경로에 위치한다.
+> ```org.springframework.data.jpa.repository.Query```
+
+<br><br>
+
+**3. Service 클래스 구현**
+
+기존의 Spring Data JDBC의 MemberService 코드와 크게 달라진 점 없이 새로운 기능에 대한 로직만 추가한다.
+
+이말은 즉 **PSA**를 통해 어플리케이션이 특정 기술에 강하게 결합되지 않도록 개발자는 일관된 코드 구현 방식을 유지하고,  
+기술의 변경이 필요할 때 **최소한의 변경**만을 하도록 지원한다는 의미이다.
+
+<br><br>
+
+**4. 기타 기능 추가로 인해 수정 및 추가된 코드**
+
+Controller, DTO, Mapper 등 기능 추가로 인한 부분을 수정한다.
+
+<br>
+
+***
+
+<br>
+
+## 🔸 기타 학습 내용
+
+<br>
+
+### 🛠 EntityManager와 Persist Context의 관계
+
+<br>
+
+Persist Context는 EntityManager에서 생성된다.  
+> EntityManager가 Persist Context를 포함하는 구조
+
+<br>
+
+하지만 J2SE(Java 2 Standard Edition) 환경과 J2EE(Java 2 Enterprise Edition) 환경에서는 약간의 차이가 있다.
+
+<br>
+
+```J2SE 환경```은 콘솔, AWT/Swing 등의 데스크탑 어플리케이션 같은 로컬 환경이며,  
+
+J2SE에서 EntityManger는 자신만의 Persist Context를 가지는 1:1 관계를 맺는다.
+
+<br>
+
+```J2EE 환경```은 서버에서 돌아가는 어플리케이션. 즉, Servlet Container 환경으로,  
+
+**동일한 트랜젝션** 내에 있다면 EntityManager 객체가 달라고 항상 같은 Persist Context를 사용한다.
+
+- 여러 Thread가 하나의 EntityManager 객체를 사용해도, Persist Context는 각각 다르게 사용된다.
+  > Thread 마다 트랜젝션이 할당되고, 트랜젝션이 다르기 때문에 Persist Context도 다르게 사용된다.
+  >
+  > Single Thread - 1 Transaction - 1 Persist Context  
+  > Multi Thread - Multi Transaction - Multi Persist Context
+
+<br><br>
+
+### 🛠 CustomBeanUtils
+
+<br>
+
+수정이 필요한 필드만 복사해서 업데이트 해주는 기능을 하는 클래스를 구현하여 사용한다.
+
+Service 클래스에서 주로 사용하며, PATCH 정보의 경우 코드가 간결해지는 장점이 있다.  
+> ex) updateMember()
+
+<br>
+<details>
+<summary> &ensp; ✔︎ CustomBeanUtils.java</summary>
+<div markdown="1">
+<br>
+
+```java
+@Component
+public class CustomBeanUtils<T> {
+    public T copyNonNullProperties(T source, T destination) {
+        if (source == null || destination == null || source.getClass() != destination.getClass()) {
+            return null;
+        }
+
+        final BeanWrapper src = new BeanWrapperImpl(source);
+        final BeanWrapper dest = new BeanWrapperImpl(destination);
+
+
+        for (final Field property : source.getClass().getDeclaredFields()) {
+            Object sourceProperty = src.getPropertyValue(property.getName());
+            if (sourceProperty != null && !(sourceProperty instanceof Collection<?>)) {
+                dest.setPropertyValue(property.getName(), sourceProperty);
+            }
+        }
+
+        return destination;
+    }
+}
+```
+
+</div>
+</details>
+<br>
+
+```java
+public Member updateMember(Member member) {
+  Member findMember = member.getMemberId();
+
+  Optional.ofNullable(member.getName())
+          .ifPresent(findMember::setName);
+  Optional.ofNullable(member.getPhone())
+          .ifPresent(findMember::setPhone);
+  Optional.ofNullable(member.getEmail())
+          .ifPresent(findMember::setEmail);
+    ...
+}
+```
+
+위와 같이 복잡한 코드를 아래와 같이 간단하게 설정할 수 있다.
+
+<br>
+
+```java
+private final CustomBeanUtils<Member> beanUtils;
+
+public Member updateMember(Member member) {
+  Member findMember = member.getMemberId();
+
+  beanUtils.copyNonNullProperties(member, findMember);
+}
+```
+
+<br><br>
+
+### 🛠 Audit
+
+DB에 데이터를 저장할 때, 누가 언제 저장했는지 등의 Audit 기능을 공통화 해주는 것
+
+```@SpringBootApplication``` 어노테이션이 작성된 클래스에 ```@EnableJpaAuditing``` 어노테이션을 추가하여 사용한다.
+> JPA Configuration으로 별도 구성하는 경우 해당 클래스에 추가하기도 한다.
+
+<br>
+
+```@EntityListeners(AuditingEntityListener.class)``` : Entity 상태 변경 감지 리스너
+
+<br>
+
+```@MappedSuperclass``` : 상위 클래스도 매핑 대상에 포함시키도록 하는 어노테이션
+- 매핑 대상은 Entity와 Table 간의 Column 매핑이다.
+- super 클래스의 필드에 포함되는 값들도 테이블에 반영하겠다는 의미이다.
+
+- ```@CreatedDate``` : Entity 생성일시 자동 추가
+- ```@LastModifiedDate``` : Entity 수정일시 자동 추가
+- ```@CreatedBy``` : Entity 생성자 자동 추가
+  > AuditorAware 인터페이스를 구현해야한다.
+
+<br>
+<details>
+<summary> &ensp; ✔︎ Auditable.java</summary>
+<div markdown="1">
+<br>
+
+```java
+@Getter
+@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+public abstract class Auditable {
+    @CreatedDate
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    @Column(name = "LAST_MODIFIED_AT")
+    private LocalDateTime modifiedAt;
+
+    @CreatedBy
+    @Column(updatable = false)
+    private String createdBy;
+}
+```
+
+</div>
+</details>
+
+<br>
+<details>
+<summary> &ensp; ✔︎ AuditorAwareImpl.java</summary>
+<div markdown="1">
+<br>
+
+```java
+@Component
+public class AuditorAwareImpl implements AuditorAware<String> {
+    @Override
+    public Optional<String> getCurrentAuditor() {
+        return Optional.of("JWANNA");
+    }
+}
+```
+
+- Entity 생성자에 ```JWANNA```라는 인자를 자동으로 전달한다는 의미이다.
+  
+  > ID를 전달받아 작성자, 수정자를 자동으로 등록할 때 사용한다.
+
+</div>
+</details>
 
 <br><br>
 
 ***
+
+_2022.11.04. Update_
 
 _2022.11.03. Update_
 
