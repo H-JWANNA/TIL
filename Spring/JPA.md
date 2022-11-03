@@ -743,6 +743,7 @@ J2SE에서 EntityManger는 자신만의 Persist Context를 가지는 1:1 관계�
 **동일한 트랜젝션** 내에 있다면 EntityManager 객체가 달라고 항상 같은 Persist Context를 사용한다.
 
 - 여러 Thread가 하나의 EntityManager 객체를 사용해도, Persist Context는 각각 다르게 사용된다.
+  
   > Thread 마다 트랜젝션이 할당되고, 트랜젝션이 다르기 때문에 Persist Context도 다르게 사용된다.
   >
   > Single Thread - 1 Transaction - 1 Persist Context  
@@ -900,7 +901,7 @@ public class AuditorAwareImpl implements AuditorAware<String> {
 
 ***
 
-_2022.11.04. Update_
+_2022.11.04. Modified_
 
 _2022.11.03. Update_
 
