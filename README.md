@@ -42,6 +42,7 @@
 ||[Data Access Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/DataAccess_Layer.md "데이터 액세스 계층")|||
 ||[Spring Data JDBC](https://github.com/H-JWANNA/TIL/blob/main/Spring/JDBC.md "JDBC")|||
 ||[Spring Data JPA](https://github.com/H-JWANNA/TIL/blob/main/Spring/JPA.md "JPA")|||
+||[Transaction](https://github.com/H-JWANNA/TIL/blob/main/Spring/Transaction.md "트랜잭션")|||
 
 <br>
 
