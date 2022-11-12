@@ -343,13 +343,57 @@ public class MemberPatchDto {
 
     @Pattern(regexp = "^010-\\d{3,4}-\\d{4}$")
     private String phone;
+}
 ```
 
 직접 어노테이션을 추가하여 유효성 검증이 되면 완료
 
+<br>
+
+***
+
+<br>
+
+## DTO 클래스의 단점
+
+PostDto, PatchDto, ResponseDto 등 DTO 클래스가 많아지면 관리하기 어려워진다는 단점이 있다.
+
+이 때, 정적 내부 클래스를 사용하여 1개의 파일로 DTO 클래스들을 관리할 수 있다.
+
+```java
+public class MemberDto {
+
+    @Getter
+    public static class Post {
+        @NotBlank
+        @Email
+        private String email;
+
+        ...
+    }
+
+    @Getter
+    public static class Patch {
+        private long memberId;
+
+        ...
+    }
+
+    @Getter
+    public static class Response {
+        private long memberId;
+        private String email;
+
+        ...
+    }
+}
+```
+
 <br><br>
 
 ***
+
+_2022.11.12. Update_
 
 _2022.10.24. Update_
 
