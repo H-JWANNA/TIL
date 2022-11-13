@@ -361,6 +361,19 @@ public class MemberControllerTest {
 
 <br>
 
+> **💡 ```@SpringBootTest``` vs ```@WebMvcTest```**
+>
+> ```@SpringBootTest```는 ```@AutoConfigureMockMvc```와 함께 사용되어 Controller를 테스트하는데,  
+> 프로젝트에서 사용하는 Bean 전체를 ApplicationContext에 등록하여 사용한다.
+> 
+> → 테스트 환경 구성은 편리하지만, 실행 속도가 상대적으로 느리다. **통합 테스트에 주로 사용**
+>
+> ```@WebMvcTest```는 Controller 테스트에 필요한 Bean만 ApplicationContext에 등록한다.
+>
+> → 테스트 환경 구성은 불편하지만, 실행 속도가 상대적으로 빠르다. **Controller 슬라이스 테스트에 주로 사용**
+
+<br>
+
 **2. 라이브러리 및 프레임워크**
 
 - ```MockMvc``` : Tomcat과 같은 서버를 실행하지 않고, Controller를 테스트할 수 있는 환경을 지원하는 Spring MVC 프레임워크  
@@ -539,6 +552,8 @@ public class MemberRepositoryTest {
 <br><br>
 
 ***
+
+_2022.11.13. Modified_
 
 _2022.11.12. Update_
 
