@@ -401,6 +401,14 @@ public class MemberControllerTest {
 
 - ```Mockito.any(클래스 타입)``` : Mockito에서 지원하는 변수 타입으로, 해당 로직의 파라미터 타입을 입력해준다.
 
+  > ```anyInt()```, ```anyLong()```, ```anyList()``` 등으로 타입을 지정할 수 있다.
+
+- ```doNothing()``` : void로 선언된 메서드에 ```when()```을 사용하기 위해 사용한다.
+
+- ```when()``` : mock 객체의 행동을 설정한다.
+
+  > ex) ```doNothing().when(memberService).deleteMember(memberId);```
+
 - ```willReturn()``` : MemberService Mock 객체의 createMember() 메서드가 리턴할 Stub 데이터
 
   > **💡 Stubbing**
@@ -552,6 +560,8 @@ public class MemberRepositoryTest {
 <br><br>
 
 ***
+
+_2022.11.14. Update_
 
 _2022.11.13. Modified_
 
