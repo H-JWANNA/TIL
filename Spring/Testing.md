@@ -433,6 +433,9 @@ public class MemberControllerTest {
 
 - ```content()``` : Request Body 데이터를 설정한다.
 
+- 이외에도 ```param("size", String.valueOf(pageMembers.getSize()))```과 같이  
+  Query Parameter로 입력되는 값에 대한 설정을 추가할 수 있다.
+
 <br>
 
 **5. Then**
@@ -445,7 +448,9 @@ public class MemberControllerTest {
 
 - ```andReturn()``` : MvcResult에서 제공하는 메서드로, 디버깅 시 Response로 전달되는 응답 데이터를 출력할 때 사용한다.
 
-- ```jsonPath(경로).value()``` : JsonPath의 값과 value의 인자 값이 일치하는지 확인한다. (```$```는 루트)
+- ```jsonPath("$.data").value()``` : JsonPath의 값과 value의 인자 값이 일치하는지 확인한다. (```$```는 루트)
+
+- ```jsonPath().isArray()``` : JS의 배열인지 확인한다. (Java의 Collection도 JS에서는 배열로 취급)
   
   > import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -560,6 +565,8 @@ public class MemberRepositoryTest {
 <br><br>
 
 ***
+
+_2022.11.16. Modified_
 
 _2022.11.14. Update_
 
