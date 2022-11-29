@@ -26,6 +26,66 @@
 
 <br>
 
+**💡 명령형 프로그래밍 vs 선언형 프로그래밍**
+
+명령형 프로그래밍 방식은 코드가 어떤식으로 실행되어야 하는지에 대한 구체적인 로직들이 코드 안에 그대로 드러난다.
+
+또한, 명령형 프로그래밍 방식으로 작성된 코드는 위에서 아래로 순차적으로 실행이 된다.
+
+```java
+public class ImperativeProgrammingExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = List.of(1, 3, 6, 9, 10, 12, 15);
+        int sum = 0;
+
+        for(int num : numbers) {
+            if(num > 4 && (num % 2 == 0)) {
+                sum += num;
+            }
+        }
+
+        System.out.println(sum);
+    }
+}
+```
+▲ _명령형 프로그래밍 방식_
+
+<br>
+
+선언형 프로그래밍 방식은 개발자가 일일이 로직을 작성하는 방식이 아니다.
+
+대신에 꼭 필요한 동작들을 람다 표현식으로 정의(선언)하고, 구체적인 동작 수행은 연산(Operation) 메서드 체인에 위임한다.
+
+```java
+public class DeclarativeProgrammingExample {
+    public static void main(Stirng[] args) {
+        List<Integer> numbers = List.of(1, 3, 6, 9, 10, 12, 15);
+
+        int sum =
+                numbers.stream()
+                        .filter(num -> num > 4 && (num % 2 == 0))
+                        .mapToInt(num -> num)
+                        .sum();
+        
+        System.out.println(sum);
+    }
+}
+```
+▲ _선언형 프로그래밍 방식_
+
+<br>
+
+Java의 Stream API은 선언형 프로그래밍 방식의 대표적인 예시이며,  
+
+Stream의 메서드 체인(중간 연산)에는 **어떠한 작업을 해달라고 선언**하는 람다 표현식만 넣어주고,  
+
+최종 연산이 호출될 때 전달받은 람다 표현식을 기반으로 동작을 수행한다.
+
+> 리액티브 프로그래밍도 선언형 프로그래밍이므로  
+> 기본적으로 Java의 Stream과 비슷한 체인형 구조로 나타낼 수 있다.
+
+<br>
+
 ## 리액티브 시스템 (Reactive System)
 
 리액티브 시스템은 클라이언트의 요청에 반응을 잘하는 시스템을 의미한다.
@@ -194,8 +254,64 @@
   > 
   > 해당 확장 라이브러리들의 Rx가 Reactive Extension의 줄임말이다.
 
+<br>
+
+***
+
+<br>
+
+## 리액티브 프로그래밍 용어 정의
+
+<br>
+
+```java
+public class ReactiveGlossaryExample {
+    public static void main(String[] args) {
+        Flux
+            .fromIterale(List.of(1, 3, 6, 9, 10, 12, 15))
+            .filter(num -> num > 4 && (num % 2 == 0))
+            .reduce((n1, n2) -> n1 + n2)
+            .subscribe(System.out::println);
+    }
+}
+```
+
+- ```Flux```   
+  **Publisher**에 해당한다.  
+  데이터를 내보내는(emit) 주체  
+
+- ```System.out::println```  
+  **Subscriber**에 해당한다.  
+  Publisher가 emit한 데이터를 전달받아서 소비하는 주체
+
+- ```subscribe()```  
+  **Subscribe**에 해당한다.  
+  구독을 하기 위해 사용 (Publisher가 내보내는 데이터를 수신할지 여부를 결정)
+
+- ```fromIterable()```, ```filter()```, ```reduce()```  
+  **Operator**에 해당한다.  
+  리액티브 프로그래밍에서 어떠한 동작을 수행하는 메서드를 의미
+
+- **Signal**  
+  Publisher가 발생시키는 이벤트를 의미한다.  
+
+  > ex) subscribe 메서드가 호출되면 Publisher인 ```Flux```는 숫자 데이터를 하나씩 emit한다.
+  >
+  > 이 때, 숫자 데이터를 하나씩 emit하는 자체를 이벤트가 발생하는 것으로 간주하며,  
+  > 해당 이벤트 발생을 다른 컴포넌트에게 전달하는 것을 **Signal을 전송한다**고 표현한다.
+
+- **Sequence**  
+  Operator 체인으로 표현되는 데이터의 흐름을 의미한다.  
+
+  > 체인으로 작성된 코드 자체를 하나의 Sequence라고 할 수 있다.
+
+- **Upstream**, **Downstream**  
+  Sequence 상의 특정 Operator를 기준으로 위쪽을 Upstream, 아래쪽을 Downstream이라고 한다.
+
 <br><br>
 
 ***
+
+_2022.11.30. Update_
 
 _2022.11.29. Update_
