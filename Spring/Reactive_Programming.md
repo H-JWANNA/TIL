@@ -86,6 +86,10 @@ Stream의 메서드 체인(중간 연산)에는 **어떠한 작업을 해달라�
 
 <br>
 
+***
+
+<br>
+
 ## 리액티브 시스템 (Reactive System)
 
 리액티브 시스템은 클라이언트의 요청에 반응을 잘하는 시스템을 의미한다.
@@ -275,22 +279,33 @@ public class ReactiveGlossaryExample {
     }
 }
 ```
+▲ _리액티브 프로그래밍 용어 정의를 위한 코드_
+
+<br>
 
 - ```Flux```   
   **Publisher**에 해당한다.  
   데이터를 내보내는(emit) 주체  
 
+<br>
+
 - ```System.out::println```  
   **Subscriber**에 해당한다.  
   Publisher가 emit한 데이터를 전달받아서 소비하는 주체
+
+<br>
 
 - ```subscribe()```  
   **Subscribe**에 해당한다.  
   구독을 하기 위해 사용 (Publisher가 내보내는 데이터를 수신할지 여부를 결정)
 
+<br>
+
 - ```fromIterable()```, ```filter()```, ```reduce()```  
   **Operator**에 해당한다.  
   리액티브 프로그래밍에서 어떠한 동작을 수행하는 메서드를 의미
+
+<br>
 
 - **Signal**  
   Publisher가 발생시키는 이벤트를 의미한다.  
@@ -300,10 +315,14 @@ public class ReactiveGlossaryExample {
   > 이 때, 숫자 데이터를 하나씩 emit하는 자체를 이벤트가 발생하는 것으로 간주하며,  
   > 해당 이벤트 발생을 다른 컴포넌트에게 전달하는 것을 **Signal을 전송한다**고 표현한다.
 
+<br>
+
 - **Sequence**  
   Operator 체인으로 표현되는 데이터의 흐름을 의미한다.  
 
   > 체인으로 작성된 코드 자체를 하나의 Sequence라고 할 수 있다.
+
+<br>
 
 - **Upstream**, **Downstream**  
   Sequence 상의 특정 Operator를 기준으로 위쪽을 Upstream, 아래쪽을 Downstream이라고 한다.
