@@ -463,7 +463,7 @@ public class CreateExample {
 public class FlatMapExample {
     public static void main(String[] args) throws InterruptedException {
         Flux
-            .range(2, 9)
+            .range(2, 8)
             .flatMap(dan -> Flux
                     .range(1, 9)
                     .publishOn(Schedulers.parallel())
