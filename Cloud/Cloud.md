@@ -71,10 +71,10 @@
 
 <br>
 
-<img src = "https://www.whatap.io/ko/blog/9/img/iaas_paas_saas3.webp" width = 500>
+<img src = "./src/cloud_service_model.png" width = 500>
 
 ▲ _클라우드 서비스 형태 비교_  
-<span style = "color: gray">_(출처 : https://<hi1>www.whatap<hi2>.io/ko/blog/9/)_</span>
+<span style = "color: gray">_(출처 : https://<hi1>www.<hi>whatap<hi2>.io/ko/blog/9/)_</span>
 
 <br>
 
