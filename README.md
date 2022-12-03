@@ -36,12 +36,12 @@
 |:-------------:|:------------:|:-----------------:|:----------------:|
 |[Spring Basic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Basic.md "Spring Framework 기본")|[Spring MVC](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC.md)|[Security Basic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Security_Basic.md "인증 / 보안 기초")|[Reactive Programming](https://github.com/H-JWANNA/TIL/blob/main/Spring/Reactive_Programming.md "리액티브 프로그래밍")|
 |[Spring Boot Basic](https://github.com/H-JWANNA/TIL/blob/main/Spring/SpringBoot_Basic.md "Spring Boot 기본")|[Presentation Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/Presentation_Layer.md "프레젠테이션 계층")|[Spring Security](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security.md "Spring Security 기초")|[Project Reactor](https://github.com/H-JWANNA/TIL/blob/main/Spring/Project_Reactor.md "프로젝트 리액터")|
-|[Spring Characteristic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Characteristic.md "Spring Framework 특징")|[DTO](https://github.com/H-JWANNA/TIL/blob/main/Spring/DTO.md "Data Transfer Object")|[JWT](https://github.com/H-JWANNA/TIL/blob/main/Spring/JWT.md)|[Spring WebFlux](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Webflux.md)|
-|[DI](https://github.com/H-JWANNA/TIL/blob/main/Spring/DI.md "의존성 주입")|[Service Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/Service_Layer.md "서비스 계층")|[OAuth2](https://github.com/H-JWANNA/TIL/blob/main/Spring/OAuth2.md)||
-|[AOP](https://github.com/H-JWANNA/TIL/blob/main/Spring/AOP.md "관점 지향 프로그래밍") |[Exception](https://github.com/H-JWANNA/TIL/blob/main/Spring/Exception.md "예외 처리")|||
-||[Data Access Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/DataAccess_Layer.md "데이터 액세스 계층")|||
-||[Spring Data JDBC](https://github.com/H-JWANNA/TIL/blob/main/Spring/JDBC.md "JDBC")|||
-||[Spring Data JPA](https://github.com/H-JWANNA/TIL/blob/main/Spring/JPA.md "JPA")|||
+|[Spring Characteristic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Characteristic.md "Spring Framework 특징")|[DTO](https://github.com/H-JWANNA/TIL/blob/main/Spring/DTO.md "Data Transfer Object")|[Filter & FilterChain](https://github.com/H-JWANNA/TIL/blob/main/Spring/Filter_FilterChain.md)|[Spring WebFlux](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Webflux.md)|
+|[DI](https://github.com/H-JWANNA/TIL/blob/main/Spring/DI.md "의존성 주입")|[Service Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/Service_Layer.md "서비스 계층")|[Delegating Password Encoder](https://github.com/H-JWANNA/TIL/blob/main/Spring/Delegating_Password_Encoder.md)||
+|[AOP](https://github.com/H-JWANNA/TIL/blob/main/Spring/AOP.md "관점 지향 프로그래밍") |[Exception](https://github.com/H-JWANNA/TIL/blob/main/Spring/Exception.md "예외 처리")|[Authentication](https://github.com/H-JWANNA/TIL/blob/main/Spring/Authentication.md)||
+||[Data Access Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/DataAccess_Layer.md "데이터 액세스 계층")|[Authorization](https://github.com/H-JWANNA/TIL/blob/main/Spring/Authorization.md)||
+||[Spring Data JDBC](https://github.com/H-JWANNA/TIL/blob/main/Spring/JDBC.md "JDBC")|[JWT](https://github.com/H-JWANNA/TIL/blob/main/Spring/JWT.md)||
+||[Spring Data JPA](https://github.com/H-JWANNA/TIL/blob/main/Spring/JPA.md "JPA")|[OAuth2](https://github.com/H-JWANNA/TIL/blob/main/Spring/OAuth2.md)||
 ||[Transaction](https://github.com/H-JWANNA/TIL/blob/main/Spring/Transaction.md "트랜잭션")|||
 ||[Testing](https://github.com/H-JWANNA/TIL/blob/main/Spring/Testing.md "테스팅")|||
 ||[API Documentation](https://github.com/H-JWANNA/TIL/blob/main/Spring/API_Documentation.md "API 문서화")|||
