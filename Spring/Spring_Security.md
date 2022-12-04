@@ -758,8 +758,39 @@ public class HelloUserAuthenticationProvider implements AuthenticationProvider {
     return new UsernamePasswordAuthenticationToken
     ```
 
+<br>
+
+***
+
+<br>
+
+## 접근 제어 표현식
+
+Spring Security에서는 웹 및 메서드 보안을 위해 표현식(Spring EL)을 사용할 수 있다.
+
+<br>
+
+|표현식|설명|
+|:-|:-|
+| hasRole(String role) | 현재 보안 주체(Principal)가 지정된 역할을 가지고 있다면 true를 리턴한다. <br><br> hasRole("ADMIN")처럼 파라미터로 넘긴 Role이 ```ROLE_```로 시작하지 않으면 기본적으로 추가한다. <br> (DefaultWebSecurityExpressionHanlder의 ```defaultRolePrefix```를 수정하여 커스텀 가능) |
+| hasAnyRole(String... roles) | 현재 보안 주체가 지정한 역할 중 1개라도 가지고 있으면 true를 리턴한다. <br> (문자열 리스트를 콤마(,)로 구분해서 전달)  <br><br> ex) hasAnyRole("ADMIN", "USER") | 
+| hasAuthority(String authority) | 현재 보안 주체가 지정한 권한을 가지고 있다면 true를 리턴한다.<br><br> ex) hasAuthority("Read") |
+| hasAnyAuthority(String... authorities) | 현재 보안 주체가 지정한 권한 중 1개라도 가지고 있으면 true를 리턴한다. <br><br>ex) hasAnyAuthority("Read", "Write") |
+| principal | 현재 사용자를 나타내는 principal 객체에 직접 접근할 수 있다. |
+| authentication | SecurityContext로 조회할 수 있는 현재 Authentication 객체에 직접 접근할 수 있다. |
+| permitAll | 항상 true로 평가한다. |
+| denyAll | 항상 false로 평가한다. |
+| isAnonymous() | 현재 보안 주체가 익명 사용자라면 true를 리턴한다. |
+| isRememberMe() | 현재 보안 주체가 remember-me 사용자면 true를 리턴한다. |
+| isAuthenticated() | 사용자가 익명이 아닌 경우 true를 리턴한다. |
+| isFullyAuthenticated() | 사용자가 익명 사용자나 remember-me 사용자가 아니라면 true를 리턴한다. |
+| hasPermission(Object target, Object permission) | 사용자가 target에 해당 permission 권한이 있으면 true를 리턴한다. <br><br> ex) hasPermission(domainObject, "Read") |
+| hasPermission(Object targetId, String targetType, Object permission) | 사용자가 target에 해당 permission 권한이 있으면 true를 리턴한다. <br><br> ex) hasPermission(1, "com.example.domain.Message", "Read") |
+
 <br><br>
 
 ***
+
+_2022.12.05. Update_
 
 _2022.11.27. Update_
