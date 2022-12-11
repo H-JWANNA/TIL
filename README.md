@@ -65,7 +65,7 @@
 |[Cloud](https://github.com/H-JWANNA/TIL/blob/main/Cloud/Cloud.md "클라우드")|[Docker](https://github.com/H-JWANNA/TIL/blob/main/Cloud/Docker.md "도커")|
 |[AWS](https://github.com/H-JWANNA/TIL/blob/main/Cloud/Aws.md "아마존 웹 서비스")||
 |[Automated Deployment](https://github.com/H-JWANNA/TIL/blob/main/Cloud/Automated_Deployment.md "배포 자동화")||
-
+|[Operating Strategy](https://github.com/H-JWANNA/TIL/blob/main/Cloud/Operating_Strategy.md "운영 전략")||
 
 <br>
 
