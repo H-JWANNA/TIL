@@ -186,6 +186,8 @@ Google, Github, Facebook 등 신뢰할만한 써드 파티 어플리케이션에
 
 - 자격 증명을 안정하게 보관할 수 있는 Client에서만 사용되어야 한다.
 
+<img src = "./src/Client_Credentials_Grant.png" width = "500">
+
 <br><br>
 
 ***
