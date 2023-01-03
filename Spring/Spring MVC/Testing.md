@@ -6,7 +6,7 @@
 
 <br>
 
-<img src = "./src/test.png" width = 600>
+<img src = "../src/test.png" width = 600>
 
 ▲ _어플리케이션의 일반적인 테스트 분류_
 

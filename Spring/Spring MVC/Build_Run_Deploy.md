@@ -94,7 +94,7 @@ java -jar 파일명.jar
 입력하는 칸이 보이지 않으면 우측 상단의 **Modify options**를 클릭하여   
 오른쪽과 같이 Java - Program arguments를 체크해주면 된다.
 
-<img src = "./src/intelliJ_Profiles.png">
+<img src = "../src/intelliJ_Profiles.png">
 
 <br>
 

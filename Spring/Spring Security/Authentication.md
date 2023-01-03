@@ -18,7 +18,7 @@ Spring Security의 컴포넌트들은 아래와 같은 과정을 거쳐 사용�
 
 <br>
 
-<img src = "./src/Spring_Authentication_Flow.png">
+<img src = "../src/Spring_Authentication_Flow.png">
 
 <br>
 

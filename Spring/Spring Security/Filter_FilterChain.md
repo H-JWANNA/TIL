@@ -8,7 +8,7 @@
 
 <br>
 
-<img src = "./src/Filter.png" width = 500>
+<img src = "../src/Filter.png" width = 500>
 
 ▲ _서블릿 기반 어플리케이션에서 Filter의 위치_
 

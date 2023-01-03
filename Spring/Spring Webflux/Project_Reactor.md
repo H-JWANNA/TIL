@@ -122,7 +122,7 @@ public class HelloReactorExample {
 
 <br>
 
-<img src = "./src/Reactor_Mono.png" width = 500>
+<img src = "../src/Reactor_Mono.png" width = 500>
 
 ▲ _Mono의 마블 다이어그램_
 
@@ -138,7 +138,7 @@ public class HelloReactorExample {
 
 <br><br>
 
-<img src = "./src/Reactor_Flux.png" width = 500>
+<img src = "../src/Reactor_Flux.png" width = 500>
 
 ▲ _Flux의 마블 다이어그램_
 
@@ -148,7 +148,7 @@ public class HelloReactorExample {
 
 <br><br>
 
-<img src = "./src/Reactor_Map.png" width = 500>
+<img src = "../src/Reactor_Map.png" width = 500>
 
 ▲ _map() Operator의 마블 다이어그램_
 

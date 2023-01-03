@@ -8,7 +8,7 @@ Resource에 대한 자격 증명 토큰을 발급한 후, Client가 해당 토�
 
 <br>
 
-<img src = "./src/OAuth2.png" width = 600>
+<img src = "../src/OAuth2.png" width = 600>
 
 ▲ _써드 파티 어플리케이션의 크리덴셜을 저장하지 않는 아키텍쳐_
 
@@ -149,7 +149,7 @@ Google, Github, Facebook 등 신뢰할만한 써드 파티 어플리케이션에
 
 - Refresh Token을 사용할 수 있다.
 
-<img src = "./src/Authorization_Code_Grant.png" width = 600>
+<img src = "../src/Authorization_Code_Grant.png" width = 600>
 
 <br>
 
@@ -162,7 +162,7 @@ Google, Github, Facebook 등 신뢰할만한 써드 파티 어플리케이션에
 
 - Refresh Token을 사용할 수 없고, Authorization Server는 Client Secret을 통해 클라이언트 인증 과정을 생략한다.
 
-<img src = "./src/Implicit_Grant.png" width = "600">
+<img src = "../src/Implicit_Grant.png" width = "600">
 
 <br>
 
@@ -174,7 +174,7 @@ Google, Github, Facebook 등 신뢰할만한 써드 파티 어플리케이션에
 
 - Authorization Server, Resource Server, Client가 모두 같은 시스템에 속해 있을 때만 사용 가능하다.
 
-<img src = "./src/Resource_Owner_Password_Credential_Grant.png" width = "600">
+<img src = "../src/Resource_Owner_Password_Credential_Grant.png" width = "600">
 
 <br>
 
@@ -186,7 +186,7 @@ Google, Github, Facebook 등 신뢰할만한 써드 파티 어플리케이션에
 
 - 자격 증명을 안정하게 보관할 수 있는 Client에서만 사용되어야 한다.
 
-<img src = "./src/Client_Credentials_Grant.png" width = "500">
+<img src = "../src/Client_Credentials_Grant.png" width = "500">
 
 <br><br>
 

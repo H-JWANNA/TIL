@@ -20,7 +20,7 @@ Spring Security에서 사용자에게 어플리케이션 리소스에 대한 접
 
 <br>
 
-<img src = "./src/Spring_Authorization_Flow.png">
+<img src = "../src/Spring_Authorization_Flow.png">
 
 <br>
 

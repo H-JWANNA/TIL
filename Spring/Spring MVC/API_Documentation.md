@@ -26,7 +26,7 @@ Spring Rest Docs는 테스트 코드 기반의 API 문서화 방식이다.
 
 <br>
 
-<image src = "./src/Spring_Rest_Docs_Flow.png" height = "500">
+<image src = "../src/Spring_Rest_Docs_Flow.png" height = "500">
 
 ▲ _Spring Rest Docs의 API 문서 생성 흐름_
 

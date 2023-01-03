@@ -301,7 +301,7 @@ DB의 관점에서 보면 Primary Key를 가진 Attribute를 Aggregate Root라�
 
 아래의 커피 주문 샘플 어플리케이션 구현을 기준으로 한다.
 
-<img src = "./src/Domain-Entity-Model-Sample.png" width = 80% />
+<img src = "../src/Domain-Entity-Model-Sample.png" width = 80% />
 
 ▲ _Domain Entity Model Sample_
 

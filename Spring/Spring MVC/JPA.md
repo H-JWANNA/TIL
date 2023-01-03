@@ -428,7 +428,7 @@ Aggregate Root를 지정하듯 두 관계 중, 제어의 권한(저장, 수정, 
 
 <br>
 
-<img src = "./src/Member_Order_Mapping.png" width = 600/>
+<img src = "../src/Member_Order_Mapping.png" width = 600/>
 
 
 
