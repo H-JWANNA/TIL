@@ -133,6 +133,7 @@ public class Member {
 <br>
 
 ```java
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(builderMethodName = "MemberBuilder")
 public class Member {
     private final String email;
@@ -148,9 +149,12 @@ public class Member {
 
 <br>
 
-- ```@Builder``` 어노테이션의 속셩 값으로 ```builderMethodName```을 지정해준다.  
+- ```@Builder```의 속성으로 ```builderMethodName```을 지정하면, 해당 값으로 빌더 메서드를 생성한다.
+  
+- 클래스 내부 ```builder()``` 메서드를 통해 필수 매개변수를 포함한 객체를 만든 후에 Builder 패턴을 적용할 수 있다.
 
-  : 지정된 ```MemberBuilder()```를 통해 객체를 만든 후에 Builder 패턴을 적용하겠다는 의미이다.
+- ```@Builder```를 선언하면 전체 인자를 갖는 생성자를 자동으로 만드는데,  
+  ```access = AccessLevel.PRIVATE``` 속성을 통해 접근자를 private로 만들어서 외부에서 접근할 수 없도록 한다.
 
 <br><br>
 
@@ -171,7 +175,7 @@ public class Member {
 }
 ```
 
-- 특정 필드에 ```@Builder.Default```를 선언하면,  
+- 특정 필드에 ```@Builder.Default```를 선언하면,   
   해당 필드에 값이 할당되지 않은 경우 설정된 초기값을 사용하겠다는 의미이다.
 
 - 해당 어노테이션을 적용하지 않은 경우 ```@Builder```에서는 기본값으로 **0 / null / false**를 사용한다.
@@ -213,6 +217,35 @@ public class Member {
 - 수정자 패턴(Setter)을 사용하지 않으므로, 불필요한 변경 가능성을 최소화 할 수 있다.
 
 - 만약 객체에 잘못된 값이 들어왔을 때, 해당 값을 할당하는 시점이 객체의 생성뿐이라면 해당 지점을 찾기 쉬우므로 유지보수성이 높아질 것이다.
+
+<br>
+
+```java
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
+@ToString(exclude = "Member")
+public static final class Member{
+    @Setter(AccessLevel.NONE)
+    @Builder.Default
+    @NotNull
+    private String id;
+
+    @NotNull
+    private String name;
+
+    @Setter(AccessLevel.NONE)
+    private String number;
+}
+```
+
+<br>
+
+- 위와 같이 Setter에 ```AccessLevel.NONE``` 속성을 부여하여, ```@Setter```가 메서드를 생성하지 않게 할 수 있다.  
+
+  이로 인해 해당 클래스의 수정은 오로지 빌더에 의해서만 적용될 수 있도록 한다.
 
 <br><br>
 
