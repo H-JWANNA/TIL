@@ -587,10 +587,13 @@ public class AnswerController {
 
 		return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
 	}
+}
 ```
 
 <br><br>
 
 ***
+
+_2023.01.09. Update_
 
 _2022.11.25. Update_
