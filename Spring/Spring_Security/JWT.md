@@ -532,6 +532,62 @@ public class JwtTokenizerTest {
 }
 ```
 
+<br>
+
+***
+
+<br>
+
+## JWT 인증
+
+<br>
+
+### 🔸 로그인한 사용자 정보 조회
+
+<br>
+
+사용자가 서버에 요청을 보낼 때마다 DB에 접근해서 데이터를 가져오는 것은 비효율적인 일이기 때문에  
+
+한 번 인증된 사용자 정보를 세션에 담아놓고, 세션이 유지되는 동안 유저 객체를 DB 접근 없이 가져다 쓸 수 있다.
+
+<br>
+
+Spring Security는 해당 정보를 SecurityContextHolder 내부의 SecurityContext의 ```Authentication``` 객체로 저장하며,  
+
+해당 객체를 참조하기 위해서는 ```@AuthenticationPrincipal``` 어노테이션을 사용할 수 있다.
+
+```UserDetails```를 구현한 ```CustomUserDetails``` 클래스를 매개변수로 받아 아래와 같이 사용할 수 있다.
+
+<br>
+
+```java
+@RestController
+@RequestMapping("/answers")
+@Validated
+public class AnswerController {
+	private final AnswerService answerService;
+	private final AnswerMapper answerMapper;
+
+	public AnswerController(AnswerService answerService, AnswerMapper answerMapper) {
+		this.answerService = answerService;
+		this.answerMapper = answerMapper;
+	}
+
+	@PatchMapping("/{answer-id}")
+	public ResponseEntity patchAnswer(
+      @Valid @RequestBody AnswerDto.Patch requestBody,
+		@PathVariable("answer-id") @Positive long answerId,
+		@AuthenticationPrincipal MemberDetails memberDetails) {
+
+		Answer answer =
+			answerService.updateAnswer(
+				answerMapper.patchToAnswer(requestBody), memberDetails);
+
+		AnswerDto.Response response = answerMapper.answerToResponse(answer);
+
+		return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
+	}
+```
 
 <br><br>
 
