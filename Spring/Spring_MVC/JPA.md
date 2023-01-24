@@ -662,11 +662,15 @@ JPQL의 특징은 테이블을 대상으로 조회하는 것이 아닌, **Entity
 
 ```java
 @Query(value = "SELECT c FROM Coffee c WHERE c.coffeeId = :coffeeId")
+List<Coffee> findAllByCoffeeId(@Param("coffeeId") Long coffeeId);
 ```
 
 해당 코드는 ```FROM Coffee c```를 통해 Coffee 객체를 생성해서, 해당 객체로 필드를 조회하고 있다.
 
 ```c.coffeeId```는 'Coffee의 coffeeId가'라는 의미이며, ```:coffeeId```는 해당 파라미터에 입력된 coffeeId를 말한다.
+
+파라미터는 ```@Param``` 어노테이션을 사용해 지정해 줄 수 있으며,  
+기본적으로 Entity가 가지고 있는 값을 사용하기 위해서는 ```findAllByCoffeeId```와 같이 메서드 명으로 조회하면 어노테이션을 사용하지 않고 조회할 수 있다.
 
 <br>
 
@@ -900,6 +904,8 @@ public class AuditorAwareImpl implements AuditorAware<String> {
 <br><br>
 
 ***
+
+_2023.01.24. Update_
 
 _2022.11.04. Modified_
 
