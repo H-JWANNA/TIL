@@ -24,10 +24,18 @@ Query는 '질의문'이라는 뜻을 가지고 있으며, 검색할 때 입력�
 
 <br>
 
+**🔸 데이터베이스 조회**
+
+```sql
+SHOW databases;
+```
+
+<br>
+
 **🔸 데이터베이스 생성**
 
 ```sql
-CREATE DATABASE database_name
+CREATE DATABASE database_name;
 ```
 
 <br>
@@ -35,7 +43,7 @@ CREATE DATABASE database_name
 **🔸 데이터베이스 삭제**
 
 ```sql
-DROP DATABASE database_name
+DROP DATABASE database_name;
 ```
 
 <br>
@@ -43,8 +51,8 @@ DROP DATABASE database_name
 **🔸 데이터베이스 수정**
 
 ```sql
-ALTER DATABASE database_name CHARACTER SET = charset_name
-ALTER DATABASE database_name COLLATE = collation_name
+ALTER DATABASE database_name CHARACTER SET = charset_name;
+ALTER DATABASE database_name COLLATE = collation_name;
 ```
 
 > 대표적인 CHARACTER SET은 아래와 같다.  
@@ -65,10 +73,21 @@ ALTER DATABASE database_name COLLATE = collation_name
 **🔸 데이터베이스 사용**
 
 ```sql
-USE database_name
+USE database_name;
 ```
 
 테이블 생성, 수정, 삭제 등의 작업을 위해 데이터베이스 사용 명령을 먼저 해야한다.
+
+<br>
+
+**🔸 테이블 조회**
+
+```sql
+SHOW tables;
+
+-- 더 자세한 정보
+SHOW table STATUS;
+```
 
 <br>
 
@@ -79,7 +98,7 @@ CREATE TABLE table_name (
     id int PRIMARY KEY AUTO_INCREMENT,
     name varchar(255),
     email varchar(255)
-)
+);
 ```
 
 필드 이름이 각각 ```id```, ```name```, ```email```이고,   
@@ -91,7 +110,7 @@ CREATE TABLE table_name (
 **🔸 테이블 삭제**
 
 ```sql
-DELETE FROM table_name
+DELETE FROM table_name;
 
 -- 조건을 붙이면 해당 행만 삭제
 WHERE sheet = 'D11'
@@ -105,7 +124,7 @@ COMMIT
 <br>
 
 ```sql
-TRUNCATE TABLE table_name
+TRUNCATE TABLE table_name;
 
 -- 자동 커밋이 되기 때문에 롤백이 불가능하다.
 ```
@@ -114,7 +133,7 @@ TRUNCATE TABLE table_name
 <br>
 
 ```sql
-DROP TABLE table_name
+DROP TABLE table_name;
 
 -- 자동 커밋이 되기 때문에 롤백이 불가능하다.
 ```
@@ -130,13 +149,13 @@ DROP TABLE table_name
 
 ```sql
 -- 새로운 필드 추가
-ALTER TABLE table_name ADD field_name field_type
+ALTER TABLE table_name ADD field_name field_type;
 
 -- 기존 필드 삭제
-ALTER TABLE table_name DROP field_name
+ALTER TABLE table_name DROP field_name;
 
 -- 필드 타입 변경
-ALTER TABLE table_name MODIFY COLUMN field_name field_type
+ALTER TABLE table_name MODIFY COLUMN field_name field_type;
 ```
 
 <br>
@@ -144,7 +163,7 @@ ALTER TABLE table_name MODIFY COLUMN field_name field_type
 **🔸 테이블 정보 확인**
 
 ```sql
-DESCRIBE table_name
+DESCRIBE table_name;
 ```
 
 <br>
@@ -174,16 +193,16 @@ mysql> describe user;
 데이터셋에 포함될 특성을 선택
 
 ```sql
-SELECT column_name
+SELECT column_name;
 
 -- 문자열
-SELECT 'hello world'
+SELECT 'hello world';
 
 -- 숫자
-SELECT 2
+SELECT 2;
 
 -- 연산
-SELECT 15 + 3
+SELECT 15 + 3;
 ```
 
 <br>
@@ -195,7 +214,7 @@ AS : 별칭 설정
 
 ```sql
 SELECT *
-FROM table_name AS db_name
+FROM table_name AS db_name;
 ```
 
 <br>
@@ -206,7 +225,7 @@ FROM table_name AS db_name
 
 ```sql
 SELECT *
-FROM table_name
+FROM table_name;
 
 -- 비교 연산자 사용 가능
 WHERE gender = 'Male'
@@ -242,7 +261,7 @@ WHERE company IS NOT NULL
 
 ```sql
 SELECT *
-FROM table_name
+FROM table_name;
 
 -- 오름차순 (ASC 생략 가능)
 ORDER BY column_name ASC
@@ -260,7 +279,7 @@ ORDER BY column_name DESC
 ```sql
 SELECT *
 FROM table_name
-GROUP BY column_name
+GROUP BY column_name;
 ```
 
 <br>
@@ -273,7 +292,7 @@ GROUP BY column_name
 SELECT *
 FROM table_name
 GROUP BY column_name
-HAVING salary >= 300
+HAVING salary >= 300;
 ```
 
 <br>
@@ -285,7 +304,7 @@ HAVING salary >= 300
 ```sql
 -- column_name은 생략 가능
 INESRT INTO table_name (column_name_1, column_name_2, …)
-VALUES (data_1, data_2, …)
+VALUES (data_1, data_2, …);
 ```
 
 <br>
@@ -312,7 +331,7 @@ WHERE column_3 = data_3
 ```sql
 SELECT *
 FROM table_name
-LIMIT 10
+LIMIT 10;
 ```
 
 <br>
@@ -324,7 +343,7 @@ LIMIT 10
 
 ```sql
 SELECT DISTINCT column_name
-FROM table_name
+FROM table_name;
 ```
 
 <br>
@@ -339,7 +358,7 @@ FROM table_name
 ```sql
 SELECT *
 FROM table_name_1
-JOIN table_name_2 ON table_name_1.column_1 = table_name_2.column_A
+JOIN table_name_2 ON table_name_1.column_1 = table_name_2.column_A;
 ```
 
 <br>
@@ -355,7 +374,7 @@ JOIN table_name_2 ON table_name_1.column_1 = table_name_2.column_A
 
 ```sql
 SELECT *
-FROM table_name
+FROM table_name;
 
 -- 왼쪽 테이블의 모든 값을 기준으로 조인
 LEFT OUTER JOIN table_name_2 ON table_name_1.column_1 = table_name_2.column_A
@@ -420,6 +439,8 @@ TCL은 DML을 거친 데이터의 변경사항을 수정할 수 있다.
 <br><br>
 
 ***
+
+_2023.01.25. Update_
 
 _2022.10.07. Update_
 
