@@ -32,20 +32,20 @@
 
 ## &ensp; 📋 <span style = "color : lightgreen">***Spring***</span>
 
-|**Spring Core**|**Spring MVC**|**Spring Security**|**Spring Webflux**|
-|:-------------:|:------------:|:-----------------:|:----------------:|
-|[Spring Basic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Core/Spring_Basic.md "Spring Framework 기본")|[Spring MVC](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/Spring_MVC.md)|[Security Basic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security/Security_Basic.md "인증 / 보안 기초")|[Reactive Programming](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Webflux/Reactive_Programming.md "리액티브 프로그래밍")|
-|[Spring Boot Basic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Core/SpringBoot_Basic.md "Spring Boot 기본")|[Presentation Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/Presentation_Layer.md "프레젠테이션 계층")|[Spring Security](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security/Spring_Security.md "Spring Security 기초")|[Project Reactor](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Webflux/Project_Reactor.md "프로젝트 리액터")|
-|[Spring Characteristic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Core/Spring_Characteristic.md "Spring Framework 특징")|[DTO](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/DTO.md "Data Transfer Object")|[Filter & FilterChain](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security/Filter_FilterChain.md)|[Spring WebFlux](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Webflux/Spring_Webflux.md)|
-|[DI](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Core/DI.md "의존성 주입")|[Service Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/Service_Layer.md "서비스 계층")|[Delegating Password Encoder](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security/Delegating_Password_Encoder.md)||
-|[AOP](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Core/AOP.md "관점 지향 프로그래밍") |[Exception](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/Exception.md "예외 처리")|[Authentication](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security/Authentication.md)||
-||[Data Access Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/DataAccess_Layer.md "데이터 액세스 계층")|[Authorization](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security/Authorization.md)||
-||[Spring Data JDBC](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/JDBC.md "JDBC")|[JWT](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security/JWT.md)||
-||[Spring Data JPA](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/JPA.md "JPA")|[OAuth2](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security/OAuth2.md)||
-||[Transaction](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/Transaction.md "트랜잭션")|||
-||[Testing](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/Testing.md "테스팅")|||
-||[API Documentation](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/API_Documentation.md "API 문서화")|||
-||[Build / Run / Deploy](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/Build_Run_Deploy.md "어플리케이션 빌드/실행/배포")|||
+|**Spring Core**|**Spring MVC**|**Spring Security**|**Spring Webflux**|**Additional Function**|
+|:-------------:|:------------:|:-----------------:|:----------------:|:-:|
+|[Spring Basic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Core/Spring_Basic.md "Spring Framework 기본")|[Spring MVC](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/Spring_MVC.md)|[Security Basic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security/Security_Basic.md "인증 / 보안 기초")|[Reactive Programming](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Webflux/Reactive_Programming.md "리액티브 프로그래밍")|  |
+|[Spring Boot Basic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Core/SpringBoot_Basic.md "Spring Boot 기본")|[Presentation Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/Presentation_Layer.md "프레젠테이션 계층")|[Spring Security](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security/Spring_Security.md "Spring Security 기초")|[Project Reactor](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Webflux/Project_Reactor.md "프로젝트 리액터")|  |
+|[Spring Characteristic](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Core/Spring_Characteristic.md "Spring Framework 특징")|[DTO](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/DTO.md "Data Transfer Object")|[Filter & FilterChain](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security/Filter_FilterChain.md)|[Spring WebFlux](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Webflux/Spring_Webflux.md)|  |
+|[DI](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Core/DI.md "의존성 주입")|[Service Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/Service_Layer.md "서비스 계층")|[Delegating Password Encoder](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security/Delegating_Password_Encoder.md)||  |
+|[AOP](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Core/AOP.md "관점 지향 프로그래밍") |[Exception](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/Exception.md "예외 처리")|[Authentication](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security/Authentication.md)||  |
+||[Data Access Layer](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/DataAccess_Layer.md "데이터 액세스 계층")|[Authorization](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security/Authorization.md)||  |
+||[Spring Data JDBC](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/JDBC.md "JDBC")|[JWT](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security/JWT.md)||  |
+||[Spring Data JPA](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/JPA.md "JPA")|[OAuth2](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_Security/OAuth2.md)||  |
+||[Transaction](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/Transaction.md "트랜잭션")|||  |
+||[Testing](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/Testing.md "테스팅")|||  |
+||[API Documentation](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/API_Documentation.md "API 문서화")|||  |
+||[Build / Run / Deploy](https://github.com/H-JWANNA/TIL/blob/main/Spring/Spring_MVC/Build_Run_Deploy.md "어플리케이션 빌드/실행/배포")|||  |
 
 <br>
 
