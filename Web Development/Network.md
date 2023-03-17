@@ -327,12 +327,13 @@ TCP/IP 4계층 모델을 기준으로 TCP와 UDP는 전송계층에서 IP와 어
 
 <br>
 
-### TCP 3-way handshake
+#### **💡 TCP 3-way handshake**
 
-TCP 3-way handshake 는 양 끝단 기기의 신뢰성 있는 데이터 통신을 위해,  
-TCP 방식이 연결을 설정하는 방식이다.
+TCP 3-way handshake 는 양 끝단 기기의 신뢰성 있는 데이터 통신을 위해, TCP 방식이 연결을 설정하는 방식이다.
 
-<img src = "https://s3.ap-south-1.amazonaws.com/afteracademy-server-uploads/what-is-a-tcp-3-way-handshake-process-three-way-handshaking-establishing-connection-6a724e77ba96e241.jpg" width="90%" />
+양 쪽 모두 데이터를 전송할 준비가 되었다는 것을 보장하고, 실제도 데이터 전달이 시작하기 전에 한 쪽이 다른 쪽이 준비되었다는 것을 알 수 있도록 한다.
+
+<img src = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F225A964D52F1BB6917" width=600 />
 
 <br>
 
@@ -341,12 +342,42 @@ TCP 방식이 연결을 설정하는 방식이다.
    Segment를 랜덤으로 설정된 SYN(Synchronize Sequence Number)와 함께 보낸다.  
    
    이 요청은 Receiver에게 Sender가 통신을 시작하고 싶다고 알린다.
+
 2. SYN / ASK  
    Receiver 는 받은 요청을 바탕으로 SYN/ACK 신호 세트를 응답한다.  
    Acknowledgement(ACK) 응답으로 보내는 Segment가 유효한 SYN요청을 받았는지를 의미
+
 3. ACK  
    Sender는 받은 ACK를 Receiver에게 전송을 하면서,  
    신뢰성 있는 연결이 성립되었다는 사실을 Sender와 Receiver 양쪽에서 알 수 있고, 실제 데이터 전송이 시작되게 된다.
+
+<br>
+
+#### **💡 TCP 4-way handshake**
+
+TCP 연결을 해제하는 단계로, 세션을 종료하기 위해 수행되는 절차이다.
+
+클라이언트는 서버에게 연결해제를 통지하고 서버가 이를 확인하고 클라이언트에게 이를 받았음을 전송해주고 최종적으로 연결이 해제됩니다. 단, 서버에서 소켓이 닫혔다고 통지해도 클라이언트 측에서는 일정시간 대기하는데, 혹시나 패킷이 나중에 도착할 수 있기 때문입니다
+
+<img src = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FqUXSw%2FbtqDWsFNWJw%2FhVdKIneSYb7UK3wc0pj6Z0%2Fimg.png" width = 600>
+
+<br>
+
+1. FIN  
+  클라이언트가 연결을 종료하겠다는 FIN 플래그를 전송한다.
+
+2. ACK  
+  서버는 FIN 플래그를 받고, 확인했다는 ACK를 보내며, 자신의 통신이 끝날 때까지 기다린다.
+
+3. FIN  
+  연결을 종료할 준비가 되면, 클라이언트에게 FIN 플래그를 전송해서 연결 해지를 위한 준비가 완료되었음을 알린다.
+
+4. ACK  
+  클라이언트는 해지 준비가 되었다는 ACK를 확인했다는 메시지를 보낸다.
+
+> 클라이언트는 서버로부터 FIN 플래그를 수신하더라도 일정 시간동안 세션을 남겨놓고 잉여 패킷을 기다린다.  
+>
+> FIN 플래그를 전송하기 전에 보낸 패킷이 라우팅 지연이나 패킷 유실로 인한 재전송 등으로 늦게 도착하는 경우가 있을 수 있기 때문이다.
 
 <br>
 
