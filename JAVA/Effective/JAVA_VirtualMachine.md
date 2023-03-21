@@ -9,8 +9,7 @@ Windows를 위해 만든 프로그램은 Windows만 작동이 가능한 운영�
 
 ## JVM
 
-JVM은 자바 프로그램을 실행시키는 도구로써,  
-자바로 작성한 소스 코드를 해석해 실행하는 별도의 프로그램이다.
+JVM은 자바 프로그램을 실행시키는 도구로써, 자바로 작성한 소스 코드를 해석해 실행하는 별도의 프로그램이다.
 
 JVM은 자바 프로그램과 운영체제 사이의 **매개 역할**을 하며,  
 Windows용 JVM, Mac OS용 JVM, Linux용 JVM이 따로 존재한다.
@@ -42,7 +41,9 @@ Windows용 JVM, Mac OS용 JVM, Linux용 JVM이 따로 존재한다.
 4. 실행 엔진(Excution Engine)이 런타임 영역의 바이트 코드를 실행시킨다.
     - Interpreter를 통해 코드를 한 줄씩 기계어로 번역하고 실행
     - JIT Compiler(Just-In-Time Compiler)를 통해 바이트 코드 전체를 기계어로 번역하고 실행
-  
+
+    <br>  
+
     > 기본적으로는 Interpreter를 통해 바이트 코드를 실행한다.
     > 
     > 특정 바이트 코드가 자주 실행되면  
@@ -65,6 +66,9 @@ Windows용 JVM, Mac OS용 JVM, Linux용 JVM이 따로 존재한다.
 런타임 데이터 영역은 JVM에 프로그램에 로드되어 실행될 때  
 특정 값, 바이트 코드, 객체, 변수 등과 같은 데이터을 담는 메모리 영역이다.
 
+Thread마다 생성되는 Stack 영역, PC Register, Native Method Stack과  
+모든 스레드가 공유하는 Heap 영역과 Method 영역이 있다.
+
 <img src = "https://tecoble.techcourse.co.kr/static/a0b18cc999920474a1852901e1e46ebf/6f641/2021-08-09-jvm-runtime-data-area-structure.png"/>
 
 ▲ _JVM Runtime Data Area_
@@ -72,8 +76,6 @@ Windows용 JVM, Mac OS용 JVM, Linux용 JVM이 따로 존재한다.
 <br>
 
 ### Stack
-
-<br>
 
 스택은 자료구조의 일종으로 _Last In First Out_ 이라는 키워드로 설명할 수 있다.
 
@@ -88,12 +90,26 @@ JVM에서도 이와 같은 원리로 작동한다.
 
 <br>
 
-### Heap
+### PC Register
 
 <br>
 
-위의 사진에서 본 것 처럼 JVM에 Heap 영역은 단 하나만 존재하고,  
-Heap 영역에는 객체, 인스턴스 변수, 배열이 저장된다.
+PC(Program Counter) 레지스터는 현재 수행 중인 명령의 주소를 가지며, 스레드가 시작될 때 생성된다.
+
+<br>
+
+### Native Method Stack
+
+Java 외의 언어로 작성된 네이티브 코드를 위한 스택이다.
+
+JNI(Java Native Interface)를 통해 호출하는 C/C++ 등의 코드를 수행하기 위한 스택으로  
+언어에 맞게 스택이 생성된다.
+
+<br>
+
+### Heap
+
+객체 또는 인스턴스를 저장하는 공간으로 GC 대상이다.
 
 ```java
 Example example = new Example();
@@ -107,6 +123,18 @@ Example example = new Example();
 <br>
 
 <img src = "https://miro.medium.com/max/700/1*CuZtwu4B_k6T8gKY2vZmMA.jpeg"/>
+
+<br>
+
+### Method Area
+
+JVM이 시작될 때 생성되며, JVM이 읽어들인 각 클래스와 인터페이스에 대한 런타임 상수 풀, 필드와 메서드에 대한 정보, Static 변수, 메서드의 바이트 코드 등을 저장한다.
+
+**💡 런타임 상수 풀 (Runtime Constant Pool)**  
+
+- JVM 동작에서 핵심적인 역할을 수행하는 곳
+- 각 클래스와 인터페이스의 상수 뿐만 아니라, 메서드와 필드에 대한 레퍼런스까지 담고 있는 테이블
+- 어떤 메서드나 필드를 참조할 때, JVM은 런타임 상수 풀을 통해 해당 메서드나 필드의 실제 메모리상 주소를 찾아서 참조한다.
 
 <br>
 
@@ -144,17 +172,37 @@ Heap 영역은 객체가 얼마나 살아있냐에 따라 Young Generation과 Ol
 Young 영역에서는 새롭게 생성되는 객체들이 할당되는 곳이라 많은 객체가 생성되고 사라지며,  
 Young 영역에서 발생하는 GC를 **Minor GC**라고 한다.
 
-Old 영역에서는 Young 영역에서 살아남은 객체들이 복사되는 곳으로  
-Young 영역보다 크기가 크기 때문에 GC는 적게 발생한다.  
-또한, Old 영역에서 발생하는 GC를 **Major GC**라고 한다.
+**💡 Eden 영역** 
+
+- 새롭게 생성되는 객체가 위치하는 공간
+- Eden 영역이 가득차면 아직 사용중인 객체를 Mark해서 Survivor 영역에 복사하고, Eden 영역을 비운다.
 
 <br>
 
-GC 실행의 단계
+**💡 Survivor 영역** 
+
+- Survivor 영역도 마찬가지로 가득차게 되면 아직 사용중인 객체를 Mark해서 다음 Survivor 영역 혹은 Old Generation으로 복사한 후 해당 영역을 비우게 된다.
+
+<br>
+
+Old 영역에서는 Young 영역에서 살아남은 객체들이 복사되는 곳으로 Young 영역보다 크기가 크기 때문에 GC는 적게 발생한다.  
+또한, Old 영역에서 발생하는 GC를 **Major GC**라고 한다.
+
+> 크기가 크기 때문에 GC가 적게 발생하지만, 그만큼 제거하는데 시간이 오래 걸린다.
+
+<br>
+
+Old 영역은 Young 영역과 반대로 현재 사용중인 객체가 아닌 참조가 끝난 객체를 찾아서 제거한다.
+
+<br>
+
+### GC 실행의 단계
 
 1. **Stop The World**  
    가비지 컬렉션을 실행시키기 위해 App의 실행을 멈추는 작업으로,  
    가비지 컬렉션을 실행하는 스레드를 제외한 모든 스레드의 작업은 중단되고, 정리가 완료되면 재개된다.
+
+   Stop The World가 발생하는 시간을 줄이기 위해 JVM 튜닝을 하기도 하는데, 이를 GC 튜닝이라고 한다.
 
 2. **Mark & Sweep**  
   Mark는 사용되는 메모리와 그렇지 않은 메모리를 식별하는 작업이고,  
@@ -167,5 +215,7 @@ GC 실행의 단계
 <br>
 
 ***
+
+_2023.03.21. Update_
 
 _2022.09.19. Update_
