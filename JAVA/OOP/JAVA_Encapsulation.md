@@ -47,10 +47,10 @@
 
 | 접근제어자 | 클래스 내 | 패키지 내 | 다른 패키지<br>하위 클래스 | 패키지 외 |
 |:----------:|:---------:|:---------:|:-----------------------:|:---------:|
-|Private|O|X|X|X|
-|Default|O|O|X|X|
-|Protected|O|O|O|X|
-|Public|O|O|O|O|
+|private|O|X|X|X|
+|default|O|O|X|X|
+|protected|O|O|O|X|
+|public|O|O|O|O|
 
 ▲ _접근 제어자의 종류와 접근 제한 범위_
 
@@ -120,13 +120,14 @@ PublicClass public void
 
 ## getter와 setter
 
-```private``` 접근 제어자가 포함되어 있는 객체의 변수에 데이터를 추가, 수정할 경우 사용
+getter와 setter는 데이터를 보호하기 위해 사용하며,  
+주로 ```private``` 접근 제어자가 포함되어 있는 객체의 변수에 데이터를 추가, 수정할 경우 사용한다.
 
 - ```setter``` 메서드는 외부에서 메서드에 접근하여 조건이 맞을 경우 데이터 값을 변경 가능하게 해준다.  
-일반적으로 메서드명에 ```set```을 붙여서 정의한다.
+일반적으로 변수명에 ```set```을 붙여서 정의한다.
 
 - ```getter``` 메서드는 ```setter```로 설정한 변수 값을 읽어오는데 사용한다.  
-일반적으로 메서드명에 ```get```을 붙여서 정의한다.
+일반적으로 변수명에 ```get```을 붙여서 정의한다.
 
 <br>
 
@@ -136,40 +137,36 @@ public class GetterSetter {
 
         AccessModifier a = new AccessModifier();
         a.setNum(5);
-        a.setStr("Test");
 
         int num = a.getNum();
         System.out.println("num : " + num); // num : 5
 
-        String str = a.getStr();
-        System.out.println("str : " + str); // str : Test
+        a.setNum(13); // IllegalArgumentException 발생
     }
 }
 
 class AccessModifier {
     // private를 사용해 외부로부터 접근 불가능
     private int num;
-    private String str;
 
-    public void setNum(int num) {   // 멤버 변수의 값 변경
+    public void setNum(int num) {   // 멤버 변수의 값 변경에 제약
+        if (num < 1 || num > 10) {
+            throw new IllegalArgumentException();
+        }
         this.num = num;
     }
     public int getNum() {           // 멤버 변수의 값
         return num;
     }
-
-    public void setStr(String str) {
-        this.str = str;
-    }
-    public String getStr() {
-        return str;
-    }
 }
 ```
+
+▲ Setter를 사용해서, 내부 값의 변화를 제한할 수 있다.
 
 <br>
 
 > 💡 **참고**  
+> 
 > IntelliJ IDEA에서 MacOS는 ```Option + n```, Windows는 ```Alt + Insert```를 통해  
 > ```getter and setter```와 같은 여러 문법을 쉽게 호출 가능하다
 
@@ -178,4 +175,6 @@ class AccessModifier {
 
 ***
 
-_Update 2022.09.06._
+_2023.03.22. Modified_
+
+_2022.09.06. Update_
