@@ -30,17 +30,21 @@ boolean comparison6 = name1.equals(name3);        // true
 boolean comparison7 = name3.equals(name4);        // true
 ```
 
-> ```name1``` ```name2```는 문자열 리터럴을 **직접 할당** 받은 변수이며  
-> ```name3``` ```name4```는 ```String``` 클래스를 통해 **인스턴스**를 생성하여 할당받은 변수이다.
-> 
-> 등가 비교 연산자 ```==```는 같은 **주소값**을 가지는지 확인하고,  
-> ```equals()``` 메서드는 같은 **결과값**을 가지는지 확인한다.
->
-> <br>
->
-> 나와 똑같이 생긴 사람이 있을 수 있지만, 그게 나는 아니듯이  
-> ```==```는 진짜 나만을 true로 반환하고,   
-> ```equals()```는 외형적으로 나와 똑같이 생긴 사람까지 true로 반환하는 느낌이다.
+```name1``` ```name2```는 문자열 리터럴을 **직접 할당** 받은 변수이며  
+```name3``` ```name4```는 ```String``` 클래스를 통해 **인스턴스**를 생성하여 할당받은 변수이다.
+
+등가 비교 연산자 ```==```는 같은 **주소값**을 가지는지 확인하고, ```equals()``` 메서드는 같은 **결과값**을 가지는지 확인한다.
+
+이를 **동일성(identity)과 동등성(equality)이라고 한다.**
+
+<br>
+
+String에서 리터럴을 사용해서 객체를 생성할 경우 Heap 메모리 내부의 String Pool에 저장이 되는데,  
+해당 String Pool에 동일한 정보가 저장이 되어있을 경우 해당 값을 참조한다.  
+
+따라서, name2는 name1에서 생성한 ```"Kim Coding"```을 참조하게 되고, name1과 name2는 **동일성을 가진다.**  
+
+다만, ```new``` 키워드를 사용해서 생성한 name3, name4는 각각 Heap 영역에 새로운 객체를 생성하기 때문에 **동등성을 가지지만, 동일성은 가지지 않는다.**
 
 <br>
 
@@ -91,6 +95,8 @@ System.out.println("compareTo() 메서드 호출 후 문자열 : " + str);
 > ```StringBuilder name = new StringBuilder();```를 통해 인스턴스를 생성
 - ```.append("text")``` : 문자열을 연결하는 메서드
 - ```.toString()``` : 변수에 문자열을 할당할 때 사용하는 메서드
+- ```.delete(num1, num2)``` : (num1) ~ (num2-1) 인덱스에 해당하는 문자열을 제거
+- ```.deleteCharAt(num)``` : num 인덱스에 해당하는 문자 제거
 
 ```java
 StringBuilder stringBuilder = new StringBuilder();
@@ -107,7 +113,7 @@ System.out.println(str);            // 문자열 연결 (String 타입)
 
 ```StringBuffer``` : ```StringBuilder```와 비슷하게 문자열 연결에 사용하는 클래스
 > ```StringBuffer name = new StringBuffer();```를 통해 인스턴스를 생성
-- ```.append()``` : 문자열을 연결하는 메서드 (```concat()``` 메서드와 같을 결과지만 훨씬 빠름)
+- ```.append()``` : 문자열을 연결하는 메서드 (```concat()``` 메서드와 같은 결과지만 훨씬 빠름)
 - ```.capacity()``` : 인스턴스의 현재 버퍼 크기를 반환 (문자열 크기 + 여유 버퍼 크기 16)
 - ```.delete(num1, num2)``` : (num1) ~ (num2-1) 인덱스에 해당하는 문자열을 제거
 - ```.deleteCharAt(num)``` : num 인덱스에 해당하는 문자 제거
@@ -115,31 +121,40 @@ System.out.println(str);            // 문자열 연결 (String 타입)
 
 <br>
 
-> ## 🔸 **String vs StringBuffer/StringBuilder**
+### 🔸 **String** vs **StringBuffer** vs **StringBuilder**
+
+<br>
+
+**String** 은 **불변**의 속성을 갖는다.  
+변하지 않는 문자열을 자주 읽어들이는 경우 좋은 성능을 기대할 수 있다.  
+
+```str + "text"```와 같은 문자열 추가, 수정, 삭제 등의 연산이 발생하면  
+기존의 메모리 영역은 Garbage로 남아있다가 사라지고 새로운 메모리 영역을 가리키게 되므로  
+힙 메모리에 많은 임시 가비지가 생성되어 성능에 영향을 끼치게 된다.
+
+<br>
+
+반면 **StringBuffer**와 **StringBuilder**의 경우에는 **가변**의 속성을 갖는다.  
+
+StringBuffer와 StringBuilder의 차이로는  
+
+StringBuffer는 동기화를 지원하기 때문에 멀티쓰레드 환경에서 안전하지만 속도 측면에서 불리하고,  
+
+StringBuilder는 동기화를 지원하지 않기 때문에 멀티 쓰레드 환경에는 적합하지 않지만 단일 쓰레드에서의 성능은 더 뛰어나다.
+
+<br>
+
+> **💡 동기화 (synchronized)**
 > 
-><br>
->
-> **String** 은 **불변**의 속성을 갖는다. 변하지 않는 문자열을 자주 읽어들이는 경우 좋은 성능을 기대할 수 있다.  
-> 
-> ```str + "text"```와 같은 문자열 추가, 수정, 삭제 등의 연산이 발생하면  
-> 기존의 메모리 영역은 Garbage로 남아있다가 사라지고 새로운 메모리 영역을 가리키게 되므로  
-> 힙 메모리에 많은 임시 가비지가 생성되어 성능에 영향을 끼치게 된다.
-> 
-> <br>
-> 
-> 반면 **StringBuffer**와 **StringBuilder**의 경우에는 **가변**의 속성을 갖는다.  
-> 
-> StringBuffer와 StringBuilder의 차이로는  
-> 
-> StringBuffer는 멀티쓰레드 환경에서 안전하고,  
-> 
-> StringBuilder는 동기화를 지원하지 않기 때문에 멀티 쓰레드 환경에는 적합하지 않지만  
-> 단일 쓰레드에서의 성능은 더 뛰어나다.
+> 멀티 쓰레드 환경에서 1번 쓰레드와 2번 쓰레드가 동시에 하나의 자원을 사용하고자 할 때,  
+> 현재 데이터를 사용하고 있는 쓰레드를 제외한 나머지 쓰레드는 데이터에 접근할 수 없도록 막는 것을 말한다.
 
 <br>
 
 ***
 
-_Modified 2022.09.04._
+_2023.03.22. Update_
 
-_Update 2022.08.30._
+_2022.09.04. Modified_
+
+_2022.08.30. Update_
