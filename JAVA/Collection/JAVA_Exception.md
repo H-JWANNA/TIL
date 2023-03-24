@@ -92,6 +92,8 @@ java: ')' expected
 
 반대로 ```RuntimeException```을 상속하지 않는 클래스는 **checked exception**이라고 하며, 코드 실행 전에 예외 처리 코드 여부를 반드시 검사한다.
 
+> try-catch, throw 등을 사용해서 예외 처리를 할 수 있다.
+
 <br>
 
 ***
@@ -151,6 +153,15 @@ public void divide() {
 ```
 
 <br>
+
+**💡 try-with-resource**
+
+Java7 이전에는 try-catch-finally 구문에서 자원을 해제하기 위해  
+finally 구문에서 null 체크를 하고, ```close()```를 해주어야하는 번거로움이 있었다.
+
+Java7부터는 ```AutoCloseable```을 구현한 객체는 자동으로 ```close()```가 호출되어 자원을 쉽게 해제할 수 있다.
+
+<br><br>
 
 ### 예외 전가
 
@@ -212,4 +223,6 @@ public static void main(String[] args) {
 
 ***
 
-_Update 2022.09.14._
+_2023.03.24. Update_
+
+_2022.09.14. Update_
