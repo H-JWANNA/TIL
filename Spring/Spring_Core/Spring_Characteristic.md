@@ -167,15 +167,17 @@ public class CafeClient {
     public static void main(String[] args) {
         MenuServiceStub menuService = new MenuServiceStub();
         MenuController controller = new MenuController(menuService);
-        List<Menu> menuList = contriller.getMenus();
+        List<Menu> menuList = controller.getMenus();
     }
 }
+
 public class MenuController {
     private MenuServiceStub menuService;
 
     public MenuController(MenuServiceStub menuService) {
         this.menuService = menuService;
     }
+    
     public List<Menu> getMenus() {
         return menuService.getMenuList();
     }
@@ -210,15 +212,18 @@ public class CafeClient {
     public static void main(String[] args) {
         MenuService menuService = new MenuServiceStub();
         MenuController controller = new MenuController(menuService);
-        List<Menu> menuList = contriller.getMenus();
+        List<Menu> menuList = controller.getMenus();
     }
 }
+
 public class MenuController {
+    // Stub을 직접 주입받는 것이 아닌 상위 인터페이스를 주입
     private MenuService menuService;
 
     public MenuController(MenuService menuService) {
         this.menuService = menuService;
     }
+
     public List<Menu> getMenus() {
         return menuService.getMenuList();
     }
@@ -288,7 +293,7 @@ AOP는 관심 지향 프로그래밍이라는 뜻으로,
 
 <br>
 
-### 📋 [***Spring AOP를 위한 추가 정보***](https://github.com/H-JWANNA/TIL/blob/main/Spring/AOP.md)
+### 📋 [***Spring AOP를 위한 추가 정보***](./AOP.md)
 
 <br>
 
@@ -333,6 +338,8 @@ Spring에서 PSA가 적용된 분야로는 트랜잭션 서비스, 메일 서비
 <br><br>
 
 ***
+
+_2023.03.24. Modified_
 
 _2022.10.12. Update_
 
