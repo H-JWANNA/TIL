@@ -258,7 +258,7 @@ public class MenuServiceStub implements MenuService {
 ```MenuService``` 인터페이스의 구현 클래스라면 모든 클래스가 주입받을 수 있다.
 
 
-### 📋 [***Spring DI를 위한 추가 정보***](https://github.com/H-JWANNA/TIL/blob/main/Spring/DI.md)
+### 📋 [***Spring DI를 위한 추가 정보***](./DI.md)
 
 <br>
 
@@ -339,7 +339,7 @@ Spring에서 PSA가 적용된 분야로는 트랜잭션 서비스, 메일 서비
 
 ***
 
-_2023.03.24. Modified_
+_2023.03.27. Modified_
 
 _2022.10.12. Update_
 
