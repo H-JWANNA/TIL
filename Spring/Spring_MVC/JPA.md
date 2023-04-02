@@ -901,9 +901,98 @@ public class AuditorAwareImpl implements AuditorAware<String> {
 </div>
 </details>
 
+<br>
+
+***
+
+<br>
+
+## 🔸 JPA N+1 문제
+
+N+1 문제란 연관 관계가 설정된 엔티티를 조회할 경우에 조회한 데이터 갯수만큼 연관 관계의 조회 쿼리가 추가로 발생하여 데이터를 읽어오는 현상을 말한다.
+
+```FetchType```을 EAGER로 설정하면 N+1 문제가 보이지만 LAZY로 사용하면 N+1 문제가 발생하지 않는 것 처럼 보인다.
+
+다만, 해당 객체를 탐색하고자 하는 경우에는 N+1 문제가 발생하게 된다.
+
+<br>
+
+### 🛠 해결 방법
+
+N+1 문제를 해결하는 방법에는 **Fetch Join**, **@EntityGraph**, **Batch Size** 등의 방법이 있다.
+
+<br>
+
+**1. Fetch Join**
+
+DB에서 데이터를 가져올 때 처음부터 연관된 데이터까지 가져오게 하는 방법
+
+```java
+public interface ContentRepository extends JpaRepository<Content, Long> {
+  @Query("select c from Content c join fetch c.tags")
+  List<Content> findAllFetchJoin();
+}
+```
+
+단점으로는 데이터 호출 시점에 모든 연관 관계의 데이터를 가져오기 때문에 FetchType을 LAZY로 설정해 놓은 것이 무의미하고,  
+
+하나의 쿼리문으로 가져오다보니 페이징 단위로 데이터를 가져오는 것이 불가능하다.
+
+<br>
+
+**2. @EntityGraph**
+
+해당 어노테이션의 속성을 사용하여 쿼리 수행 시 가져올 필드명을 지정하면 LAZY가 아닌 EAGER 조회로 가져오게 된다.
+
+```java
+public interface ContentRepository extends JpaRepository<Content, Long> {
+  @EntityGraph(attributePaths = "tags")
+  @Query("select c from Content c")
+  List<Content> findAllFetchJoin();
+}
+```
+
+Fetch Join을 통한 쿼리문은 inner join이 발생하지만,  
+EntityGraph 어노테이션을 통한 join은 outer join이 발생한다.
+
+<br>
+
+> Fetch Join이나 EntityGraph를 사용한다면 Join을 활용하여 하나의 쿼리로 해결할 수 있지만, 중복 데이터 관리가 필요하다.
+
+<br>
+
+**3. Batch Size**
+
+N+1 문제가 발생하더라도 ```where``` 절의 ```in```을 사용해서 문제가 발생하는 횟수를 줄이는 방식이다.
+
+```yml
+spring:
+  jpa:
+    properties:
+      hibernate:
+        default_batch_fetch_size: 1000
+```
+
+위처럼 yml이나 properties를 수정하여 어플리케이션 전체에 적용시키는 방법이 있고,
+
+```java
+@Entity
+public class Content {
+  ...
+
+  @BatchSize(size = 1000)
+  @OneToMany(mappedBy = "content", fetch = FetchType.EAGER)
+  private Set<Tag> tags = new LinkedHashSet<>();
+}
+```
+
+위처럼 어노테이션을 사용하여 개별 설정을 해주는 방법이 있다.
+
 <br><br>
 
 ***
+
+_2023.04.02. Update_
 
 _2023.01.24. Update_
 
