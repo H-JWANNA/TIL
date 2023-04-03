@@ -187,20 +187,18 @@ ACID 원칙에 따라 트랜잭션은 독립적으로 실행돼야한다는 격�
 
 Spring에서는 트랜잭션에 ```isolation``` 속성을 적용해 격리성을 조정할 수 있다.
 
-- ```Isolation.DEFAULT```  
-  DB에서 사용하는 기본 값
-
 - ```Isolation.READ_UNCOMMITTED```  
   다른 트랜잭션에서 커밋하지 않은 데이터를 읽는 것을 허용
 
 - ```Isolation.READ_COMMITTED```  
-  다른 트랜잭션에 의해 커밋된 데이터를 읽는 것을 허용
+  다른 트랜잭션에 의해 커밋된 데이터를 읽는 것을 허용 (Oracle의 Default)
 
 - ```Isolation.REPEATABLE_READ```  
-  트랜잭션 내에서 한 번 조회한 데이터를 반복해서 조회해도 같은 데이터가 조회되도록 한다.
+  트랜잭션 내에서 한 번 조회한 데이터를 반복해서 조회해도 같은 데이터가 조회되도록 한다. (MySQL의 Default)  
+  트랜잭션 조회 시점에 이미 커밋되어 있던 내용에 대해서만 조회한다.
 
 - ```Isolation.SERIALIZABLE```  
-  동일한 데이터에 대해서 동시에 2개 이상의 트랜잭션이 수행되지 못하도록 한다.
+  동일한 데이터에 대해서 동시에 2개 이상의 트랜잭션이 수행되지 못하도록 한다. (InnoDB의 Default)
 
 <br><br>
 
@@ -345,5 +343,7 @@ public Advisor txAdvisor() {
 <br><br>
 
 ***
+
+_2023.04.03. Modified_
 
 _2022.11.06. Update_
