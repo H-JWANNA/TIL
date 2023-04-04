@@ -10,14 +10,14 @@ mybatis, Spring JDBC, Spring Data JDBC, JPA, Spring Data JPA 등이 있다.
 
 <br>
 
-### 📋 [***Spring Data JDBC***](https://github.com/H-JWANNA/TIL/blob/main/Spring/JDBC.md "JDBC")
+### 📋 [***Spring Data JDBC***](./JDBC.md "JDBC")
 
-### 📋 [***Spring Data JPA***](https://github.com/H-JWANNA/TIL/blob/main/Spring/JPA.md "JPA")
+### 📋 [***Spring Data JPA***](./JPA.md "JPA")
 
 <br><br>
 
 ***
 
-_2022.10.29. Modified_
+_2023.04.04. Modified_
 
 _2022.10.27. Update_
