@@ -42,6 +42,10 @@ API 요청과 무관하게 독립적으로 로직을 실행할 수 있고, 필�
 
 <br>
 
+***
+
+<br>
+
 ## 🔸 Kafka 구조
 
 <img src = "./src/Kafka_Structure.png" width = 600>
@@ -54,13 +58,11 @@ API 요청과 무관하게 독립적으로 로직을 실행할 수 있고, 필�
 
 데이터 복제(Replication)와 결합하여 흔히 **고가용성 구성**이라고 한다.
 
-<br>
+<br><br>
 
 <img src = "./src/Kafka_Structure_of_Cluster.png" width = 600>
 
 ▲ _Kafka Cluster 구조_
-
-<br>
 
 - Leader Partition : Producer와 Consumer가 연결되어 쓰기와 읽기가 실행되는 파티션
 
@@ -79,7 +81,7 @@ API 요청과 무관하게 독립적으로 로직을 실행할 수 있고, 필�
 
 4. 새로운 Leader 선정이 완료되면 Producer와 Consumer는 다시 정상적 발행을 시작한다.
 
-<br>
+<br><br>
 
 <img src = "./src/Kafka_Structure_of_Partition.png" width = 600>
 
@@ -120,7 +122,7 @@ Topic이 여러 개의 Partition으로 나뉘게 되면 Producer의 메시지 �
 ## 🔸 Kafka 용어
 
 |용어|설명|
-|:-:|:-:|
+|:-:|:-|
 |**Zookeeper**|Kafka 브로커를 하나의 클러스터로 코디네이트하는 분산 코디네이션 시스템|
 |**Kafka Broker**|Kafka 어플리케이션이 설치되어 있는 서버 또는 노드|
 |**Topic**|Kafka 데이터 저장소 (폴더와 비슷한 개념)|
@@ -133,8 +135,83 @@ Topic이 여러 개의 Partition으로 나뉘게 되면 Producer의 메시지 �
 |**ISR**<br>**(In Sync Replica)**|Leader, Follower Partition이 모두 동기화 된 상태|
 |**Consumer Lag**|Topic의 최신 Offset과 Consumer Offset 간의 차이|
 
+<br>
+
+### ▫️ Zookeeper
+
+Zookeeper는 분산 어플리케이션을 위한 코디네이션 시스템이다.
+
+분산 어플리케이션이 안정적인 서비스를 할 수 있도록 분산된 어플리케이션 정보를 중앙에 집중하고 구성 관리, 동기화 등의 서비스를 제공한다.
+
+<img src = "https://zookeeper.apache.org/doc/r3.5.1-alpha/images/zkservice.jpg" width = 600>
+
+▲ _Zookeeper Service_
+
+<br>
+
+Zookeeper는 서버 여러 대를 Cluster로 구성하고, 서버들의 상태 정보들을 Znode에 저장한다.
+
+> **💡 Znode**
+>
+> 데이터를 저장하기 위한 공간의 명칭
+>
+> Znode의 데이터가 변경될 때마다 Znode의 버전 정보가 증가한다.  
+> 데이터는 메모리에 저장되므로 처리량이 매우 크고 속도가 빠르다.
+
+<img src = "https://zookeeper.apache.org/doc/r3.5.1-alpha/images/zknamespace.jpg" width = 600>
+
+▲ _Znode_
+
+<br>
+
+### ▫️ Kafka Broker
+
+Kafka Broker는 실행된 Kafka 어플리케이션 서버 중 1대를 말하며, 클라이언트와 데이터를 주고 받기 위해 사용된다.  
+
+Broker 여러 개가 모여 하나의 Cluster를 구성한다.
+
+<br>
+
+여러 Broker 중 1대는 컨트롤러(Controller) 기능을 수행한다.
+
+> **💡 컨트롤러 (Controller)**
+>
+> 각 Broker에게 담당 Partition 할당을 수행하고, Broker 상태를 체크하고, 장애를 감지한다.
+
+<br>
+
+### ▫️ Topic
+
+Kafka Cluster는 Topic에 데이터를 저장한다.
+
+하나의 Topic에 여러 Producer가 데이터를 전송할 수 있고, 여러 Consumer가 데이터를 읽어올 수 있다.
+
+<br>
+
+### ▫️ Partition
+
+Partition은 Topic을 분할한 것이다.
+
+파티션이 여러개로 구성되면 병렬로 데이터 처리를 할 수 있다.
+
+토픽 생성 시 파티션 갯수는 동시 처리량과 깊은 관계를 갖기 때문에 토픽 생성 시 주요 관심사이다.
+
+해당 토픽에서 예상되는 메시지 인입량과 컨슈머 처리량등을 고려해서 초기값을 설정하고, 서비스 운영 과정에서 모니터링을 통해 파티션 확대를 하는 경우도 있다.
+
+<br>
+
+### ▫️ Offset
+
+컨슈머 그룹이 이미 가져간 마지막 레코드에 대한 포인터  
+
+> **💡 컨슈머 그룹 (Consumer Group)**
+> 
+> 동일한 그룹명을 사용하는 컨슈머들의 집합
+
 <br><br>
 
 ***
+
+_2023.05.25. Update_
 
 _2023.05.24. Update_
