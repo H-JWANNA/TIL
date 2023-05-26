@@ -208,9 +208,246 @@ Partition은 Topic을 분할한 것이다.
 > 
 > 동일한 그룹명을 사용하는 컨슈머들의 집합
 
+<br>
+
+***
+
+<br>
+
+## 🔸 CLI 환경에서 Kafka 사용하기
+
+<span style = "color : gray">OpenJDK 1.8 및 Kafka-2.13-2.8.2 버전을 사용하여 Mac 환경에서 Kafka를 사용하는 방법이다.</span>
+
+<br>
+
+### ▫️ 사전 설정
+
+로컬 환경에서 사용을 위해 설정파일을 수정해야한다.
+
+```bash
+$ vi config/server.properties
+```
+
+```advertised.listeners``` 주석 해제 후 ```localhost:9092```로 수정
+
+<br><br>
+
+### ▫️ Zookeeper 및 Kafka 실행
+
+```bash
+$ bin/zookeeper-server-start.sh config/zookeeper.properties
+```
+▲ _Zookeeper 실행_
+
+<br>
+
+```bash
+$ bin/kafka-server-start.sh config/server.properties
+```
+▲ _Kafka 실행_
+
+<br><br>
+
+### ▫️ 토픽 생성
+
+```bash
+$ bin/kafka-topic.sh --create --topic 토픽명 --bootstrap-server localhost:9092
+```
+▲ _Topic 생성_
+
+> **💡 Topic 생성 시 사용 가능한 옵션**
+>
+> - ```--partitions 갯수``` : 파티션 갯수 설정  
+> 
+> - ```--replication-factor 갯수``` : 복제본 갯수(Leader&Follower) 설정
+
+<br>
+
+```bash
+$ bin/kafka-topic.sh --describe --topic 토픽명 --bootstrap-server localhost:9092
+```
+▲ _Topic 정보 확인_
+
+<br><br>
+
+### ▫️ 토픽 수정
+
+```bash
+$ bin/kafka-topic.sh --alter --topic 토픽명 --partitions 3
+```
+▲ _Partition 갯수 수정_
+
+<br>
+
+📌 kafka-configs를 사용하면 몇가지 다이나믹 옵션의 설정 값을 수정할 수 있다.
+
+```bash
+$ bin/kafka-configs.sh --alter --entity-type topics --entity-name 토픽명 --add-config retention.ms=86400000
+```
+▲ _Topic의 레코드가 삭제되기까지의 유지시간 수정_
+
+<br><br>
+
+### ▫️ Message 발행
+
+```bash
+$ bin/kafka-console-producer.sh --topic 토픽명 --bootstrap-server localhost:9092
+```
+▲ _Producer Console을 통한 메시지 발행_
+
+> **💡 Message 발행 시 사용 가능한 옵션**
+>
+> - ```--request-required-acks [0/1/all]``` :  
+>   Producer가 브로커로 메시지를 보낸 후 브로커의 수신 응답 메시지를 어떤 식으로 처리할지 설정
+> 
+>   - 0 : 메시지를 보낸 후 Kafka의 응답 메시지를 듣지 않고 성공 처리  
+>    가장 빠르지만 브로커 장애 발생 시 메시지 유실 가능성이 높다.
+>
+>   - 1 : Leader 파티션의 성공 응답 값만을 확인  
+>     장애 발생 시 메시지 유실 가능성이 조금 있다.
+>
+>   - all : 하나 이상의 Follow 파티션의 성공 응답도 확인  
+>     유실 가능성이 거의 없다.   
+>     ```min-insync-replicas=2``` 옵션과 함께하여 성공적인 전송 여부를 확인할 수 있다.
+>
+> ```--message-send-max-retries 숫자``` : 브로커 장애와 같은 상황에서 Producer의 재전송 횟수
+
+<br>
+
+```bash
+$ bin/kafka-verifiable-producer.sh --topic 토픽명 --max-messages 100
+```
+▲ _String 타입의 넘버를 반복적으로 발행해주는 툴을 사용해 100개의 메시지 발행 테스트_
+
+<br><br>
+
+### ▫️ Message 읽기
+
+```bash
+$ bin/kafka-console-consumer.sh --topic 토픽명 --from-beginning --bootstrap-server localhost:9092
+```
+▲ _Consumer Console을 통한 메시지 읽기_
+
+<br>
+
+> **💡 Message 읽기 시에 사용 가능한 옵션**
+>
+> - ```--from-beginning``` :   
+>   Current Offset이 없을 때, Topic이 갖고 있는 첫 레코드부터 메시지를 읽어온다.   
+>   해당 설정이 없으면 Consumer가 접속한 이후 신규로 생성된 메시지부터 읽어온다.
+>
+> - ```--group 그룹명``` : 그룹을 지정하여 메시지를 읽는다.  
+>   Current Offset은 그룹 단위로 관리되므로 항상 그룹을 지정하는 것이 좋다.
+>
+> - ```--property print.key=true``` : 메시지의 키값을 출력한다.
+>
+> - ```--property key.separator="-"``` : 키와 밸류 사이에 ```-``` 구분자를 추가한다.
+
+<br>
+
+```bash
+$ bin/kafka-consumer-group.sh --list --bootstrap-server localhost:9092
+```
+▲ _Consumer Group 리스트 확인_
+
+<br>
+
+```bash
+$ bin/kafka-consumer-group.sh --describe --group 그룹명 --bootstrap-server localhost:9092
+```
+▲ _특정 Group의 상세 정보 확인_
+
+<br><br>
+
+### ▫️ Kafka Cluster 구성
+
+먼저 ```config/server.properties``` 파일을 수정해야한다.
+
+```bash
+$ vi config/server.properties
+
+broker.id=0
+listeners=PLAINTEXT://localhost:9092
+log.dirs=/tmp/kafka-logs
+```
+
+<br>
+
+이후 Broker의 갯수만큼 ```server.properties```를 복제한다.
+
+```bash
+$ cp server.properties server1.properties
+$ cp server.properties server2.properties
+```
+
+<br>
+
+복제한 properties 파일을 수정한다.
+
+```bash
+$ vi config/server1.properties
+
+broker.id=1
+listeners=PLAINTEXT://localhost:9093
+log.dirs=/tmp/kafka-logs1
+
+
+$ vi config/server2.properties
+
+broker.id=2
+listeners=PLAINTEXT://localhost:9094
+log.dirs=/tmp/kafka-logs2
+```
+
+<br>
+
+Zookeeper 서버를 실행하고, Kafka 서버를 각 properties 별로 실행한다.
+
+```bash
+$ bin/zookeeper-server-start.sh config/zookeeper.properties
+
+$ bin/kafka-server-start.sh config/server.properties&
+$ bin/kafka-server-start.sh config/server1.properties&
+$ bin/kafka-server-start.sh config/server2.properties&
+```
+
+<br>
+
+Topic을 생성하고 메시지를 발행하고 읽는다.
+
+```bash
+$ bin/kafka-topic.sh --create --topic 토픽명 --partitions 3 --replication-factor 3 --bootstrap-server localhost:9093
+
+$ bin/kafka-console-producer.sh --topic 토픽명 --bootstrap-server localhost:9093
+
+$ bin/kafka-console-consumer.sh --topic 토픽명 --from-beginning --group 그룹명 --bootstrap-server localhost:9092,localhost:9093,localhost:9094
+```
+
+<br>
+
+새로운 터미널에서 Broker 중 1개를 Shutdown 시킨다.
+
+```bash
+$ ps -ef|grep server2.properties
+혹은
+$ lsof -i :9094
+
+$ kill -9 [위에서 확인한 PID]
+```
+
+<br>
+
+Consumer console에서 Warning 메시지가 표시되며,  
+
+토픽 정보를 확인하면 Leader 파티션이 변경되며 ISR에는 Replication 정보가 사라지게 된다.
+
+이후 종료했던 Broker를 다시 실행하면 장애 상황이 해소되며 Leader 파티션은 다시 원래대로 돌아간다.
+
 <br><br>
 
 ***
+
+_2023.05.26. Update_
 
 _2023.05.25. Update_
 
