@@ -348,7 +348,7 @@ public class SecurityConfiguration {
 public class DBMemberService implements MemberService {
 
     private final MemberRepository memberRepository;
-    private final passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public DBMemberService(MemberRepository memberRepository,
                            PasswordEncoder passwordEncoder) {
@@ -790,6 +790,8 @@ Spring Security에서는 웹 및 메서드 보안을 위해 표현식(Spring EL)
 <br><br>
 
 ***
+
+_2023.07.06. Modified_
 
 _2022.12.05. Update_
 

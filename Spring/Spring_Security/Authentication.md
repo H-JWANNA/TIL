@@ -36,7 +36,7 @@ Spring Security의 컴포넌트들은 아래와 같은 과정을 거쳐 사용�
 
 <br>
 
-3. 인증되지 않은 ```Authentication을 ```AuthenticationManager```에게 전달한다.
+3. 인증되지 않은 ```Authentication```을 ```AuthenticationManager```에게 전달한다.
 
    - ```AuthenticationManager```는 **인증 처리를 총괄하는 매니저 역할**을 하는 인터페이스이다.
 
@@ -436,7 +436,7 @@ public class ProviderManager implements ... {
 
 ```for``` 문을 활용해 DI 받은 List로 적절한 ```AuthenticationProvider```를 찾는다.
 
-적절한 객체를 찾았다면, ```autenticate()``` 메서드를 통해 ```AuthenticationProvider```에게 인증 처리를 위임한다.
+적절한 객체를 찾았다면, ```authenticate()``` 메서드를 통해 ```AuthenticationProvider```에게 인증 처리를 위임한다.
 
 인증이 정상적으로 완료되었다면, ```eraseCredentials()``` 메서드를 통해 인증에 사용된 Credentials를 제거한다.
 
@@ -627,5 +627,7 @@ public class SecurityConextHolder {
 <br><br>
 
 ***
+
+_2023.07.06. Modified_
 
 _2022.12.05. Update_
