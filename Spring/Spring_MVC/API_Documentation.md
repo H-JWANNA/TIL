@@ -556,6 +556,90 @@ Swagger는 어노테이션 기반의 API 문서화 방식이다.
 
 <br>
 
+Swagger 기반의 API 문서는 Postman에서 HTTP 요청을 전송하듯 API 요청 툴로의 기능을 사용할 수 있다는 장점이 있다.
+
+<br>
+
+반면에 어노테이션 등을 통해 API 문서를 생성하는 방식으로,  
+
+기능 구현과 관련 없는 어노테이션이 추가되어 기능 구현 코드가 눈에 잘 들어오지 않게 된다.
+
+> Controller뿐만 아니라 Request Body, Response Body 같은 DTO 클래스도 어노테이션을 적용해야 한다.
+
+<br>
+
+### 🔸 Swagger 설정
+
+<br>
+
+**1. build.gradle 설정**
+
+Swagger는 Springfox, Springdoc 2가지의 라이브러리로 구현되어있다.
+
+|   |Springfox|Springdoc OpenAPI UI|
+|:-:|:-------:|:------------------:|
+|최종 업데이트|Jul 14, 2020|Apr 02, 2023|
+|Webflux 지원|X|O|
+|Swagger-UI 정렬|X|O (abc, HTTP Method별 정리 가능)|
+
+<br>
+
+```java
+// Springfox 의존성
+implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+
+// Springdoc 의존성
+implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+// Springdoc Webflux
+implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.7.0'
+```
+
+<br>
+
+**2. Springdoc Config 구성**
+
+```java
+@Configuration
+public class OpenApiConfig {
+    @Bean
+    public OpenAPI openAPI() {
+        Info info = new Info()
+                    .title("API Document")
+                    .version("v0.0.1")
+                    .description("API 문서입니다.");
+        return new OpenAPI()
+                    .components(new Components())
+                    .info(info);
+    }
+}
+```
+
+<br>
+
+**3. Springdoc application.yml 설정**
+
+```yml
+springdoc:
+    packages-to-scan: com.test.demo
+    default-consumes-media-type: application/json;charset=UTF-8
+    default-produces-media-type: application/json;charset=UTF-8
+    swagger-ui:
+        path: demo-ui.html          # Swannger UI 경로 => localhost:8000/demo-ui.html
+        tags-sorter: alpha          # alpha : 알파벳 순 태그 정렬
+        operations-sorter: alpha    # method : HTTP Method 순 정렬
+    api-docs:
+        path: /api-docs/json
+        groups.enabled: true
+    cache:
+        disabled: true
+```
+
+<br>
+
+**4. Controller 설정**
+
+- Springfox
+
 ```java
 @ApiOperation(value = "회원 정보 API", tags = {"Member Controller"})
 @RestController
@@ -608,19 +692,82 @@ public class MemberControllerSwaggerExample {
 
 <br>
 
-```@ApiOperation```, ```@ApiResponses``` 어노테이션 등을 통해 API 문서를 생성하는 방식으로,  
+- Springdoc
 
-기능 구현과 관련 없는 어노테이션이 추가되어 기능 구현 코드가 눈에 잘 들어오지 않게 된다.
+```java
+@Tag(name = "회원 정보", description = "회원 정보 API Document")
+@RequestMapping("/v11/swagger/members")
+@RequiredArgsConstuctor
+@RestController
+@Validated
+@Slf4j
+public class MemberControllerSwaggerExample {
+    private final MemberService memberService;
+    private final MemberMapper mapper;
 
-> Controller뿐만 아니라 Request Body, Response Body 같은 DTO 클래스도 어노테이션을 적용해야 한다.
+    @Operation(summary = "회원 정보 등록", description = "회원 정보 등록")
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = 201, description = "회원 등록 완료"),
+            @ApiResponse(responseCode = 404, description = "Member not found")
+    })
+    @PostMapping
+    public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post memberDto) {
+        Member member = mapper.memberPostToMember(memberDto);
+        member.setStamp(new Stamp()); // homework solution 추가
+
+        Member createdMember = memberService.createMember(member);
+
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.memberToMemberResponse(createdMember)),
+                HttpStatus.CREATED);
+    }
+
+    ...
+
+    @Operation(summary = "회원 정보 조회", description = "회원 식별자(memberId)에 해당하는 회원을 조회")
+    @GetMapping("/{member-id}")
+    public ResponseEntity getMember(
+            @Parameter(name = "member-id", value = "회원 식별자", example = "1")
+            @PathVariable("member-id") @Positive long memberId) {
+        Member member = memberService.findMember(memberId);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.memberToMemberResponse(member))
+                                    , HttpStatus.OK);
+    }
+
+    ...
+}
+```
 
 <br>
 
-Swagger 기반의 API 문서는 Postman에서 HTTP 요청을 전송하듯 API 요청 툴로의 기능을 사용할 수 있다는 장점이 있다.
+**💡 Springfox → Springdoc 어노테이션 변경점**
+
+Swagger 2에서 Swagger 3로 변경되면서 어노테이션이 변경되었다.
+
+|Swagger 2|Swagger 3|
+|:-------:|:-------:|
+|```@Api```|```@Tag```|
+|```@ApiIgnore```|```@Parameter(hidden = true)```<br>or<br>```@Operation(hidden = true)```<br>or<br>```@Hidden```|
+|```@ApiImplicitParam``` | ```@Parameter```|
+|```@ApiImplicitParams``` | ```@Parameters```|
+|```@ApiModel``` | ```@Schema```|
+|```@ApiModelProperty(hidden = true)``` | ```@Schema(accessMode = READ_ONLY)```|
+|```@ApiModelProperty``` | ```@Schema```|
+|```@ApiOperation(value = "foo", notes = "bar")``` | ```@Operation(summary = "foo", description = "bar")```|
+|```@ApiParam``` | ```@Parameter```|
+|```@ApiResponse(code = 404, message = "foo")``` | ```@ApiResponse(responseCode = "404", description = "foo")```|
+
+<br>
+
+### 📋 [***Springdoc OpenAPI 3 Library***](https://springdoc.org/)
 
 <br><br>
 
 ***
+
+_2023.07.11. Update_
 
 _2022.11.16. Update_
 
