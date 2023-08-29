@@ -1,6 +1,8 @@
 # Spring Security
 
-Spring Security 6.0 이후의 변경점을 주로 다루고 있으며, 이전 버전에 대한 내용은 [여기](./Spring_Security_Legacy.md)에서 확인할 수 있다.
+### Spring Security 6.0 이후의 변경점을 주로 다루고 있으며, 이전 버전에 대한 내용은 [여기](./Spring_Security_Legacy.md)에서 확인할 수 있다.
+
+<br>
 
 Spring Security는 Spring MVC 기반 어플리케이션의 인증(Authentication)과 권한 부여(Authorization) 기능을 지원하는 보안 프레임워크로써,  
 Spring MVC 기반 어플리케이션에 보안을 적용하기 위한 표준이다.
@@ -33,6 +35,7 @@ Spring MVC 기반 어플리케이션에 보안을 적용하기 위한 표준이�
 
 - **Authentication (인증)**  
   어플리케이션을 사용하는 사용자가 본인이 맞음을 증명하는 절차를 의미한다.
+
 - **Cridential (신원 증명 정보)**  
   Authentication을 정상적으로 수행하기 위해 필요한 사용자 식별 정보  
   주로 특정 사이트에서 로그인을 위해 입력하는 패스워드를 의미한다.
