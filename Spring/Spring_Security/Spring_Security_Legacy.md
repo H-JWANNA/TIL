@@ -1,4 +1,6 @@
-# Spring Security
+# Spring Security (Legacy)
+
+### Spring Security 6.0 이전 버전을 다루고 있으며, 6.0 이후 버전에 대한 내용은 [여기](./Spring_Security.md)에서 확인할 수 있다.
 
 Spring Security는 Spring MVC 기반 어플리케이션의 인증(Authentication)과 권한 부여(Authorization) 기능을 지원하는 보안 프레임워크로써,  
 Spring MVC 기반 어플리케이션에 보안을 적용하기 위한 표준이다.
