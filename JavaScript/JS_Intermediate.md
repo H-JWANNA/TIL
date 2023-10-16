@@ -458,6 +458,10 @@ num.toString(2);    // "1010"
 
 - `str.split(text)` : 문자열을 text 기준으로 구분하여 배열로 만든다.
 
+- `str.replace(regex, text)` : 정규표현식을 통해 문자를 찾은뒤 text로 교체한다.
+
+- `str.replaceAll(a, b)` : 문자 내 모든 a를 찾아 b로 교체한다.
+
 <br><br>
 
 ## 배열 메소드 (Array Method)
@@ -1322,6 +1326,38 @@ Promise.race(
 
 만약 2번 작업이 `reject`를 반환할 경우에도 1번이 먼저 완료되었으므로 2번 작업은 무시된다.
 
+<br>
+
+### 🔸 Promise.any()
+
+```js
+const rejPromise = new Promise((res, rej) => {
+    setTimeout(() => {
+        rej("fail");
+    }, 1000)
+})
+
+const resPromise = new Promise((res, rej) => {
+    setTimeout(() => {
+        res("success");
+    }, 2000)
+})
+
+Promise.any(
+    [rejPromise, resPromise]
+).then((res) => {
+    console.log(res);
+}).catch(e => console.log(e));
+
+// success
+```
+
+`Promise.race()`를 사용하면 위의 결과는 가장 먼저 완료된 작업의 결과만 보여주므로 **fail**이 나올 것이다.
+
+반면에 `Promise.any()`를 사용하면 전달된 프로미스 중 가장 먼저 이행된 객체를 반환한다.
+
+모두 거부가 된다면 모든 프로미스가 거부가 되었다는 메시지를 출력한다.
+
 <br><br>
 
 ## async, await
@@ -1608,6 +1644,8 @@ console.log(...gen2()); // Hello, W o r l d !
 <br><br>
 
 ---
+
+_2023.10.17. Update_
 
 _2023.10.16. Update_
 
