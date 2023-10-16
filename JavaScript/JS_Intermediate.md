@@ -84,11 +84,13 @@ name = 'male';  // Uncaught SyntaxError
   console.log(txt); // 가능
   ```
 
-<br>
+<br><br>
 
 ## 생성자 함수
 
 비슷한 객체 리터럴을 생성자를 통해 만들 수 있다.
+
+생성자를 통해 객체를 만들때 해당 객체를 인스턴스라고 한다.
 
 ```js
 function User(name, age) {
@@ -106,6 +108,15 @@ user1.sayName(); // JWANNA
 `new` 키워드를 사용하지 않으면 return이 없는 함수를 실행하기 때문에 `undefined`를 할당받는다.
 
 <br>
+
+```js
+console.log(user1 instanceof User); // true
+console.log(user1.constructor === User); // true
+```
+
+생성자를 통해 만들어진 객체가 해당 생성자의 인스턴스인지, 해당 인스턴스의 생성자가 맞는지 확인할 수 있다.
+
+<br><br>
 
 ## 계산된 프로퍼티 (Computed Property)
 
@@ -141,7 +152,7 @@ function makeObj(key, val) {
 const obj = makeObj("이름", "JWANNA");
 ```
 
-<br>
+<br><br>
 
 ## 객체 메소드 (Object Method)
 
@@ -280,7 +291,7 @@ Object.fromEntries(arr);
 */
 ```
 
-<br>
+<br><br>
 
 ## 심볼 (Symbol)
 
@@ -360,7 +371,7 @@ const id2 = Symbol('id2');
 id2.description;    // id2
 ```
 
-<br>
+<br><br>
 
 ## Number, Math
 
@@ -421,7 +432,7 @@ num.toString(2);    // "1010"
 
 - `parseFloat()` : parseInt와 다르게 소수점 이하도 반환
 
-<br>
+<br><br>
 
 ## 문자열 메소드 (String Method)
 
@@ -447,7 +458,7 @@ num.toString(2);    // "1010"
 
 - `str.split(text)` : 문자열을 text 기준으로 구분하여 배열로 만든다.
 
-<br>
+<br><br>
 
 ## 배열 메소드 (Array Method)
 
@@ -589,7 +600,7 @@ num.toString(2);    // "1010"
   console.log(prev);    // [ 'Hong', 'Park', 'Choi' ]
   ```
 
-<br>
+<br><br>
 
 ## 구조 분해 할당 (Destructuring assignment)
 
@@ -637,7 +648,7 @@ console.log(gender);   // Male
 
 프로퍼티의 순서를 바꿔도 사용할 수 있다.
 
-<br>
+<br><br>
 
 ## 나머지 매개변수 (Rest parameters)
 
@@ -708,7 +719,7 @@ const user2 = new User('Park', 19, 'html', 'css');
 const user3 = new User('Choi', 30, 'English');
 ```
 
-<br>
+<br><br>
 
 ## 전개 구문 (Spread syntax)
 
@@ -745,7 +756,7 @@ console.log(user);
 // { name: 'Hong', age: 27, skill: ['java', 'spring', 'ko', 'en'] }
 ```
 
-<br>
+<br><br>
 
 ## 클로저 (Closure)
 
@@ -784,6 +795,23 @@ console.log(counter()); // 2
 ```
 
 <br>
+
+이를 활용하면 Java의 Getter처럼 사용할 수 있다.
+
+```js
+const User = function(name) {
+    const n = name;
+    this.getName = function() {
+        console.log(n);
+    }
+}
+
+const hong = new User('Hong');
+```
+
+위처럼 작성하면 해당 객체의 프로퍼티를 수정할 수 없고, 가져오기만 가능하다.
+
+<br><br>
 
 ## setTimeout / setInterval
 
@@ -837,32 +865,750 @@ clearInterval(timeId);   // 스케쥴링 취소
 > 
 > 또한 브라우저는 기본적으로 4ms 정도의 딜레이 시간이 있어 그 이상의 시간이 걸릴 수 있다.
 
-<br>
+<br><br>
 
 ## call, apply, bind
 
+함수 호출 방식과 관계없이 this를 지정할 수 있다.
+
 <br>
+
+### 🔸 call
+
+call 메소드는 모든 함수에서 사용할 수 있으며, **this를 특정 값으로 지정**할 수 있다.
+
+첫번째 파라미터로 this를 지정할 객체를 받으며, 두번째부터 함수의 파라미터를 받는다.
+
+```js
+const hong = {
+    name: 'Hong'
+}
+
+function showName() {
+    console.log(this.name);
+}
+
+showName();
+// undefined (this가 window)
+
+showName.call(hong);
+// Hong (this를 hong 객체로 지정)
+```
+
+<br>
+
+call 메소드를 사용해서 객체 프로퍼티의 추가도 가능하다.
+
+```js
+const hong = {
+    name: 'Hong'
+}
+
+function update(birthYear, occupation) {
+    this.birthYear = birthYear;
+    this.occupation = occupation;
+}
+
+update.call(hong, 1997, 'Programmer');
+
+console.log(hong);
+// { name: 'Hong', birthYear: 1997, occupation: 'Programmer' }
+```
+
+<br>
+
+### 🔸 apply
+
+apply 메소드는 함수 매개변수 처리 방법을 제외하면 call과 완전히 같다.
+
+apply는 call과 다르게 **배열의 형태로 파라미터를 전달**받는다.
+
+```js
+const kim = {
+    name: 'Kim'
+}
+
+function update(birthYear, occupation) {
+    this.birthYear = birthYear;
+    this.occupation = occupation;
+}
+
+update.apply(kim, [1995, 'Architecture']);
+
+console.log(kim);
+// { name: 'Kim', birthYear: 1995, occupation: 'Architecture' }
+```
+
+<br>
+
+### 🔸 bind
+
+bind 메소드는 함수의 **this 값을 영구히** 바꿀 수 있다.
+
+```js
+const user = {
+    name: 'Hong',
+    showName: function() {
+        console.log(`hello, ${this.name}`);
+    }
+}
+
+user.showName(); // hello, Hong
+
+let fn = user.showName;
+
+fn(); // hello, undefined
+fn.call(user); // hello, Hong
+
+let boundFn = fn.bind(user);
+boundFn(); // hello, Hong
+```
+
+`fn` 변수에 showName을 할당하면서 this를 잃어버려 fn만 호출할 때에는 this를 찾지 못한다.
+
+위와 같은 상황에 `bind`를 통해 this 값에 대한 객체를 할당해주면 this를 찾을 수 있다.
+
+<br><br>
 
 ## 상속, 프로토타입 (Prototype)
 
+프로토타입은 상속을 통해 상위 객체의 프로퍼티를 사용하거나 오버라이딩할 수 있게 한다.
+
+```js
+const car = {
+    wheels: 4
+}
+
+const bmw = {
+    navigation: 1,
+    name: 'bmw'
+}
+
+const x5 = {
+    color: 'white',
+    name: 'x5'
+}
+
+bmw.__proto__ = car;
+x5.__proto__ = bmw;
+```
+
+위처럼 `__proto__`를 사용해서 특정 객체의 프로토타입을 지정할 수 있다.
+
 <br>
+
+```js
+console.log(x5);
+// { color: 'white', name: 'x5' }
+
+console.log(x5.wheels);
+// 4
+```
+
+객체의 프로퍼티에서 찾을 수 없다면, 프로토타입을 통해 해당 프로퍼티가 존재하는지 확인한다.
+
+<br>
+
+```js
+for(p in x5) {
+    if(x5.hasOwnProperty(p)) {
+        console.log('o', p);
+    } else {
+        console.log('x', p);
+    }
+}
+
+/*
+    o color
+    o name
+    x navigation
+    x wheels
+*/
+```
+
+`for in` 문을 사용하면 프로토타입의 프로퍼티도 모두 가져오게 된다.
+
+이 때, `hasOwnProperty`를 사용해서 해당 객체의 프로퍼티만 선별할 수 있다.
+
+<br>
+
+### 🔸 생성자 프로토타입
+
+생성자 함수에도 프로토타입을 사용해서 중복 코드를 줄일 수 있다.
+
+```js
+const Bmw = function(color) {
+    this.color = color;
+}
+
+Bmw.prototype.wheels = 4;
+Bmw.prototype.drive = function() {
+    console.log('drive');
+}
+
+const x5 = new Bmw('red');
+```
+
+생성자 함수에는 `prototype` 메소드를 사용해서 프로토타입을 설정할 수 있다.
+
+<br>
+
+단, 아래와 같이 프로토타입을 작성할 경우에는 문제가 발생한다.
+
+```js
+const Bmw = function(color) {
+    this.color = color;
+}
+
+Bmw.prototype = {
+    wheels = 4,
+    drive = function() {
+        console.log('drive');
+    }
+}
+
+const x5 = new Bmw('red');
+
+console.log(x5 instanceof Bmw); // true
+console.log(x5.constructor === Bmw); // false
+```
+
+해당 인스턴스의 constructor가 false가 나오는 문제점이 생기기 때문에 프로토타입을 하나씩 추가하거나,  
+아래처럼 수동으로 constructor 프로퍼티를 추가해줄 수 있다.
+
+```js
+Bmw.prototype = {
+    constructor: Bmw,
+    wheels = 4,
+    ...
+}
+```
+
+<br><br>
 
 ## 클래스 (Class)
 
+ES6에 추가된 스펙으로 Java의 클래스처럼 객체를 만들 수 있다.
+
 <br>
+
+### 🔸 생성자
+
+```js
+const User = function(name) {
+    this.name = name;
+    this.showName = function() {
+        console.log(this.name);
+    }
+}
+```
+▲ _기존 생성자 함수_
+
+
+```js
+class User {
+    constructor(name) {
+        this.name = name;
+    }
+
+    showName() {
+        console.log(this.name);
+    }
+}
+```
+▲ _클래스_
+
+<br>
+
+클래스로 인스턴스를 생성하게 되면 생성자 외부의 메소드들은 프로토타입으로 들어가게 된다.
+
+단, `for in` 문을 통해서도 프로토타입의 메소드를 출력하지 않는다.
+
+또한, `new` 키워드를 사용하지 않은 생성자 함수는 `undefined`를 출력하지만, 클래스 생성자는 **에러를 발생**시킨다.
+
+<br>
+
+### 🔸 상속
+
+클래스의 상속에는 `extends` 키워드를 사용한다.
+
+부모의 프로퍼티에 접근하기 위해서는 `super` 키워드를 사용할 수 있으며, 메소드 오버라이딩을 통해 재정의가 가능하다.
+
+```js
+class Car {
+    constructor(color) {
+        this.color = color;
+        this.wheels = 4;
+    }
+
+    drive() {
+        console.log('drive');
+    }
+}
+
+class Bmw extends Car {
+    constructor(color) {
+        super(color);
+        this.navigation = 1;
+    }
+
+    park() {
+        console.log('park');
+    }
+}
+
+const x5 = new Bmw('black');
+
+console.log(x5);
+// Bmw { color: 'black', wheels: 4, navigation: 1 }
+```
+
+<br><br>
 
 ## 프로미스 (Promise)
 
+프로미스는 Javascript **비동기 처리에 사용되는 객체**이며, 주로 서버에서 받아온 데이터를 화면에 표시할 때 사용한다.
+
+프로미스는 다음과 같이 나타낼 수 있다.
+
+```js
+const pr = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        // resolve('OK')
+        reject(new Error("error"))
+    }, 1000)
+})
+
+console.log('---start---');
+
+pr.then(result => {
+    console.log(result)
+}).catch(err => {
+    console.log(err)
+}).finally(() => {
+    console.log('---finally---');
+})
+```
+
+- `resolve` : 요청이 성공했을 때, 보내주는 값을 의미한다.
+
+- `reject` : 요청이 실패했을 때, 보내주는 값을 의미한다.
+
+- `then` : 요청이 성공했을 때, 실행되는 함수를 의미한다.
+
+- `catch` : 요청이 실패했을 때, 실행되는 함수를 의미한다.
+
+- `finally` : 요청의 성공 여부와 관계없이 마지막에 실행되는 함수를 의미한다.
+
 <br>
+
+### 🔸 프로미스 체이닝(Promises chaining)
+
+기존의 콜백 함수를 사용하여 함수를 나타내면 아래와 같다.
+
+```js
+const f1 = (callback) => {
+    setTimeout(function() {
+        console.log('1번');
+        callback();
+    }, 1000)
+}
+
+const f2 = (callback) => {
+    setTimeout(function() {
+        console.log('2번');
+        callback();
+    }, 2000)
+}
+
+const f3 = (callback) => {
+    setTimeout(function() {
+        console.log('3번');
+        callback();
+    }, 3000)
+}
+
+console.log('시작');
+f1(function() {
+    f2(function() {
+        f3(function(){
+            console.log('끝');
+        })
+    })
+})
+```
+
+이처럼 뎁스가 깊어지면서 콜백을 계속 호출하는 것을 콜백 지옥(Callback Hell)이라고 한다.
+
+<br>
+
+이를 프로미스를 통해 나타내면 아래와 같다.
+
+```js
+const f1 = () => {
+    return new Promise((res, rej) => {
+        setTimeout(() => {
+            res('1번');
+        }, 1000)
+    })
+}
+
+const f2 = (msg) => {
+    console.log(msg);
+
+    return new Promise((res, rej) => {
+        setTimeout(() => {
+            res('2번');
+        }, 2000)
+    })
+}
+
+const f3 = (msg) => {
+    console.log(msg);
+
+    return new Promise((res, rej) => {
+        setTimeout(() => {
+            res('3번');
+        }, 3000)
+    })
+}
+
+console.log('시작');
+f1()
+    .then((res) => f2(res))
+    .then((res) => f3(res))
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err))
+    .finally(() => console.log('끝'));
+```
+
+<br>
+
+### 🔸 Promise.all()
+
+위와 같이 나타낼 경우 1초, 2초, 3초를 기다려 총 6초의 시간이 걸리게 된다.
+
+모든 작업이 비동기로 동시에 시작된다면 가장 오래 걸리는 작업의 시간인 3초에 작업이 완료될 것이다.
+
+```js
+Promise.all(
+    [f1(), f2(), f3()]
+).then((res) => {
+    console.log(res);
+})
+// [ '1번', '2번', '3번' ]
+```
+
+`Promise.all()`을 사용하면 모든 작업을 동시에 시작해서, 모든 작업이 완료되는 순간 배열로 나타낸다.
+
+단, 하나라도 `reject`를 반환할 경우에는 데이터를 하나도 반환하지 않는다. (All or Nothing)
+
+<br>
+
+### 🔸 Promise.race()
+
+```js
+Promise.race(
+    [f1(), f2(), f3()]
+).then((res) => {
+    console.log(res);
+})
+/*
+    1번
+*/
+```
+
+`Promise.race()`를 사용하면 가장 먼저 완료된 작업만 보여준다.
+
+만약 2번 작업이 `reject`를 반환할 경우에도 1번이 먼저 완료되었으므로 2번 작업은 무시된다.
+
+<br><br>
 
 ## async, await
 
+`async`, `await`를 사용하면 프로미스를 더 편리하게 사용할 수 있다.
+
 <br>
 
+### 🔸 async
+
+`async` 키워드를 함수 앞에 붙이면 함수는 항상 `Promise` 객체를 반환한다.
+
+그러므로 `then`, `catch`와 같은 키워드를 사용할 수 있다.
+
+```js
+async function getName() {
+    return 'Hong';
+}
+
+getName().then((name) => {
+    console.log(name); // Hong
+})
+```
+
+<br>
+
+만약 반환값이 `Promise`라면 해당 값을 그대로 사용한다.
+
+```js
+async function getName() {
+    return Promise.resolve('Kim');
+}
+
+getName().then((name) => {
+    console.log(name); // Kim
+})
+```
+
+<br>
+
+함수 내부에서 예외가 발생하면 `reject` 상태의 프로미스가 반환된다.
+
+```js
+async function getName() {
+    throw new Error('err');
+}
+
+getName().catch((err) => {
+    console.log(err);
+})
+```
+
+<br>
+
+### 🔸 await
+
+`await` 키워드는 `async` 함수 내에서만 사용할 수 있다.
+
+```js
+function getName(name) {
+    return new Promise((res, rej) => {
+        setTimeout(() => {
+            res(name);
+        }, 1000)
+    })
+}
+
+async function showName() {
+    const result = await getName('Hong');
+    console.log(result);
+}
+
+console.log('시작');
+showName();
+```
+
+`await` 키워드 오른쪽에는 프로미스가 오고, 해당 프로미스가 처리될 때까지 기다린다.
+
+<br>
+
+아래와 같이 `async`, `await`를 사용하면 가독성있는 코드를 작성할 수 있다.
+
+```js
+f1()
+    .then((res) => f2(res))
+    .then((res) => f3(res))
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err))
+    .finally(() => console.log('끝'));
+
+// 위 아래는 동일의미의 코드이다.
+
+async function order() {
+    try {
+        const result1 = await f1();
+        const result2 = await f2(result1);
+        const result3 = await f3(result2);
+        console.log(result3);
+    } catch(e) {
+        console.log(e);
+    }
+    console.log('끝');
+}
+
+order();
+```
+
+<br><br>
+
 ## Generator
+
+함수의 실행을 중간에 멈췄다가 재개할 수 있는 기능
+
+```js
+function* fn() {
+    yield 1;
+    yield 2;
+    yield 3;
+    return 'finish';
+}
+
+const a = fn();
+```
+
+Generator는 function 옆에 `*` 키워드를 붙여 선언하고, 내부에 `yield` 키워드를 사용하여 함수 실행을 멈출 수 있다.
+
+또한 yield 키워드를 통해 값을 입력받아 변수로 할당할 수 있다.
+
+```js
+function* fn() {
+    const num1 = yield '첫번째 숫자를 입력하세요.';
+    console.log(num1);
+
+    const num2 = yield '두번째 숫자를 입력하세요.';
+    console.log(num2);
+
+    return num1 + num2;
+}
+```
+
+<br>
+
+### 🔸 Generator Method
+
+- `next()` : 다음 `yield`까지 함수 실행을 진행한다.
+
+    ```js
+    function* fn() {
+        console.log('1번');
+        yield 1;
+        console.log('2번');
+        yield 2;
+        return 'finish';
+    }
+
+    const a = fn();
+
+    console.log(a);
+    // Object [Generator] {}
+
+    console.log(a.next());
+    // 1번
+    // { value: 1, done: false }
+
+    console.log(a.next());
+    // 2번
+    // { value: 2, done: false }
+
+    console.log(a.next());
+    // { value: 'finish', done: true }
+
+    console.log(a.next());
+    // { value: undefined, done: true }
+    ```
+
+    `value`는 yield의 값 또는 리턴 값을 의미하며, `done`은 함수가 완료되었는지를 반환한다.
+
+<br>
+
+- `return()` : 메소드를 호출하는 즉시 Generator 함수를 종료한다.
+
+    ```js
+    const a = fn();
+
+    console.log(a.next());
+    // 1번
+    // { value: 1, done: false }
+
+    console.log(a.return('End'));
+    // { value: 'End', done: true }
+
+    console.log(a.next());
+    // { value: undefined, done: true }
+    ```
+
+<br>
+
+- `throw()` : 메소드를 호출하는 즉시 에러를 반환하며 Generator 함수를 종료한다.
+
+    ```js
+    function* fn() {
+        try {
+            console.log('1번');
+            yield 1;
+            console.log('2번');
+            yield 2;
+            return 'finish';
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    const a = fn();
+
+    console.log(a.next());
+    // 1번
+    // { value: 1, done: false }
+
+    console.log(a.throw(new Error('err')));
+    // 에러 발생
+
+    console.log(a.next());
+    // { value: undefined, done: true }
+    ```
+
+<br>
+
+### 🔸 Iterator
+
+Generator는 반복이 가능한 Iterable이다. 
+
+그러므로 `for of` 문을 사용하여 done이 true가 될 때까지 반복할 수 있다.
+
+```js
+a[Symbol.iterator]() === a;
+// true
+```
+
+<br>
+
+`Iterable`
+
+- `Symbol.iterator` 메소드가 있다.
+
+- `Symbol.iterator`는 `iterator`를 반환해야한다.
+
+`Iterator`
+
+- `next` 메소드를 가진다.
+
+- `next` 메소드는 `value`, `done` 속성을 가진 객체를 반환한다.
+
+- 작업이 끝나면 `done`은 `true`가 된다.
+
+<br>
+
+Iterable 객체에는 **문자열, 배열, Generator** 등이 있다.
+
+<br>
+
+반복가능한 객체를 활용하면 아래와 같은 표현이 가능하다.
+
+```js
+function* gen1() {
+    yield 'W';
+    yield 'o';
+    yield 'r';
+    yield 'l';
+    yield 'd';
+}
+
+function* gen2() {
+    yield 'Hello,';
+    yield* gen1();
+    yield '!';
+}
+
+// 구조 분해 할당을 사용하면 done이 true가 될 때까지 값을 표현한다.
+console.log(...gen2()); // Hello, W o r l d !
+```
+
+`gen1()` 자리는 현재는 Generator가 들어가있지만, 반복가능한 모든 객체가 들어갈 수 있다.
 
 <br><br>
 
 ---
+
+_2023.10.16. Update_
 
 _2023.10.13. Update_
