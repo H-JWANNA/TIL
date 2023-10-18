@@ -10,6 +10,7 @@
 |:--------:|:-------:|:--------------:|:-------------------:|
 |[HTML Basics](./HTML/HTML_Basics.md "HTML 기초")|[CSS Basics](./CSS/CSS_Basics.md "CSS 기초")| [JS Basic](./JavaScript/JS_Basic.md "JavaScript 기초") | [Thymeleaf](./Template_Engine/Thymeleaf.md "타임리프") |
 |  |[CSS Layout](./CSS/Layout.md "CSS 레이아웃 - Flexbox")| [JS Intermediate](./JavaScript/JS_Intermediate.md "JavaScript 중급") |  |
+| | | [DOM & Event](./JavaScript/DOM_Event.md) | |
 
 <br>
 
