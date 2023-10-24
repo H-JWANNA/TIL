@@ -21,6 +21,7 @@
 <details>
 <summary style="font-size:150%"><strong>JavaScript</strong></summary>
 <br>
+<div style="font-size:100%">
 
 | **Basic** | **Intermediate** | **DOM & Event** |
 |:---------:|:----------------:|:---------------:|
@@ -38,6 +39,8 @@
 |  | [Promise](./JavaScript/Intermediate/JS_Promise.md "프로미스") |
 |  | [async & await](./JavaScript/Intermediate/JS_async_await.md) |
 |  | [Generator](./JavaScript/Intermediate/JS_Generator.md "제너레이터") |
+
+</div>
 
 </details>
 
