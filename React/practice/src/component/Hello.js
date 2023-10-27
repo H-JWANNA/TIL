@@ -2,6 +2,18 @@ import World from "./World";
 import asd from "./Hello.module.css";
 
 const Hello = () => {
+  function showName() {
+    console.log("JWANNA");
+  }
+
+  function showAge(age) {
+    console.log(age);
+  }
+
+  function showText(e) {
+    console.log(e.target.value);
+  }
+
   return (
     <div>
       <h1
@@ -14,6 +26,20 @@ const Hello = () => {
       >
         Hello
       </h1>
+      <button onClick={showName}>Show name</button>
+      <button
+        onClick={() => {
+          showAge(27);
+        }}
+      >
+        Show age
+      </button>
+      <input
+        type="text"
+        onChange={(e) => {
+          showText(e);
+        }}
+      ></input>
       <World />
       <div className={asd.box}>Box</div>
     </div>
