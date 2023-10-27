@@ -1,16 +1,22 @@
 import { useState } from "react";
+import CheckAge from "./CheckAge";
 
-function State() {
+function State(props) {
   const [name, setName] = useState("JWANNA");
+  const [age, setAge] = useState(props.age);
 
   function changeName() {
     setName(name === "JWANNA" ? "CHANGED JWANNA" : "JWANNA");
-    console.log(name);
+    setAge(age + 1);
+    console.log(name, age);
   }
 
   return (
     <div>
-      <h2 id="name">{name}</h2>
+      <h2 id="name">
+        {name}({age})
+      </h2>
+      <CheckAge age={age} />
       <button onClick={changeName}>Change</button>
     </div>
   );

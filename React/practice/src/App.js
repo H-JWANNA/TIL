@@ -6,9 +6,9 @@ function App() {
   const name = "World";
   return (
     <div className="App">
-      <State></State>
-      <State></State>
-      <State></State>
+      <State age={10}></State>
+      <State age={20}></State>
+      <State age={30}></State>
     </div>
   );
 }
