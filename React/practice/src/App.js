@@ -1,14 +1,14 @@
 import "./App.css";
-import Hello from "./component/Hello";
-import State from "./component/State";
+import Day from "./component/Day";
+import DayList from "./component/DayList";
+import Header from "./component/Header";
 
 function App() {
   const name = "World";
   return (
     <div className="App">
-      <State age={10}></State>
-      <State age={20}></State>
-      <State age={30}></State>
+      <Header />
+      <DayList />
     </div>
   );
 }
