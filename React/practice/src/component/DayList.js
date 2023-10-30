@@ -1,26 +1,18 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 import dummy from "../dummy/data.json";
-import Day from "./Day";
 
 export default function DayList() {
   console.log(dummy);
-  const [today, setToday] = useState(1);
 
   return (
     <div>
       <ul className="list_day">
         {dummy.days.map((day) => (
-          <li
-            key={day.id}
-            onClick={() => {
-              setToday(day.day);
-            }}
-          >
-            Day {day.day}
+          <li key={day.id}>
+            <Link to={`/day/${day.day}`}>Day {day.day}</Link>
           </li>
         ))}
       </ul>
-      <Day today={today} />
     </div>
   );
 }
