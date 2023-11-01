@@ -167,7 +167,7 @@ function App() {
 
 HTML의 `<a>` 태그를 사용하면 클릭 시 페이지를 새로 불러오기 때문에 SPA에 어울리지 않는다.
 
-이를 위해 `<Link>` 컴포넌트를 사용할 수 있다.
+필요한 컴포넌트만 재렌더링하기 위해서는 `<Link>` 컴포넌트를 사용할 수 있다.
 
 <br>
 
@@ -225,6 +225,80 @@ export default function Day() {
 
 <br><br>
 
+### 🔸 History API
+
+v5까지는 Route에 할당된 컴포넌트는 자동으로 match, location, history 값이 props로 전달되었으나, v6부터는 해당 값들이 전달되지 않는다.
+
+<br>
+
+💡 **`useNavigate()`**
+
+- `useHistory()`가 v6에서 변경
+
+- 페이지 이동을 할 수 있게 해주는 함수를 반환
+
+- 첫번째 인자로 경로를 넣어주면 해당 경로로 이동
+
+- 주로 조건이 필요한 곳에서 navigate 함수를 호출 (ex. 로그인 후 다른 페이지 리다이렉트 시)
+
+<br>
+
+💡 **`useMatch()`**
+
+- `useRouterMatch()`가 v6에서 변경
+
+- 인자로 url을 넘기면 해당 url과 일치할 경우 정보를 반환, 아니라면 null 반환
+
+```json
+{
+    "params": {
+        "day": "1"
+    },
+    "pathname": "/day/1",
+    "pathnameBase": "/day/1",
+    "pattern": {
+        "path": "/day/:day",
+        "caseSensitive": false,
+        "end": true
+    }
+}
+```
+
+> Match 객체의 값
+> 
+> - params : [object] url path로 전달된 파라미터 객체 
+> - pathname : [string] 라우터에 정의된 path
+> - pathnameBase : [string] 실제 클라이언트로부터 요청된 url path
+> - pattern : [object] caseSensitive, end, path로 구성
+
+<br>
+
+💡 **`useLocation()`**
+
+- 현재 페이지의 정보를 가진 객체를 반환
+
+```json
+{
+    "pathname": "/day/1",
+    "search": "",
+    "hash": "",
+    "state": null,
+    "key": "qgvimb9g"
+}
+```
+
+> Location 객체의 값
+>
+> - pathname : [string] 현재 페이지의 경로명
+> - search : [string] 현재 페이지의 query string
+> - hash : [string] 현재 페이지의 hash
+> - state : [string?] 페이지로 이동 시 임의로 넣을 수 있는 상태값
+> - key : [string] location 객체의 고유 값
+
+<br><br>
+
 ---
+
+_2023.11.01. Update_
 
 _2023.10.31. Update_
