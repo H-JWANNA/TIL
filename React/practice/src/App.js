@@ -6,7 +6,6 @@ import Header from "./component/Header";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
-  const name = "World";
   return (
     <BrowserRouter>
       <div className="App">
