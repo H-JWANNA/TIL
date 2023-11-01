@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { SERVER_URL } from "../api/getUrl";
 
 export default function DayList() {
   const [days, setDays] = useState([]);
-  const [count, setCount] = useState(0);
-  const [count2, setCount2] = useState(0);
 
-  function onClick() {
-    setCount(count + 1);
-  }
-
-  function onClick2() {
-    setCount2(count2 + 1);
-  }
+  const fetchDay = async () => {
+    const res = await axios.get(`${SERVER_URL}/days`);
+    setDays(res.data);
+  };
 
   useEffect(() => {
-    console.log("count: ", count);
-  }, [count]);
+    fetchDay();
+  }, []);
 
   return (
     <div>
@@ -27,15 +24,6 @@ export default function DayList() {
           </li>
         ))}
       </ul>
-      <button
-        onClick={onClick}
-        style={{
-          marginRight: "10px",
-        }}
-      >
-        {count}
-      </button>
-      <button onClick={onClick2}>{count2}</button>
     </div>
   );
 }

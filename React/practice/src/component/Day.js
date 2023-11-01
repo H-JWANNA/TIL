@@ -1,18 +1,28 @@
-import dummy from "../dummy/data.json";
 import { useParams } from "react-router-dom";
 import Word from "./Word";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { SERVER_URL } from "../api/getUrl";
 
 export default function Day() {
   const day = useParams().day;
-  const wordList = dummy.words.filter((word) => word.day === Number(day));
-  console.log(wordList);
+  const [words, setWords] = useState([]);
+
+  const fetchWords = async () => {
+    const res = await axios.get(`${SERVER_URL}/words?day=${day}`);
+    setWords(res.data);
+  };
+
+  useEffect(() => {
+    fetchWords();
+  }, []);
 
   return (
     <div>
       <h2>Day {day}</h2>
       <table>
         <tbody>
-          {wordList.map((word) => (
+          {words.map((word) => (
             <Word word={word} key={word.id} />
           ))}
         </tbody>
