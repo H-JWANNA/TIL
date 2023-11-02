@@ -78,6 +78,18 @@ export default function CheckAge({ age }) {
 
 <br>
 
+변수명이 겹치는 것을 고려해서 아래와 같이 사용할 수도 있다.
+
+```js
+export default function CheckAge({ age: a }) {
+  ...
+}
+```
+
+age라는 이름 대신 a라는 이름으로 사용할 수 있다.
+
+<br>
+
 그리고 기존 컴포넌트에서 CheckAge 컴포넌트를 import해서 사용할 수 있다.
 
 ```js
@@ -110,5 +122,7 @@ State가 변경되면 하위 컴포넌트도 새로 렌더링을해서 보여주
 <br><br>
 
 ---
+
+_2023.11.02. Update_
 
 _2023.10.27. Update_
