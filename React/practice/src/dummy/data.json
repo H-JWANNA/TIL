@@ -11,6 +11,14 @@
     {
       "id": 3,
       "day": 3
+    },
+    {
+      "day": 4,
+      "id": 4
+    },
+    {
+      "day": 5,
+      "id": 5
     }
   ],
   "words": [
@@ -41,6 +49,48 @@
       "eng": "female",
       "kor": "여성",
       "isDone": false
+    },
+    {
+      "day": "1",
+      "eng": "apple",
+      "kor": "사과",
+      "isDone": false,
+      "id": 7
+    },
+    {
+      "day": "2",
+      "eng": "computer",
+      "kor": "컴퓨터",
+      "isDone": false,
+      "id": 8
+    },
+    {
+      "day": "3",
+      "eng": "tea",
+      "kor": "차",
+      "isDone": false,
+      "id": 9
+    },
+    {
+      "day": "1",
+      "eng": "cat",
+      "kor": "고양이",
+      "isDone": false,
+      "id": 10
+    },
+    {
+      "day": "5",
+      "eng": "monkey",
+      "kor": "원숭이",
+      "isDone": false,
+      "id": 11
+    },
+    {
+      "day": "4",
+      "eng": "key",
+      "kor": "열쇠",
+      "isDone": false,
+      "id": 12
     }
   ]
 }
