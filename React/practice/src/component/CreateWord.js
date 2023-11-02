@@ -1,12 +1,13 @@
 import axios from "axios";
 import { SERVER_URL } from "../api/getUrl";
 import useFetch from "../hooks/useFetch";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateWord() {
   const days = useFetch(`${SERVER_URL}/days`);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const engRef = useRef(null);
   const korRef = useRef(null);
@@ -15,18 +16,23 @@ export default function CreateWord() {
   async function onSubmit(e) {
     e.preventDefault();
 
-    const res = await axios.post(`${SERVER_URL}/words`, {
-      day: dayRef.current.value,
-      eng: engRef.current.value,
-      kor: korRef.current.value,
-      isDone: false,
-    });
+    if (!isLoading) {
+      setIsLoading(true);
 
-    console.log(res);
+      const res = await axios.post(`${SERVER_URL}/words`, {
+        day: dayRef.current.value,
+        eng: engRef.current.value,
+        kor: korRef.current.value,
+        isDone: false,
+      });
 
-    if (res.status === 201) {
-      alert("생성이 완료되었습니다.");
-      navigate(`/day/${dayRef.current.value}`);
+      console.log(res);
+
+      if (res.status === 201) {
+        alert("생성이 완료되었습니다.");
+        navigate(`/day/${dayRef.current.value}`);
+        setIsLoading(false);
+      }
     }
   }
 
@@ -50,7 +56,13 @@ export default function CreateWord() {
           ))}
         </select>
       </div>
-      <button>저장</button>
+      <button
+        style={{
+          opacity: isLoading ? 0.3 : 1,
+        }}
+      >
+        {isLoading ? "저장 중.." : "저장"}
+      </button>
     </form>
   );
 }

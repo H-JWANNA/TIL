@@ -91,6 +91,20 @@
       "kor": "열쇠",
       "isDone": false,
       "id": 12
+    },
+    {
+      "day": "3",
+      "eng": "flower",
+      "kor": "꽃",
+      "isDone": false,
+      "id": 13
+    },
+    {
+      "day": "5",
+      "eng": "mouse",
+      "kor": "쥐",
+      "isDone": false,
+      "id": 14
     }
   ]
 }
