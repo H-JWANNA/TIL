@@ -1,19 +1,9 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { SERVER_URL } from "../api/getUrl";
+import useFetch from "../hooks/useFetch";
 
 export default function DayList() {
-  const [days, setDays] = useState([]);
-
-  const fetchDay = async () => {
-    const res = await axios.get(`${SERVER_URL}/days`);
-    setDays(res.data);
-  };
-
-  useEffect(() => {
-    fetchDay();
-  }, []);
+  const days = useFetch(`${SERVER_URL}/days`);
 
   return (
     <div>
