@@ -1,8 +1,17 @@
 {
   "days": [
-    { "id": 1, "day": 1 },
-    { "id": 2, "day": 2 },
-    { "id": 3, "day": 3 }
+    {
+      "id": 1,
+      "day": 1
+    },
+    {
+      "id": 2,
+      "day": 2
+    },
+    {
+      "id": 3,
+      "day": 3
+    }
   ],
   "words": [
     {
@@ -10,27 +19,13 @@
       "day": 1,
       "eng": "book",
       "kor": "책",
-      "isDone": false
-    },
-    {
-      "id": 2,
-      "day": 1,
-      "eng": "apple",
-      "kor": "사과",
-      "isDone": false
+      "isDone": true
     },
     {
       "id": 3,
       "day": 2,
       "eng": "orange",
       "kor": "오렌지",
-      "isDone": false
-    },
-    {
-      "id": 4,
-      "day": 2,
-      "eng": "happy",
-      "kor": "행복한",
       "isDone": false
     },
     {
